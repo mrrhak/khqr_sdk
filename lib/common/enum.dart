@@ -1,0 +1,1 @@
+enum KhqrCurrency { khr, usd }
