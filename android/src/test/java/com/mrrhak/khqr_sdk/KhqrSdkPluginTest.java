@@ -1,4 +1,4 @@
-package com.example.khqr_sdk;
+package com.mrrhak.khqr_sdk;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;

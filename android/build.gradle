@@ -1,4 +1,4 @@
-group = "com.example.khqr_sdk"
+group = "com.mrrhak.khqr_sdk"
 version = "1.0"
 
 buildscript {
@@ -23,7 +23,7 @@ apply plugin: "com.android.library"
 
 android {
     if (project.android.hasProperty("namespace")) {
-        namespace = "com.example.khqr_sdk"
+        namespace = "com.mrrhak.khqr_sdk"
     }
 
     compileSdk = 34
@@ -54,6 +54,7 @@ android {
 }
 
 dependencies {
-    implementation 'kh.gov.nbc.bakong_khqr:sdk-java:1.0.0.11'
+    // https://package-search.jetbrains.com/package?id=kh.gov.nbc.bakong_khqr%3Asdk-java
+    implementation 'kh.gov.nbc.bakong_khqr:sdk-java:1.0.0.13'
     implementation 'com.google.code.gson:gson:2.11.0'
 }

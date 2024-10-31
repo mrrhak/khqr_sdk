@@ -1,4 +1,4 @@
-package com.example.khqr_sdk;
+package com.mrrhak.khqr_sdk;
 
 import androidx.annotation.NonNull;
 

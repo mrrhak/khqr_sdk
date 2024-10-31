@@ -1,4 +1,4 @@
-package com.example.khqr_sdk_example;
+package com.example.khqr_sdk;
 
 import io.flutter.embedding.android.FlutterActivity;
 
