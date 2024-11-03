@@ -1,6 +1,6 @@
 <div align="center">
   <h1 align="center" style="font-size: 50px;">🍃 KHQR SDK 🍃</h1>
-<div align="left">
+</div>
 
 > [!NOTE]
 > This **KHQR SDK** plugin is not officially release from [**NBC**](https://bakong.nbc.gov.kh/).
@@ -8,10 +8,9 @@
 > This is a simple interface layer that connects your Dart code directly to the original native platform-specific SDK, bridging Flutter and native functionality seamlessly.
 > 
 > [KHQR SDK Document Reference](https://bakong.nbc.gov.kh/en/download/KHQR/integration/KHQR%20SDK%20Document.pdf)
-</div>
-
 ---
 
+<div align="center">
 <p align="center">
 The standardization of KHQR code specifications will help promote wider use of mobile retail payments in Cambodia and provide consistent user experience for merchants and consumers. It can enable interoperability in the payment industry. A common QR code would facilitate payments among different schemes, e-wallets and banks and would encourage small merchants to adopt KHQR code as payment method. KHQR is created for retail or remittance in Cambodia and Cross-Border. It only requires a single QR for receiving transactions from any payment provider through Bakong including Bakong App.
 </p>
@@ -80,15 +79,31 @@ The standardization of KHQR code specifications will help promote wider use of m
 - Android
 
 ## Native KHQR SDK Version
-| iOS | Version | Android | Version |
-| --- | --- | --- | --- |
-| **BakongKHQR** | 1.0.0.15 | **sdk-java** | 1.0.0.13 |
+- iOS using **`BakongKHQR`** (v1.0.0.15)
+- Android using **`kh.gov.nbc.bakong_khqr:sdk-java:1.0.0.13`**
+
 
 ## Features
 - [x] Generate KHQR (Individual / Merchant)
 - [x] Verification (Valid / Invalid)
 - [x] Decode KHQR Information
 - [x] Generate KHQR Deeplink
+
+
+## Platform specific setup
+### iOS
+1. Add source to Podfile (ios/Podfile)
+```bash
+source "https://sambo:ycfXmxxRbyzEmozY9z6n@gitlab.nbc.gov.kh/khqr/khqr-ios-pod.git"
+```
+
+2. Run pod install (make sure your terminal is in ios folder)
+```bash
+pod install
+```
+
+### Android
+- No need to do anything it's working out of the box.
 
 ## Usage
 ### Create instance of KHQR SDK
