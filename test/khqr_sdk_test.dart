@@ -1,66 +1,80 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:khqr_sdk/khqr_sdk.dart';
-import 'package:khqr_sdk/khqr_sdk_platform_interface.dart';
-import 'package:khqr_sdk/khqr_sdk_method_channel.dart';
-import 'package:khqr_sdk/model/deeplink_data/deeplink_data.dart';
-import 'package:khqr_sdk/model/deeplink_info/deeplink_info.dart';
 import 'package:khqr_sdk/model/individual_info/individual_info.dart';
 import 'package:khqr_sdk/model/khqr_data/khqr_data.dart';
 import 'package:khqr_sdk/model/khqr_decode_data/khqr_decode_data.dart';
 import 'package:khqr_sdk/model/merchant_info/merchant_info.dart';
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-
-class MockKhqrSdkPlatform
-    with MockPlatformInterfaceMixin
-    implements KhqrSdkPlatform {
-  @override
-  Future<KhqrDecodeData?> decode(String qrCode) {
-    // TODO: implement decode
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<DeeplinkData?> generateDeepLink(DeeplinkInfo info) {
-    // TODO: implement generateDeepLink
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<KhqrData?> generateIndividual(IndividualInfo info) {
-    final khqrData = KhqrData(qr: 'This is QR', md5: 'This is MD5');
-    return Future.value(khqrData);
-  }
-
-  @override
-  Future<KhqrData?> generateMerchant(MerchantInfo info) {
-    // TODO: implement generateMerchant
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<bool> verify(String qrCode) {
-    // TODO: implement verify
-    throw UnimplementedError();
-  }
-}
 
 void main() {
-  final KhqrSdkPlatform initialPlatform = KhqrSdkPlatform.instance;
+  TestWidgetsFlutterBinding.ensureInitialized();
+  KhqrSdk khqrSdk = KhqrSdk();
+  const MethodChannel channel = MethodChannel('khqr_sdk');
 
-  test('MethodChannelKhqrSdk is the default instance', () {
-    expect(initialPlatform, isInstanceOf<MethodChannelKhqrSdk>());
+  setUp(() {
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(
+      channel,
+      (MethodCall methodCall) async {
+        if (methodCall.method == 'generateIndividual') {
+          final khqrData = KhqrData(
+              qr: 'This is individual QR', md5: 'This is individual MD5');
+          return jsonEncode(khqrData);
+        } else if (methodCall.method == 'generateMerchant') {
+          final khqrData =
+              KhqrData(qr: 'This is merchant QR', md5: 'This is merchant MD5');
+          return jsonEncode(khqrData);
+        } else if (methodCall.method == 'verify') {
+          return true;
+        } else if (methodCall.method == 'decode') {
+          final decodeData = KhqrDecodeData(
+            bakongAccountId: 'john_smith@devb',
+            merchantName: 'John Smith',
+          );
+          return jsonEncode(decodeData);
+        }
+        return null;
+      },
+    );
+  });
+
+  tearDown(() {
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(channel, null);
   });
 
   test('generateIndividual', () async {
-    KhqrSdk khqrSdkPlugin = KhqrSdk();
-    MockKhqrSdkPlatform fakePlatform = MockKhqrSdkPlatform();
-    KhqrSdkPlatform.instance = fakePlatform;
-
     final info = IndividualInfo(
       bakongAccountId: 'john_smith@devb',
       merchantName: 'John Smith',
     );
+    final khqrData = await khqrSdk.generateIndividual(info);
+    expect(khqrData, isNotNull);
+    expect(khqrData?.qr, 'This is individual QR');
+  });
 
-    expect(await khqrSdkPlugin.generateIndividual(info), isNotNull);
+  test('generateMerchant', () async {
+    final info = MerchantInfo(
+      bakongAccountId: 'john_smith@devb',
+      merchantName: 'John Smith',
+      acquiringBank: 'Dev Bank',
+      merchantId: '123456',
+    );
+    final khqrData = await khqrSdk.generateMerchant(info);
+    expect(khqrData, isNotNull);
+    expect(khqrData?.qr, 'This is merchant QR');
+  });
+
+  test('verify', () async {
+    final isVerify = await khqrSdk.verify('Test');
+    expect(isVerify, true);
+  });
+
+  test('decode', () async {
+    final decoded = await khqrSdk.decode('Test');
+    expect(decoded, isNotNull);
+    expect(decoded?.bakongAccountId, 'john_smith@devb');
   });
 }

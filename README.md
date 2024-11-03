@@ -73,10 +73,73 @@ The standardization of KHQR code specifications will help promote wider use of m
 | BakongKHQR | 1.0.0.15 | sdk-java | 1.0.0.13 |
 
 ## Features
-- [x] Generate KHQR
-  - [x] Individual
-  - [x] Merchant
-- [x] Verification (Valid or Invalid)
+- [x] Generate KHQR (Individual / Merchant)
+- [x] Verification (Valid / Invalid)
 - [x] Decode KHQR Information
 - [x] Generate KHQR Deeplink
 
+## Usage
+### Create instance of KHQR SDK
+```dart
+import 'package:khqr_sdk/khqr_sdk.dart';
+
+final _khqrSdk = KhqrSdk();
+```
+
+### Generate KHQR (Individual)
+```dart
+import 'package:khqr_sdk/model/individual_info/individual_info.dart';
+
+final info = IndividualInfo(
+  bakongAccountId: 'john_smith@devb',
+  merchantName: 'John Smith',
+);
+final khqrData = await _khqrSdk.generateIndividual(info);
+```
+
+### Generate KHQR (Merchant)
+```dart
+import 'package:khqr_sdk/model/merchant_info/merchant_info.dart';
+
+final info = MerchantInfo(
+  bakongAccountId: 'john_smith@devb',
+  acquiringBank: 'Dev Bank',
+  merchantId: '123456',
+  merchantName: 'John Smith',
+);
+final khqrData = await _khqrSdk.generateMerchant(info);
+```
+
+### Verify KHQR
+```dart
+const qrCode = '00020101021129190015john_smith@devb5204599953031165802KH5910John Smith6010Phnom Penh991700131727168754698630499FB';
+final isValid = await _khqrSdk.verify(qrCode);
+```
+
+### Decode KHQR
+```dart
+const qrCode = '00020101021129190015john_smith@devb5204599953031165802KH5910John Smith6010Phnom Penh991700131727168754698630499FB';
+final khqrDecodeData = await _khqrSdk.decode(qrCode);
+```
+
+### Generate KHQR Deeplink
+```dart
+import 'package:khqr_sdk/model/deeplink_info/deeplink_info.dart';
+import 'package:khqr_sdk/model/source_info/source_info.dart';
+
+const qrCode = '00020101021129190015john_smith@devb5204599953031165802KH5910John Smith6010Phnom Penh991700131727168754698630499FB';
+
+final sourceInfo = SourceInfo(
+  appName: 'Example App',
+  appIconUrl: 'http://cdn.example.com/icons.logo.png',
+  appDeepLinkCallBack: 'http://app.example.com',
+);
+
+final deeplinkInfo = DeeplinkInfo(
+  qr: qrCode,
+  url: 'http://api.example.com/v1/generate_deeplink_by_qr',
+  sourceInfo: sourceInfo,
+);
+
+final deeplinkData = await _khqrSdk.generateDeepLink(deeplinkInfo);
+```
