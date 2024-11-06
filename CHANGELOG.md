@@ -1,6 +1,7 @@
 # Changelog
 
-## 0.0.1-beta.1
+## 1.0.0
+- Initial release (iOS, Android)
 - Added feature Generate KHQR (individual/merchant)
 - Added feature Verification (Valid/Invalid)
 - Added feature Decode KHQR Information

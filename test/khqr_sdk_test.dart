@@ -3,10 +3,8 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:khqr_sdk/khqr_sdk.dart';
-import 'package:khqr_sdk/model/individual_info/individual_info.dart';
 import 'package:khqr_sdk/model/khqr_data/khqr_data.dart';
 import 'package:khqr_sdk/model/khqr_decode_data/khqr_decode_data.dart';
-import 'package:khqr_sdk/model/merchant_info/merchant_info.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

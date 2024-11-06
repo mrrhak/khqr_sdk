@@ -70,8 +70,7 @@ The standardization of KHQR code specifications will help promote wider use of m
 ---
 
 <p align="center">
-  <img src="assets/khqr_sdk_preview.png" width="500" alt="khqr sdk preview"/>
-  <!-- <img src="https://raw.githubusercontent.com/mrrhak/khqr_sdk/master/assets/khqr_sdk_preview.png" width="500" alt="khqr sdk preview"/> -->
+  <img src="https://raw.githubusercontent.com/mrrhak/khqr_sdk/refs/heads/master/assets/khqr_sdk_preview.png" width="500" alt="khqr sdk preview"/>
 </p>
 
 ## Supported Platforms
@@ -183,3 +182,4 @@ KhqrCardWidget(
 ```
 
 ## Activities
+![Alt](https://repobeats.axiom.co/api/embed/c03b76c879011a105eeb936c5ce90c73a554ea8d.svg "Repobeats analytics image")
