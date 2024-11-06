@@ -28,6 +28,9 @@ dependencies:
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
   plugin_platform_interface: ^2.1.8
+  qr_flutter: ^4.1.0
+  flutter_svg: ^2.0.13
+  money2: ^5.4.0
 
 dev_dependencies:
   flutter_test:
@@ -45,3 +48,16 @@ flutter:
         pluginClass: KhqrSdkPlugin
       ios:
         pluginClass: KhqrSdkPlugin
+
+  assets:
+    - assets/fonts/nunito_sans/
+    - assets/images/
+    - assets/svg/
+
+  fonts:
+    - family: NunitoSans
+      fonts:
+        - asset: assets/fonts/nunito_sans/NunitoSans_7pt-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/nunito_sans/NunitoSans_7pt-Bold.ttf
+          weight: 700

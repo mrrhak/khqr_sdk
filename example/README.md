@@ -1,16 +1,74 @@
-# khqr_sdk_example
+## Installation
+```sh
+flutter pub add khqr_sdk
+```
 
-Demonstrates how to use the khqr_sdk plugin.
+## Usage
+### Create instance of KHQR SDK
+```dart
+import 'package:khqr_sdk/khqr_sdk.dart';
 
-## Getting Started
+final _khqrSdk = KhqrSdk();
+```
 
-This project is a starting point for a Flutter application.
+### Generate KHQR (Individual)
+```dart
+final info = IndividualInfo(
+  bakongAccountId: 'john_smith@devb',
+  merchantName: 'John Smith',
+);
+final khqrData = await _khqrSdk.generateIndividual(info);
+```
 
-A few resources to get you started if this is your first Flutter project:
+### Generate KHQR (Merchant)
+```dart
+final info = MerchantInfo(
+  bakongAccountId: 'john_smith@devb',
+  acquiringBank: 'Dev Bank',
+  merchantId: '123456',
+  merchantName: 'John Smith',
+);
+final khqrData = await _khqrSdk.generateMerchant(info);
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Verify KHQR
+```dart
+const qrCode = '00020101021129190015john_smith@devb5204599953031165802KH5910John Smith6010Phnom Penh991700131727168754698630499FB';
+final isValid = await _khqrSdk.verify(qrCode);
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Decode KHQR
+```dart
+const qrCode = '00020101021129190015john_smith@devb5204599953031165802KH5910John Smith6010Phnom Penh991700131727168754698630499FB';
+final khqrDecodeData = await _khqrSdk.decode(qrCode);
+```
+
+### Generate KHQR Deeplink
+```dart
+const qrCode = '00020101021129190015john_smith@devb5204599953031165802KH5910John Smith6010Phnom Penh991700131727168754698630499FB';
+
+final sourceInfo = SourceInfo(
+  appName: 'Example App',
+  appIconUrl: 'http://cdn.example.com/icons.logo.png',
+  appDeepLinkCallBack: 'http://app.example.com',
+);
+
+final deeplinkInfo = DeeplinkInfo(
+  qr: qrCode,
+  url: 'http://api.example.com/v1/generate_deeplink_by_qr',
+  sourceInfo: sourceInfo,
+);
+
+final deeplinkData = await _khqrSdk.generateDeepLink(deeplinkInfo);
+```
+
+### KHQR Card Widget
+```dart
+KhqrCardWidget(
+  width: 300.0,
+  receiverName: 'John Smith',
+  amount: 0,
+  currency: KhqrCurrency.khr,
+  qr: khqrContent,
+),
+```

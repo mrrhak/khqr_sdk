@@ -49,7 +49,6 @@ The standardization of KHQR code specifications will help promote wider use of m
   </a>
   <a href="https://github.com/mrrhak/khqr_sdk"><img src="https://img.shields.io/github/stars/mrrhak/khqr_sdk.svg?style=flat&logo=github&colorB=deeppink&label=Stars" alt="Star on Github"></a>
   <a href="https://github.com/mrrhak/khqr_sdk"><img src="https://img.shields.io/github/forks/mrrhak/khqr_sdk?color=orange&label=Forks&logo=github" alt="Forks on Github"></a>
-  <!-- <a href="https://github.com/mrrhak/khqr_sdk"><img src="https://img.shields.io/github/watchers/mrrhak/khqr_sdk?color=teal&label=Watchers&logo=github" alt="Watchers on Github"></a> -->
   <a href="https://github.com/mrrhak/khqr_sdk/graphs/contributors">
     <img src="https://img.shields.io/github/contributors/mrrhak/khqr_sdk.svg?style=flat&logo=github&colorB=yellow&label=Contributors"
       alt="Contributors" />
@@ -71,12 +70,17 @@ The standardization of KHQR code specifications will help promote wider use of m
 ---
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/mrrhak/khqr_sdk/master/assets/khqr_sdk_preview.png" width="500" alt="khqr sdk preview"/>
+  <img src="assets/khqr_sdk_preview.png" width="500" alt="khqr sdk preview"/>
+  <!-- <img src="https://raw.githubusercontent.com/mrrhak/khqr_sdk/master/assets/khqr_sdk_preview.png" width="500" alt="khqr sdk preview"/> -->
 </p>
 
 ## Supported Platforms
-- iOS
-- Android
+- [x] iOS
+- [x] Android
+- [ ] Web
+- [ ] MacOS
+- [ ] Windows
+- [ ] Linux
 
 ## Native KHQR SDK Version
 - iOS using **`BakongKHQR`** (v1.0.0.15)
@@ -84,10 +88,13 @@ The standardization of KHQR code specifications will help promote wider use of m
 
 
 ## Features
-- [x] Generate KHQR (Individual / Merchant)
-- [x] Verification (Valid / Invalid)
-- [x] Decode KHQR Information
-- [x] Generate KHQR Deeplink
+- **Core SDK**
+  - [x] Generate KHQR (Individual / Merchant)
+  - [x] Verification (Valid / Invalid)
+  - [x] Decode KHQR Information
+  - [x] Generate KHQR Deeplink
+- **Widget**
+  - [x] KHQR Card Widget
 
 
 ## Platform specific setup
@@ -115,8 +122,6 @@ final _khqrSdk = KhqrSdk();
 
 ### Generate KHQR (Individual)
 ```dart
-import 'package:khqr_sdk/model/individual_info/individual_info.dart';
-
 final info = IndividualInfo(
   bakongAccountId: 'john_smith@devb',
   merchantName: 'John Smith',
@@ -126,8 +131,6 @@ final khqrData = await _khqrSdk.generateIndividual(info);
 
 ### Generate KHQR (Merchant)
 ```dart
-import 'package:khqr_sdk/model/merchant_info/merchant_info.dart';
-
 final info = MerchantInfo(
   bakongAccountId: 'john_smith@devb',
   acquiringBank: 'Dev Bank',
@@ -151,9 +154,6 @@ final khqrDecodeData = await _khqrSdk.decode(qrCode);
 
 ### Generate KHQR Deeplink
 ```dart
-import 'package:khqr_sdk/model/deeplink_info/deeplink_info.dart';
-import 'package:khqr_sdk/model/source_info/source_info.dart';
-
 const qrCode = '00020101021129190015john_smith@devb5204599953031165802KH5910John Smith6010Phnom Penh991700131727168754698630499FB';
 
 final sourceInfo = SourceInfo(
@@ -170,3 +170,16 @@ final deeplinkInfo = DeeplinkInfo(
 
 final deeplinkData = await _khqrSdk.generateDeepLink(deeplinkInfo);
 ```
+
+### KHQR Card Widget
+```dart
+KhqrCardWidget(
+  width: 300.0,
+  receiverName: 'John Smith',
+  amount: 0,
+  currency: KhqrCurrency.khr,
+  qr: khqrContent,
+),
+```
+
+## Activities
