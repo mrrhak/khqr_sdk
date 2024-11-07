@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:khqr_sdk/model/deeplink_data/deeplink_data.dart';
-import 'package:khqr_sdk/model/deeplink_info/deeplink_info.dart';
-import 'package:khqr_sdk/model/individual_info/individual_info.dart';
-import 'package:khqr_sdk/model/khqr_decode_data/khqr_decode_data.dart';
-import 'package:khqr_sdk/model/merchant_info/merchant_info.dart';
+import 'package:khqr_sdk/src/model/deeplink_data/deeplink_data.dart';
+import 'package:khqr_sdk/src/model/deeplink_info/deeplink_info.dart';
+import 'package:khqr_sdk/src/model/individual_info/individual_info.dart';
+import 'package:khqr_sdk/src/model/khqr_decode_data/khqr_decode_data.dart';
+import 'package:khqr_sdk/src/model/merchant_info/merchant_info.dart';
 
 import 'khqr_sdk_platform_interface.dart';
-import 'model/khqr_data/khqr_data.dart';
+import '../model/khqr_data/khqr_data.dart';
 
 /// An implementation of [KhqrSdkPlatform] that uses method channels.
 class MethodChannelKhqrSdk extends KhqrSdkPlatform {
@@ -37,6 +37,7 @@ class MethodChannelKhqrSdk extends KhqrSdkPlatform {
 
   @override
   Future<bool> verify(String qrCode) async {
+    if (qrCode.isEmpty) return false;
     final valid = await methodChannel.invokeMethod<bool>(
       'verify',
       {'qrCode': qrCode},
@@ -46,6 +47,7 @@ class MethodChannelKhqrSdk extends KhqrSdkPlatform {
 
   @override
   Future<KhqrDecodeData?> decode(String qrCode) async {
+    if (qrCode.isEmpty) return null;
     final jsonData = await methodChannel.invokeMethod(
       'decode',
       {'qrCode': qrCode},

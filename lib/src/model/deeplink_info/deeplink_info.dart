@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:khqr_sdk/model/source_info/source_info.dart';
+import 'package:khqr_sdk/src/model/source_info/source_info.dart';
 
 part 'deeplink_info.freezed.dart';
 part 'deeplink_info.g.dart';

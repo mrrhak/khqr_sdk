@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:khqr_sdk/common/enum.dart';
+import 'package:khqr_sdk/src/common/enum.dart';
 
 part 'merchant_info.freezed.dart';
 part 'merchant_info.g.dart';

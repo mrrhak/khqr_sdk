@@ -1,12 +1,12 @@
-import 'package:khqr_sdk/model/deeplink_data/deeplink_data.dart';
-import 'package:khqr_sdk/model/deeplink_info/deeplink_info.dart';
-import 'package:khqr_sdk/model/individual_info/individual_info.dart';
-import 'package:khqr_sdk/model/khqr_decode_data/khqr_decode_data.dart';
-import 'package:khqr_sdk/model/merchant_info/merchant_info.dart';
+import 'package:khqr_sdk/src/model/deeplink_data/deeplink_data.dart';
+import 'package:khqr_sdk/src/model/deeplink_info/deeplink_info.dart';
+import 'package:khqr_sdk/src/model/individual_info/individual_info.dart';
+import 'package:khqr_sdk/src/model/khqr_decode_data/khqr_decode_data.dart';
+import 'package:khqr_sdk/src/model/merchant_info/merchant_info.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'khqr_sdk_method_channel.dart';
-import 'model/khqr_data/khqr_data.dart';
+import '../model/khqr_data/khqr_data.dart';
 
 abstract class KhqrSdkPlatform extends PlatformInterface {
   /// Constructs a KhqrSdkPlatform.

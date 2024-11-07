@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:khqr_sdk/common/enum.dart';
-import 'package:khqr_sdk/util/money_formatter_util.dart';
+import 'package:khqr_sdk/src/common/enum.dart';
+import 'package:khqr_sdk/src/util/money_formatter_util.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class KhqrCardWidget extends StatefulWidget {
