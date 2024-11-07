@@ -1,11 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'khqr_decode_data.freezed.dart';
-part 'khqr_decode_data.g.dart';
+part 'khqr_decoded_data.freezed.dart';
+part 'khqr_decoded_data.g.dart';
 
 @freezed
-class KhqrDecodeData with _$KhqrDecodeData {
-  factory KhqrDecodeData({
+class KhqrDecodedData with _$KhqrDecodedData {
+  factory KhqrDecodedData({
     String? payloadFormatIndicator,
     String? pointOfInitiationMethod,
     @JsonKey(name: 'bakongAccountID') required String bakongAccountId,
@@ -30,8 +30,8 @@ class KhqrDecodeData with _$KhqrDecodeData {
     String? merchantAlternateLanguagePreference,
     String? merchantNameAlternateLanguage,
     String? merchantCityAlternateLanguage,
-  }) = _KhqrDecodeData;
+  }) = _KhqrDecodedData;
 
-  factory KhqrDecodeData.fromJson(Map<String, dynamic> json) =>
-      _$KhqrDecodeDataFromJson(json);
+  factory KhqrDecodedData.fromJson(Map<String, dynamic> json) =>
+      _$KhqrDecodedDataFromJson(json);
 }

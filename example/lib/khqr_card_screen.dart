@@ -15,6 +15,10 @@ class _KhqrCardScreenState extends State<KhqrCardScreen> {
   late KhqrSdk _khqrSdk;
   String? khqrContent;
 
+  final String _receiverName = 'Kimhak';
+  final KhqrCurrency _receiverCurrency = KhqrCurrency.khr;
+  final double _amount = 0;
+
   @override
   void initState() {
     _khqrSdk = KhqrSdk();
@@ -26,10 +30,10 @@ class _KhqrCardScreenState extends State<KhqrCardScreen> {
   Future<void> generateIndividual() async {
     try {
       final info = IndividualInfo(
-        bakongAccountId: 'john_smith@devb',
-        merchantName: 'John Smith',
-        currency: KhqrCurrency.khr,
-        amount: 0,
+        bakongAccountId: 'kimhak@dev',
+        merchantName: _receiverName,
+        currency: _receiverCurrency,
+        amount: _amount,
       );
       final individual = await _khqrSdk.generateIndividual(info);
       setState(() {
@@ -55,9 +59,9 @@ class _KhqrCardScreenState extends State<KhqrCardScreen> {
               children: [
                 KhqrCardWidget(
                   width: 300.0,
-                  receiverName: 'John Smith',
-                  amount: 0,
-                  currency: KhqrCurrency.khr,
+                  receiverName: _receiverName,
+                  amount: _amount,
+                  currency: _receiverCurrency,
                   qr: khqrContent!,
                 ),
                 const SizedBox(height: 16.0),

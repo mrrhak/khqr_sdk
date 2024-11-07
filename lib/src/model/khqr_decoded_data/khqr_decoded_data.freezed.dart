@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'khqr_decode_data.dart';
+part of 'khqr_decoded_data.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-KhqrDecodeData _$KhqrDecodeDataFromJson(Map<String, dynamic> json) {
-  return _KhqrDecodeData.fromJson(json);
+KhqrDecodedData _$KhqrDecodedDataFromJson(Map<String, dynamic> json) {
+  return _KhqrDecodedData.fromJson(json);
 }
 
 /// @nodoc
-mixin _$KhqrDecodeData {
+mixin _$KhqrDecodedData {
   String? get payloadFormatIndicator => throw _privateConstructorUsedError;
   String? get pointOfInitiationMethod => throw _privateConstructorUsedError;
   @JsonKey(name: 'bakongAccountID')
@@ -49,21 +49,21 @@ mixin _$KhqrDecodeData {
   String? get merchantCityAlternateLanguage =>
       throw _privateConstructorUsedError;
 
-  /// Serializes this KhqrDecodeData to a JSON map.
+  /// Serializes this KhqrDecodedData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of KhqrDecodeData
+  /// Create a copy of KhqrDecodedData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $KhqrDecodeDataCopyWith<KhqrDecodeData> get copyWith =>
+  $KhqrDecodedDataCopyWith<KhqrDecodedData> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $KhqrDecodeDataCopyWith<$Res> {
-  factory $KhqrDecodeDataCopyWith(
-          KhqrDecodeData value, $Res Function(KhqrDecodeData) then) =
-      _$KhqrDecodeDataCopyWithImpl<$Res, KhqrDecodeData>;
+abstract class $KhqrDecodedDataCopyWith<$Res> {
+  factory $KhqrDecodedDataCopyWith(
+          KhqrDecodedData value, $Res Function(KhqrDecodedData) then) =
+      _$KhqrDecodedDataCopyWithImpl<$Res, KhqrDecodedData>;
   @useResult
   $Res call(
       {String? payloadFormatIndicator,
@@ -93,16 +93,16 @@ abstract class $KhqrDecodeDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$KhqrDecodeDataCopyWithImpl<$Res, $Val extends KhqrDecodeData>
-    implements $KhqrDecodeDataCopyWith<$Res> {
-  _$KhqrDecodeDataCopyWithImpl(this._value, this._then);
+class _$KhqrDecodedDataCopyWithImpl<$Res, $Val extends KhqrDecodedData>
+    implements $KhqrDecodedDataCopyWith<$Res> {
+  _$KhqrDecodedDataCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of KhqrDecodeData
+  /// Create a copy of KhqrDecodedData
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -235,11 +235,11 @@ class _$KhqrDecodeDataCopyWithImpl<$Res, $Val extends KhqrDecodeData>
 }
 
 /// @nodoc
-abstract class _$$KhqrDecodeDataImplCopyWith<$Res>
-    implements $KhqrDecodeDataCopyWith<$Res> {
-  factory _$$KhqrDecodeDataImplCopyWith(_$KhqrDecodeDataImpl value,
-          $Res Function(_$KhqrDecodeDataImpl) then) =
-      __$$KhqrDecodeDataImplCopyWithImpl<$Res>;
+abstract class _$$KhqrDecodedDataImplCopyWith<$Res>
+    implements $KhqrDecodedDataCopyWith<$Res> {
+  factory _$$KhqrDecodedDataImplCopyWith(_$KhqrDecodedDataImpl value,
+          $Res Function(_$KhqrDecodedDataImpl) then) =
+      __$$KhqrDecodedDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -270,14 +270,14 @@ abstract class _$$KhqrDecodeDataImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$KhqrDecodeDataImplCopyWithImpl<$Res>
-    extends _$KhqrDecodeDataCopyWithImpl<$Res, _$KhqrDecodeDataImpl>
-    implements _$$KhqrDecodeDataImplCopyWith<$Res> {
-  __$$KhqrDecodeDataImplCopyWithImpl(
-      _$KhqrDecodeDataImpl _value, $Res Function(_$KhqrDecodeDataImpl) _then)
+class __$$KhqrDecodedDataImplCopyWithImpl<$Res>
+    extends _$KhqrDecodedDataCopyWithImpl<$Res, _$KhqrDecodedDataImpl>
+    implements _$$KhqrDecodedDataImplCopyWith<$Res> {
+  __$$KhqrDecodedDataImplCopyWithImpl(
+      _$KhqrDecodedDataImpl _value, $Res Function(_$KhqrDecodedDataImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of KhqrDecodeData
+  /// Create a copy of KhqrDecodedData
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -307,7 +307,7 @@ class __$$KhqrDecodeDataImplCopyWithImpl<$Res>
     Object? merchantNameAlternateLanguage = freezed,
     Object? merchantCityAlternateLanguage = freezed,
   }) {
-    return _then(_$KhqrDecodeDataImpl(
+    return _then(_$KhqrDecodedDataImpl(
       payloadFormatIndicator: freezed == payloadFormatIndicator
           ? _value.payloadFormatIndicator
           : payloadFormatIndicator // ignore: cast_nullable_to_non_nullable
@@ -411,8 +411,8 @@ class __$$KhqrDecodeDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$KhqrDecodeDataImpl implements _KhqrDecodeData {
-  _$KhqrDecodeDataImpl(
+class _$KhqrDecodedDataImpl implements _KhqrDecodedData {
+  _$KhqrDecodedDataImpl(
       {this.payloadFormatIndicator,
       this.pointOfInitiationMethod,
       @JsonKey(name: 'bakongAccountID') required this.bakongAccountId,
@@ -438,8 +438,8 @@ class _$KhqrDecodeDataImpl implements _KhqrDecodeData {
       this.merchantNameAlternateLanguage,
       this.merchantCityAlternateLanguage});
 
-  factory _$KhqrDecodeDataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$KhqrDecodeDataImplFromJson(json);
+  factory _$KhqrDecodedDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$KhqrDecodedDataImplFromJson(json);
 
   @override
   final String? payloadFormatIndicator;
@@ -493,14 +493,14 @@ class _$KhqrDecodeDataImpl implements _KhqrDecodeData {
 
   @override
   String toString() {
-    return 'KhqrDecodeData(payloadFormatIndicator: $payloadFormatIndicator, pointOfInitiationMethod: $pointOfInitiationMethod, bakongAccountId: $bakongAccountId, merchantId: $merchantId, accountInformation: $accountInformation, acquiringBank: $acquiringBank, merchantType: $merchantType, transactionCurrency: $transactionCurrency, merchantName: $merchantName, transactionAmount: $transactionAmount, merchantCategoryCode: $merchantCategoryCode, countryCode: $countryCode, merchantCity: $merchantCity, billNumber: $billNumber, storeLabel: $storeLabel, terminalLabel: $terminalLabel, mobileNumber: $mobileNumber, timestamp: $timestamp, crc: $crc, upiAccountInformation: $upiAccountInformation, purposeOfTransaction: $purposeOfTransaction, merchantAlternateLanguagePreference: $merchantAlternateLanguagePreference, merchantNameAlternateLanguage: $merchantNameAlternateLanguage, merchantCityAlternateLanguage: $merchantCityAlternateLanguage)';
+    return 'KhqrDecodedData(payloadFormatIndicator: $payloadFormatIndicator, pointOfInitiationMethod: $pointOfInitiationMethod, bakongAccountId: $bakongAccountId, merchantId: $merchantId, accountInformation: $accountInformation, acquiringBank: $acquiringBank, merchantType: $merchantType, transactionCurrency: $transactionCurrency, merchantName: $merchantName, transactionAmount: $transactionAmount, merchantCategoryCode: $merchantCategoryCode, countryCode: $countryCode, merchantCity: $merchantCity, billNumber: $billNumber, storeLabel: $storeLabel, terminalLabel: $terminalLabel, mobileNumber: $mobileNumber, timestamp: $timestamp, crc: $crc, upiAccountInformation: $upiAccountInformation, purposeOfTransaction: $purposeOfTransaction, merchantAlternateLanguagePreference: $merchantAlternateLanguagePreference, merchantNameAlternateLanguage: $merchantNameAlternateLanguage, merchantCityAlternateLanguage: $merchantCityAlternateLanguage)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$KhqrDecodeDataImpl &&
+            other is _$KhqrDecodedDataImpl &&
             (identical(other.payloadFormatIndicator, payloadFormatIndicator) ||
                 other.payloadFormatIndicator == payloadFormatIndicator) &&
             (identical(other.pointOfInitiationMethod, pointOfInitiationMethod) ||
@@ -585,25 +585,25 @@ class _$KhqrDecodeDataImpl implements _KhqrDecodeData {
         merchantCityAlternateLanguage
       ]);
 
-  /// Create a copy of KhqrDecodeData
+  /// Create a copy of KhqrDecodedData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$KhqrDecodeDataImplCopyWith<_$KhqrDecodeDataImpl> get copyWith =>
-      __$$KhqrDecodeDataImplCopyWithImpl<_$KhqrDecodeDataImpl>(
+  _$$KhqrDecodedDataImplCopyWith<_$KhqrDecodedDataImpl> get copyWith =>
+      __$$KhqrDecodedDataImplCopyWithImpl<_$KhqrDecodedDataImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$KhqrDecodeDataImplToJson(
+    return _$$KhqrDecodedDataImplToJson(
       this,
     );
   }
 }
 
-abstract class _KhqrDecodeData implements KhqrDecodeData {
-  factory _KhqrDecodeData(
+abstract class _KhqrDecodedData implements KhqrDecodedData {
+  factory _KhqrDecodedData(
       {final String? payloadFormatIndicator,
       final String? pointOfInitiationMethod,
       @JsonKey(name: 'bakongAccountID') required final String bakongAccountId,
@@ -627,10 +627,10 @@ abstract class _KhqrDecodeData implements KhqrDecodeData {
       final String? purposeOfTransaction,
       final String? merchantAlternateLanguagePreference,
       final String? merchantNameAlternateLanguage,
-      final String? merchantCityAlternateLanguage}) = _$KhqrDecodeDataImpl;
+      final String? merchantCityAlternateLanguage}) = _$KhqrDecodedDataImpl;
 
-  factory _KhqrDecodeData.fromJson(Map<String, dynamic> json) =
-      _$KhqrDecodeDataImpl.fromJson;
+  factory _KhqrDecodedData.fromJson(Map<String, dynamic> json) =
+      _$KhqrDecodedDataImpl.fromJson;
 
   @override
   String? get payloadFormatIndicator;
@@ -682,10 +682,10 @@ abstract class _KhqrDecodeData implements KhqrDecodeData {
   @override
   String? get merchantCityAlternateLanguage;
 
-  /// Create a copy of KhqrDecodeData
+  /// Create a copy of KhqrDecodedData
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$KhqrDecodeDataImplCopyWith<_$KhqrDecodeDataImpl> get copyWith =>
+  _$$KhqrDecodedDataImplCopyWith<_$KhqrDecodedDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

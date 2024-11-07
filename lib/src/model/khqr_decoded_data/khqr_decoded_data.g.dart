@@ -1,13 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'khqr_decode_data.dart';
+part of 'khqr_decoded_data.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$KhqrDecodeDataImpl _$$KhqrDecodeDataImplFromJson(Map<String, dynamic> json) =>
-    _$KhqrDecodeDataImpl(
+_$KhqrDecodedDataImpl _$$KhqrDecodedDataImplFromJson(
+        Map<String, dynamic> json) =>
+    _$KhqrDecodedDataImpl(
       payloadFormatIndicator: json['payloadFormatIndicator'] as String?,
       pointOfInitiationMethod: json['pointOfInitiationMethod'] as String?,
       bakongAccountId: json['bakongAccountID'] as String,
@@ -37,8 +38,8 @@ _$KhqrDecodeDataImpl _$$KhqrDecodeDataImplFromJson(Map<String, dynamic> json) =>
           json['merchantCityAlternateLanguage'] as String?,
     );
 
-Map<String, dynamic> _$$KhqrDecodeDataImplToJson(
-        _$KhqrDecodeDataImpl instance) =>
+Map<String, dynamic> _$$KhqrDecodedDataImplToJson(
+        _$KhqrDecodedDataImpl instance) =>
     <String, dynamic>{
       'payloadFormatIndicator': instance.payloadFormatIndicator,
       'pointOfInitiationMethod': instance.pointOfInitiationMethod,

@@ -23,8 +23,8 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
   Future<void> generateIndividual() async {
     try {
       final info = IndividualInfo(
-        bakongAccountId: 'john_smith@devb',
-        merchantName: 'John Smith',
+        bakongAccountId: 'kimhak@dev',
+        merchantName: 'Kimhak',
       );
       final individual = await _khqrSdk.generateIndividual(info);
       if (!mounted) return;
@@ -90,10 +90,10 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
   Future<void> generateMerchant() async {
     try {
       final info = MerchantInfo(
-        bakongAccountId: 'john_smith@devb',
+        bakongAccountId: 'kimhak@dev',
         acquiringBank: 'Dev Bank',
         merchantId: '123456',
-        merchantName: 'John Smith',
+        merchantName: 'Kimhak',
       );
       final merchant = await _khqrSdk.generateMerchant(info);
       if (!mounted) return;

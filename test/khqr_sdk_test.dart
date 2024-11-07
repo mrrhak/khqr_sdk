@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:khqr_sdk/khqr_sdk.dart';
-import 'package:khqr_sdk/model/khqr_data/khqr_data.dart';
-import 'package:khqr_sdk/model/khqr_decode_data/khqr_decode_data.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -27,9 +25,9 @@ void main() {
         } else if (methodCall.method == 'verify') {
           return true;
         } else if (methodCall.method == 'decode') {
-          final decodeData = KhqrDecodeData(
-            bakongAccountId: 'john_smith@devb',
-            merchantName: 'John Smith',
+          final decodeData = KhqrDecodedData(
+            bakongAccountId: 'kimhak@dev',
+            merchantName: 'Kimhak',
           );
           return jsonEncode(decodeData);
         }
@@ -45,8 +43,8 @@ void main() {
 
   test('generateIndividual', () async {
     final info = IndividualInfo(
-      bakongAccountId: 'john_smith@devb',
-      merchantName: 'John Smith',
+      bakongAccountId: 'kimhak@dev',
+      merchantName: 'Kimhak',
     );
     final khqrData = await khqrSdk.generateIndividual(info);
     expect(khqrData, isNotNull);
@@ -55,8 +53,8 @@ void main() {
 
   test('generateMerchant', () async {
     final info = MerchantInfo(
-      bakongAccountId: 'john_smith@devb',
-      merchantName: 'John Smith',
+      bakongAccountId: 'kimhak@dev',
+      merchantName: 'Kimhak',
       acquiringBank: 'Dev Bank',
       merchantId: '123456',
     );
@@ -73,6 +71,6 @@ void main() {
   test('decode', () async {
     final decoded = await khqrSdk.decode('Test');
     expect(decoded, isNotNull);
-    expect(decoded?.bakongAccountId, 'john_smith@devb');
+    expect(decoded?.bakongAccountId, 'kimhak@dev');
   });
 }

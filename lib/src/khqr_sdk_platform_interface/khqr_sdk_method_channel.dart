@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:khqr_sdk/src/model/deeplink_data/deeplink_data.dart';
 import 'package:khqr_sdk/src/model/deeplink_info/deeplink_info.dart';
 import 'package:khqr_sdk/src/model/individual_info/individual_info.dart';
-import 'package:khqr_sdk/src/model/khqr_decode_data/khqr_decode_data.dart';
+import 'package:khqr_sdk/src/model/khqr_decoded_data/khqr_decoded_data.dart';
 import 'package:khqr_sdk/src/model/merchant_info/merchant_info.dart';
 
 import 'khqr_sdk_platform_interface.dart';
@@ -46,13 +46,13 @@ class MethodChannelKhqrSdk extends KhqrSdkPlatform {
   }
 
   @override
-  Future<KhqrDecodeData?> decode(String qrCode) async {
+  Future<KhqrDecodedData?> decode(String qrCode) async {
     if (qrCode.isEmpty) return null;
     final jsonData = await methodChannel.invokeMethod(
       'decode',
       {'qrCode': qrCode},
     );
-    return KhqrDecodeData.fromJson(jsonDecode(jsonData));
+    return KhqrDecodedData.fromJson(jsonDecode(jsonData));
   }
 
   @override

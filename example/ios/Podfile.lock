@@ -3,7 +3,7 @@ PODS:
   - Flutter (1.0.0)
   - integration_test (0.0.1):
     - Flutter
-  - khqr_sdk (0.0.1):
+  - khqr_sdk (1.0.0):
     - BakongKHQR (~> 1.0.0.15)
     - Flutter
 
@@ -28,8 +28,8 @@ SPEC CHECKSUMS:
   BakongKHQR: 6ade9d154b26056075c9b8bcc865ad7ca1652424
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   integration_test: 252f60fa39af5e17c3aa9899d35d908a0721b573
-  khqr_sdk: 0b432b03337fdb078a4295ab6d1da7dc8e777d8c
+  khqr_sdk: 0025bfc5486f9fd8d31300eb28314036e3952ea4
 
 PODFILE CHECKSUM: e0006343b0b6cd9a7825676c319b85508a5c66cc
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

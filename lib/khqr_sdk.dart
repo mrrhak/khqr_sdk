@@ -3,7 +3,7 @@ import 'src/model/individual_info/individual_info.dart';
 import 'src/model/merchant_info/merchant_info.dart';
 import 'src/model/deeplink_info/deeplink_info.dart';
 import 'src/model/khqr_data/khqr_data.dart';
-import 'src/model/khqr_decode_data/khqr_decode_data.dart';
+import 'src/model/khqr_decoded_data/khqr_decoded_data.dart';
 import 'src/model/deeplink_data/deeplink_data.dart';
 
 export 'src/model/individual_info/individual_info.dart';
@@ -11,7 +11,7 @@ export 'src/model/merchant_info/merchant_info.dart';
 export 'src/model/deeplink_info/deeplink_info.dart';
 export 'src/model/source_info/source_info.dart';
 export 'src/model/khqr_data/khqr_data.dart';
-export 'src/model/khqr_decode_data/khqr_decode_data.dart';
+export 'src/model/khqr_decoded_data/khqr_decoded_data.dart';
 export 'src/model/deeplink_data/deeplink_data.dart';
 export 'src/widget/khqr_card_widget.dart';
 export 'src/common/enum.dart';
@@ -29,7 +29,7 @@ class KhqrSdk {
     return await KhqrSdkPlatform.instance.verify(qrCode);
   }
 
-  Future<KhqrDecodeData?> decode(String qrCode) async {
+  Future<KhqrDecodedData?> decode(String qrCode) async {
     return await KhqrSdkPlatform.instance.decode(qrCode);
   }
 

@@ -1,7 +1,7 @@
 import 'package:khqr_sdk/src/model/deeplink_data/deeplink_data.dart';
 import 'package:khqr_sdk/src/model/deeplink_info/deeplink_info.dart';
 import 'package:khqr_sdk/src/model/individual_info/individual_info.dart';
-import 'package:khqr_sdk/src/model/khqr_decode_data/khqr_decode_data.dart';
+import 'package:khqr_sdk/src/model/khqr_decoded_data/khqr_decoded_data.dart';
 import 'package:khqr_sdk/src/model/merchant_info/merchant_info.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
@@ -41,7 +41,7 @@ abstract class KhqrSdkPlatform extends PlatformInterface {
     throw UnimplementedError('verify() has not been implemented.');
   }
 
-  Future<KhqrDecodeData?> decode(String qrCode) {
+  Future<KhqrDecodedData?> decode(String qrCode) {
     throw UnimplementedError('decode() has not been implemented.');
   }
 

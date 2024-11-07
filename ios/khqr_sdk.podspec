@@ -4,10 +4,14 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'khqr_sdk'
-  s.version          = '0.0.1'
-  s.summary          = 'A new Flutter project.'
+  s.version          = '1.0.0'
+  s.summary          = 'KHQR is a standardization of QR Code (EMV) that will promote wider use of mobile retail payments in Cambodia.'
   s.description      = <<-DESC
-A new Flutter project.
+The standardization of KHQR code specifications will help promote wider use of mobile retail payments in Cambodia and provide consistent user experience for merchants and consumers.
+It can enable interoperability in the payment industry.
+A common QR code would facilitate payments among different schemes, e-wallets and banks and would encourage small merchants to adopt KHQR code as payment method.
+KHQR is created for retail or remittance in Cambodia and Cross-Border.
+It only requires a single QR for receiving transactions from any payment provider through Bakong including Bakong App.
                        DESC
   s.homepage         = 'https://mrrhak.com'
   s.license          = { :file => '../LICENSE' }
@@ -16,7 +20,7 @@ A new Flutter project.
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
   s.dependency 'BakongKHQR', '~> 1.0.0.15' 
-  s.platform = :ios, '12.0'
+  s.platform = :ios, '11.0'
 
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
