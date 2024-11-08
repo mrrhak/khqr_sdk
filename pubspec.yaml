@@ -8,8 +8,8 @@ version: 1.0.0
 funding:
   - https://ko-fi.com/mrrhak
 screenshots:
-  - description: "KHQR SDK"
-    path: assets/khqr.png
+  - description: "Bakong KHQR SDK is a standardization of QR Code that will promote wider use of mobile retail payments in Cambodia."
+    path: assets/khqr_sdk.png
 
 topics:
   - khqr
