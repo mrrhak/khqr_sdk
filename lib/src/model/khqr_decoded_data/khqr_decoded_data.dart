@@ -8,7 +8,7 @@ class KhqrDecodedData with _$KhqrDecodedData {
   factory KhqrDecodedData({
     String? payloadFormatIndicator,
     String? pointOfInitiationMethod,
-    @JsonKey(name: 'bakongAccountID') required String bakongAccountId,
+    required String bakongAccountId,
     String? merchantId,
     String? accountInformation,
     String? acquiringBank,

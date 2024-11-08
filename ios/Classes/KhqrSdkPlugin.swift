@@ -178,7 +178,9 @@ public class KhqrSdkPlugin: NSObject, FlutterPlugin {
     // Convert the dictionary to JSON
     do {
       let jsonData = try JSONSerialization.data(withJSONObject: dict, options: [])
-      let jsonString = String(data: jsonData, encoding: .utf8)
+      var jsonString = String(data: jsonData, encoding: .utf8) ?? ""
+      jsonString = jsonString.replacingOccurrences(
+        of: "\"bakongAccountID\":", with: "\"bakongAccountId\":")
       return jsonString
     } catch {
       print("Error serializing object to JSON: \(error)")

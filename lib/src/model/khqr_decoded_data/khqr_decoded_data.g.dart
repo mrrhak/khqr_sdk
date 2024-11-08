@@ -11,7 +11,7 @@ _$KhqrDecodedDataImpl _$$KhqrDecodedDataImplFromJson(
     _$KhqrDecodedDataImpl(
       payloadFormatIndicator: json['payloadFormatIndicator'] as String?,
       pointOfInitiationMethod: json['pointOfInitiationMethod'] as String?,
-      bakongAccountId: json['bakongAccountID'] as String,
+      bakongAccountId: json['bakongAccountId'] as String,
       merchantId: json['merchantId'] as String?,
       accountInformation: json['accountInformation'] as String?,
       acquiringBank: json['acquiringBank'] as String?,
@@ -43,7 +43,7 @@ Map<String, dynamic> _$$KhqrDecodedDataImplToJson(
     <String, dynamic>{
       'payloadFormatIndicator': instance.payloadFormatIndicator,
       'pointOfInitiationMethod': instance.pointOfInitiationMethod,
-      'bakongAccountID': instance.bakongAccountId,
+      'bakongAccountId': instance.bakongAccountId,
       'merchantId': instance.merchantId,
       'accountInformation': instance.accountInformation,
       'acquiringBank': instance.acquiringBank,

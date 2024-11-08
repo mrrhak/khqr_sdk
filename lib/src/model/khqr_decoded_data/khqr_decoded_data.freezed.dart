@@ -22,7 +22,6 @@ KhqrDecodedData _$KhqrDecodedDataFromJson(Map<String, dynamic> json) {
 mixin _$KhqrDecodedData {
   String? get payloadFormatIndicator => throw _privateConstructorUsedError;
   String? get pointOfInitiationMethod => throw _privateConstructorUsedError;
-  @JsonKey(name: 'bakongAccountID')
   String get bakongAccountId => throw _privateConstructorUsedError;
   String? get merchantId => throw _privateConstructorUsedError;
   String? get accountInformation => throw _privateConstructorUsedError;
@@ -68,7 +67,7 @@ abstract class $KhqrDecodedDataCopyWith<$Res> {
   $Res call(
       {String? payloadFormatIndicator,
       String? pointOfInitiationMethod,
-      @JsonKey(name: 'bakongAccountID') String bakongAccountId,
+      String bakongAccountId,
       String? merchantId,
       String? accountInformation,
       String? acquiringBank,
@@ -245,7 +244,7 @@ abstract class _$$KhqrDecodedDataImplCopyWith<$Res>
   $Res call(
       {String? payloadFormatIndicator,
       String? pointOfInitiationMethod,
-      @JsonKey(name: 'bakongAccountID') String bakongAccountId,
+      String bakongAccountId,
       String? merchantId,
       String? accountInformation,
       String? acquiringBank,
@@ -415,7 +414,7 @@ class _$KhqrDecodedDataImpl implements _KhqrDecodedData {
   _$KhqrDecodedDataImpl(
       {this.payloadFormatIndicator,
       this.pointOfInitiationMethod,
-      @JsonKey(name: 'bakongAccountID') required this.bakongAccountId,
+      required this.bakongAccountId,
       this.merchantId,
       this.accountInformation,
       this.acquiringBank,
@@ -446,7 +445,6 @@ class _$KhqrDecodedDataImpl implements _KhqrDecodedData {
   @override
   final String? pointOfInitiationMethod;
   @override
-  @JsonKey(name: 'bakongAccountID')
   final String bakongAccountId;
   @override
   final String? merchantId;
@@ -606,7 +604,7 @@ abstract class _KhqrDecodedData implements KhqrDecodedData {
   factory _KhqrDecodedData(
       {final String? payloadFormatIndicator,
       final String? pointOfInitiationMethod,
-      @JsonKey(name: 'bakongAccountID') required final String bakongAccountId,
+      required final String bakongAccountId,
       final String? merchantId,
       final String? accountInformation,
       final String? acquiringBank,
@@ -637,7 +635,6 @@ abstract class _KhqrDecodedData implements KhqrDecodedData {
   @override
   String? get pointOfInitiationMethod;
   @override
-  @JsonKey(name: 'bakongAccountID')
   String get bakongAccountId;
   @override
   String? get merchantId;

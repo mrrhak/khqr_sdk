@@ -1,11 +1,12 @@
-include: package:flutter_lints/flutter.yaml
-
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+include: package:lints/recommended.yaml
 
 analyzer:
-  errors:
-    invalid_annotation_target: ignore
+  # errors:
+    # invalid_annotation_target: ignore
   exclude:
     - 'test'
     - 'example'
+
+linter:
+  rules:
+    - public_member_api_docs

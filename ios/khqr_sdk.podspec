@@ -7,16 +7,13 @@ Pod::Spec.new do |s|
   s.version          = '1.0.0'
   s.summary          = 'KHQR is a standardization of QR Code (EMV) that will promote wider use of mobile retail payments in Cambodia.'
   s.description      = <<-DESC
-The standardization of KHQR code specifications will help promote wider use of mobile retail payments in Cambodia and provide consistent user experience for merchants and consumers.
-It can enable interoperability in the payment industry.
-A common QR code would facilitate payments among different schemes, e-wallets and banks and would encourage small merchants to adopt KHQR code as payment method.
-KHQR is created for retail or remittance in Cambodia and Cross-Border.
-It only requires a single QR for receiving transactions from any payment provider through Bakong including Bakong App.
+KHQR is a standardization of QR Code (EMV) that will promote wider use of mobile retail payments in Cambodia.
                        DESC
   s.homepage         = 'https://mrrhak.com'
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Kimhak Long' => 'longkimhak.kh@gmail.com' }
-  s.source           = { :path => '.' }
+  s.source           = { :http => 'https://github.com/mrrhak/khqr_sdk' }
+  s.documentation_url = 'https://pub.dev/packages/khqr_sdk'
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
   s.dependency 'BakongKHQR', '~> 1.0.0.15' 

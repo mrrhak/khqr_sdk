@@ -204,10 +204,10 @@ public class KhqrSdkPlugin implements FlutterPlugin, MethodCallHandler {
     String qrCode = (String) arguments.get("qrCode");
 
     KHQRResponse<KHQRDecodeData> response = BakongKHQR.decode(qrCode);
-    System.out.println(response);
     if (response.getKHQRStatus().getCode() == 0) {
       Gson gson = new Gson();
       String jsonString = gson.toJson(response.getData());
+      jsonString = jsonString.replace("\"bakongAccountID\":", "\"bakongAccountId\":");
       result.success(jsonString);
     } else {
       result.error("Error", response.getKHQRStatus().getMessage(), null);
