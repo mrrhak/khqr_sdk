@@ -7,7 +7,8 @@
 > 
 > This is a simple interface layer that connects your Dart code directly to the original native platform-specific SDK, bridging Flutter and native functionality seamlessly.
 > 
-> [KHQR SDK Document Reference](https://bakong.nbc.gov.kh/en/download/KHQR/integration/KHQR%20SDK%20Document.pdf)
+> <small>[KHQR SDK Document Reference](https://bakong.nbc.gov.kh/en/download/KHQR/integration/KHQR%20SDK%20Document.pdf)
+> </small>
 ---
 
 <div align="center">
@@ -70,7 +71,7 @@ The standardization of KHQR code specifications will help promote wider use of m
 ---
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/mrrhak/khqr_sdk/refs/heads/master/assets/khqr_sdk_preview.png" width="500" alt="khqr sdk preview"/>
+  <img src="https://raw.githubusercontent.com/mrrhak/khqr_sdk/refs/heads/master/assets/khqr_sdk_preview.png" width="640" alt="khqr sdk preview"/>
 </p>
 
 ## Supported Platforms
@@ -85,15 +86,18 @@ The standardization of KHQR code specifications will help promote wider use of m
 - iOS using **`BakongKHQR`** (v1.0.0.15)
 - Android using **`kh.gov.nbc.bakong_khqr:sdk-java:1.0.0.13`**
 
+## Features Supported
 
-## Features
-- **Core SDK**
-  - [x] Generate KHQR (Individual / Merchant)
-  - [x] Verification (Valid / Invalid)
-  - [x] Decode KHQR Information
-  - [x] Generate KHQR Deeplink
-- **Widget**
-  - [x] KHQR Card Widget
+See the example app for detailed implementation information.
+
+| Features            | Android | iOS     |
+|---------------------|---------|---------|
+| Generate Individual |    ✔    |    ✔    |
+| Generate Merchant   |    ✔    |    ✔    |
+| Generate Deeplink   |    ✔    |    ✔    |
+| Verify              |    ✔    |    ✔    |
+| Decode              |    ✔    |    ✔    |
+| KHQR Card Widget    |    ✔    |    ✔    |
 
 
 ## Platform specific setup
@@ -180,6 +184,17 @@ KhqrCardWidget(
   qr: khqrContent,
 ),
 ```
+
+See the [example](https://github.com/mrrhak/khqr_sdk/tree/master/example) for runnable examples of various usages.
+
+## Bugs or Requests
+
+If you encounter any problems feel free to open an [issue](https://github.com/mrrhak/khqr_sdk/issues/new?template=bug_report.md). If you feel the library is missing a feature, please raise a [ticket](https://github.com/mrrhak/khqr_sdk/issues/new?template=feature_request.md) on GitHub and I'll look into it. Pull request are also welcome.
+
+See [Contributing.md](https://github.com/mrrhak/khqr_sdk/blob/master/CONTRIBUTING.md).
+
+## Support
+Don't forget to give it a like 👍 or a star ⭐
 
 ## Activities
 ![Alt](https://repobeats.axiom.co/api/embed/c03b76c879011a105eeb936c5ce90c73a554ea8d.svg "Repobeats analytics image")

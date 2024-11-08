@@ -1,6 +1,14 @@
 import 'package:money2/money2.dart';
 
+/// Utility class for formatting money
 class MoneyFormatterUtil {
+  /// Formats [amount] as US dollars with the specified [decimalDigits].
+  ///
+  /// If [showSymbol] is true, the [symbol] will be included in the formatted string.
+  ///
+  /// If [decimalDigits] is omitted, it defaults to 2.
+  ///
+  /// The default [symbol] is '$'.
   static Money dollarDisplayFormatter(
     num amount, {
     int? decimalDigits,
@@ -20,6 +28,13 @@ class MoneyFormatterUtil {
     return money;
   }
 
+  /// Formats [amount] as Khmer Riel with the specified [decimalDigits].
+  ///
+  /// If [showSymbol] is true, the [symbol] will be included in the formatted string.
+  ///
+  /// If [decimalDigits] is omitted, it defaults to 0.
+  ///
+  /// The default [symbol] is '៛'.
   static Money rielDisplayFormatter(
     num amount, {
     int? decimalDigits,

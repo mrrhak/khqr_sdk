@@ -1,14 +1,20 @@
 ---
 name: Feature request
-about: Suggest an idea to improve Flutter KHQR SDK
+about: Suggest an idea for this project
 title: "[FEATURE REQUEST]"
 labels: improvement
 assignees: ''
 
 ---
 
-### :speech_balloon: Description
-A clear and concise description of what you would like to be added to KHQR SDK.
+**Is your feature request related to a problem? Please describe.**
+A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
 
-### :question: Platform
-Is this feature request for a specific platform? E.g. Web / iOS / Android / MacOS / Windows / Linux
+**Describe the solution you'd like**
+A clear and concise description of what you want to happen.
+
+**Describe alternatives you've considered**
+A clear and concise description of any alternative solutions or features you've considered.
+
+**Additional context**
+Add any other context or screenshots about the feature request here.

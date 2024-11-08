@@ -3,8 +3,10 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'khqr_decoded_data.freezed.dart';
 part 'khqr_decoded_data.g.dart';
 
+/// Data class for KhqrDecodedData
 @freezed
 class KhqrDecodedData with _$KhqrDecodedData {
+  /// Creates new instance of [KhqrDecodedData]
   factory KhqrDecodedData({
     String? payloadFormatIndicator,
     String? pointOfInitiationMethod,
@@ -32,6 +34,7 @@ class KhqrDecodedData with _$KhqrDecodedData {
     String? merchantCityAlternateLanguage,
   }) = _KhqrDecodedData;
 
+  /// Creates new instance of [KhqrDecodedData] from JSON map
   factory KhqrDecodedData.fromJson(Map<String, dynamic> json) =>
       _$KhqrDecodedDataFromJson(json);
 }

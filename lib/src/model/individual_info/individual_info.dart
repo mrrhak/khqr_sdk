@@ -4,8 +4,10 @@ import 'package:khqr_sdk/src/common/enum.dart';
 part 'individual_info.freezed.dart';
 part 'individual_info.g.dart';
 
+/// Data class for IndividualInfo
 @freezed
 class IndividualInfo with _$IndividualInfo {
+  /// Creates a new instance of [IndividualInfo]
   factory IndividualInfo({
     required String bakongAccountId,
     String? accountInformation,
@@ -25,6 +27,7 @@ class IndividualInfo with _$IndividualInfo {
     String? merchantCityAlternateLanguage,
   }) = _IndividualInfo;
 
+  /// Creates a new instance of [IndividualInfo] from a JSON map
   factory IndividualInfo.fromJson(Map<String, dynamic> json) =>
       _$IndividualInfoFromJson(json);
 }

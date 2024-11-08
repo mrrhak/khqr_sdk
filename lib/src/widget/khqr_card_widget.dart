@@ -6,7 +6,9 @@ import 'package:khqr_sdk/src/common/enum.dart';
 import 'package:khqr_sdk/src/util/money_formatter_util.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
+/// KhqrCardWidget is a widget that displays a KHQR card
 class KhqrCardWidget extends StatefulWidget {
+  /// Creates a [KhqrCardWidget]
   const KhqrCardWidget({
     super.key,
     this.width = 300,
@@ -21,15 +23,34 @@ class KhqrCardWidget extends StatefulWidget {
     this.onRetry,
   });
 
+  /// The width of the card
   final double width;
+
+  /// The name of the receiver
   final String receiverName;
+
+  /// The amount of the transaction
   final double amount;
+
+  /// The currency of the transaction
   final KhqrCurrency currency;
+
+  /// The KHQR code
   final String qr;
+
+  /// The duration of qr code expiration
   final Duration? duration;
+
+  /// Whether to show the empty amount
   final bool showEmptyAmount;
+
+  /// Whether to use dark mode
   final bool? isDark;
+
+  /// Whether to show shadow
   final bool showShadow;
+
+  /// The callback when retry
   final Function()? onRetry;
 
   @override
