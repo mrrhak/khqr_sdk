@@ -9,7 +9,7 @@ let package = Package(
         .iOS("11.0")
     ],
     products: [
-        .library(name: "khqr_sdk", targets: ["khqr_sdk"])
+        .library(name: "khqr-sdk", targets: ["khqr_sdk"])
     ],
     dependencies: [],
     targets: [

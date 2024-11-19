@@ -12,13 +12,13 @@ It can enable interoperability in the payment industry. A common QR code would f
 KHQR is created for retail or remittance in Cambodia and Cross-Border. It only requires a single QR for receiving transactions from any payment provider through Bakong including Bakong App.
                        DESC
   s.homepage         = 'https://mrrhak.com'
-  s.license          = { :file => '../LICENSE' }
+  s.license          = { :file => '../LICENSE', :type => 'MIT' }
   s.author           = { 'Kimhak Long' => 'longkimhak.kh@gmail.com' }
   s.source           = { :http => 'https://github.com/mrrhak/khqr_sdk' }
   s.documentation_url = 'https://pub.dev/packages/khqr_sdk'
-  s.source_files = 'Classes/**/*'
+  s.source_files = 'khqr_sdk/Sources/khqr_sdk/**/*.swift'
   s.dependency 'Flutter'
-  s.dependency 'BakongKHQR', '~> 1.0.0.15' 
+  s.dependency 'BakongKHQR', '~> 1.0.0.15'
   s.platform = :ios, '11.0'
 
   # Flutter.framework does not contain a i386 slice.
@@ -29,5 +29,5 @@ KHQR is created for retail or remittance in Cambodia and Cross-Border. It only r
   # required reason APIs, update the PrivacyInfo.xcprivacy file to describe your
   # plugin's privacy impact, and then uncomment this line. For more information,
   # see https://developer.apple.com/documentation/bundleresources/privacy_manifest_files
-  # s.resource_bundles = {'khqr_sdk_privacy' => ['Resources/PrivacyInfo.xcprivacy']}
+  s.resource_bundles = {'khqr_sdk_privacy' => ['khqr_sdk/Sources/khqr_sdk/PrivacyInfo.xcprivacy']}
 end
