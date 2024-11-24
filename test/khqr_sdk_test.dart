@@ -45,6 +45,7 @@ void main() {
     final info = IndividualInfo(
       bakongAccountId: 'kimhak@dev',
       merchantName: 'Kimhak',
+      accountInformation: '123456789',
     );
     final khqrData = await khqrSdk.generateIndividual(info);
     expect(khqrData, isNotNull);
