@@ -12,6 +12,7 @@ class KhqrCardWidget extends StatefulWidget {
   const KhqrCardWidget({
     super.key,
     this.width = 300,
+    this.padding,
     required this.receiverName,
     this.amount = 0.0,
     required this.currency,
@@ -25,6 +26,9 @@ class KhqrCardWidget extends StatefulWidget {
 
   /// The width of the card
   final double width;
+
+  /// The padding of the QR code
+  final EdgeInsets? padding;
 
   /// The name of the receiver
   final String receiverName;
@@ -131,7 +135,7 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
       children: [
         Center(
           child: QrImageView(
-            padding: const EdgeInsets.all(8.0),
+            padding: widget.padding ?? EdgeInsets.zero,
             data: widget.qr,
             version: QrVersions.auto,
             errorCorrectionLevel: QrErrorCorrectLevel.H,

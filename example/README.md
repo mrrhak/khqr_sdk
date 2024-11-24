@@ -16,6 +16,7 @@ final _khqrSdk = KhqrSdk();
 final info = IndividualInfo(
   bakongAccountId: 'kimhak@dev',
   merchantName: 'Kimhak',
+  accountInformation: '123456789',
 );
 final khqrData = await _khqrSdk.generateIndividual(info);
 ```
@@ -33,19 +34,19 @@ final khqrData = await _khqrSdk.generateMerchant(info);
 
 ### Verify KHQR
 ```dart
-const qrCode = '00020101021129140010kimhak@dev520459995303116540105802KH5906Kimhak6010Phnom Penh991700131730993158840630414C8';
+const qrCode = '00020101021129270010kimhak@dev01091234567895204599953031165802KH5906Kimhak6010Phnom Penh9917001317324625358296304B59E';
 final isValid = await _khqrSdk.verify(qrCode);
 ```
 
 ### Decode KHQR
 ```dart
-const qrCode = '00020101021129140010kimhak@dev520459995303116540105802KH5906Kimhak6010Phnom Penh991700131730993158840630414C8';
+const qrCode = '00020101021129270010kimhak@dev01091234567895204599953031165802KH5906Kimhak6010Phnom Penh9917001317324625358296304B59E';
 final khqrDecodeData = await _khqrSdk.decode(qrCode);
 ```
 
 ### Generate KHQR Deeplink
 ```dart
-const qrCode = '00020101021129140010kimhak@dev520459995303116540105802KH5906Kimhak6010Phnom Penh991700131730993158840630414C8';
+const qrCode = '00020101021129270010kimhak@dev01091234567895204599953031165802KH5906Kimhak6010Phnom Penh9917001317324625358296304B59E';
 
 final sourceInfo = SourceInfo(
   appName: 'Example App',

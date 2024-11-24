@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.2
+- Updated swift package manager support
+- Updated KHQR Card Widget
+- Updated README
+- Updated dependencies
+
 ## 1.0.1
 - Added public API documentation
 - Added swift package manager

@@ -25,6 +25,7 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
       final info = IndividualInfo(
         bakongAccountId: 'kimhak@dev',
         merchantName: 'Kimhak',
+        accountInformation: '123456789',
       );
       final individual = await _khqrSdk.generateIndividual(info);
       if (!mounted) return;

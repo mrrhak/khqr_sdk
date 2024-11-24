@@ -32,6 +32,7 @@ class _KhqrCardScreenState extends State<KhqrCardScreen> {
       final info = IndividualInfo(
         bakongAccountId: 'kimhak@dev',
         merchantName: _receiverName,
+        accountInformation: '123456789',
         currency: _receiverCurrency,
         amount: _amount,
       );

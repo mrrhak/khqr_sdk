@@ -1,10 +1,10 @@
 /// KHQR Currency Enum
-/// - [KhqrCurrency.khr] Riel (KHR)
-/// - [KhqrCurrency.usd] Dollar (USD)
+/// - [KhqrCurrency.khr] Riel (KHR) - 116
+/// - [KhqrCurrency.usd] Dollar (USD) - 840
 enum KhqrCurrency {
-  /// Riel (KHR)
+  /// Riel (KHR) - 116
   khr,
 
-  /// Dollar (USD)
+  /// Dollar (USD) - 840
   usd,
 }
