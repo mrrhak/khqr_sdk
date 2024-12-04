@@ -17,6 +17,7 @@ class KhqrCardWidget extends StatefulWidget {
     this.amount = 0.0,
     required this.currency,
     required this.qr,
+    this.keepIntegerDecimal = false,
     this.duration,
     this.showEmptyAmount = true,
     this.isDark,
@@ -38,6 +39,9 @@ class KhqrCardWidget extends StatefulWidget {
 
   /// The currency of the transaction
   final KhqrCurrency currency;
+
+  /// Whether to keep the integer decimal of the amount
+  final bool keepIntegerDecimal;
 
   /// The KHQR code
   final String qr;
@@ -221,17 +225,12 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
                                 children: [
                                   widget.amount > 0 || widget.showEmptyAmount
                                       ? Text(
-                                          widget.currency == KhqrCurrency.khr
-                                              ? MoneyFormatterUtil
-                                                  .rielDisplayFormatter(
-                                                  widget.amount,
-                                                  showSymbol: false,
-                                                ).toString()
-                                              : MoneyFormatterUtil
-                                                  .dollarDisplayFormatter(
-                                                  widget.amount,
-                                                  showSymbol: false,
-                                                ).toString(),
+                                          MoneyFormatterUtil
+                                              .formatThousandNumber(
+                                            widget.amount,
+                                            keepDecimal:
+                                                widget.keepIntegerDecimal,
+                                          ),
                                           style: TextStyle(
                                             fontFamily: _fontFamily,
                                             package: 'khqr_sdk',

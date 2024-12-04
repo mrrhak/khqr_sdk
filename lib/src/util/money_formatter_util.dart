@@ -1,56 +1,26 @@
-import 'package:money2/money2.dart';
+import 'package:intl/intl.dart';
 
 /// Utility class for formatting money
 class MoneyFormatterUtil {
-  /// Formats [amount] as US dollars with the specified [decimalDigits].
+  /// Format a given number to a string with thousand separators.
   ///
-  /// If [showSymbol] is true, the [symbol] will be included in the formatted string.
+  /// The string will also keep up to two decimal places if the number is not an integer.
+  /// Set [keepDecimal] to true to keep the decimal places even if the number is an integer.
   ///
-  /// If [decimalDigits] is omitted, it defaults to 2.
+  /// Example:
   ///
-  /// The default [symbol] is '$'.
-  static Money dollarDisplayFormatter(
-    num amount, {
-    int? decimalDigits,
-    String symbol = r'$',
-    bool showSymbol = true,
-  }) {
-    final currency = Currency.create(
-      'USD',
-      decimalDigits ?? 2,
-      symbol: symbol,
-      groupSeparator: ',',
-      decimalSeparator: '.',
-      pattern: showSymbol ? 'S #,###.00' : '#,###.00',
-    );
-
-    final money = Money.fromNumWithCurrency(amount, currency);
-    return money;
-  }
-
-  /// Formats [amount] as Khmer Riel with the specified [decimalDigits].
+  ///   123456.78 -> 123,456.78
   ///
-  /// If [showSymbol] is true, the [symbol] will be included in the formatted string.
-  ///
-  /// If [decimalDigits] is omitted, it defaults to 0.
-  ///
-  /// The default [symbol] is '៛'.
-  static Money rielDisplayFormatter(
-    num amount, {
-    int? decimalDigits,
-    String symbol = r'៛',
-    bool showSymbol = true,
-  }) {
-    final currency = Currency.create(
-      'KHR',
-      decimalDigits ?? 0,
-      symbol: symbol,
-      groupSeparator: ',',
-      decimalSeparator: '.',
-      pattern: showSymbol ? '#,###.## S' : '#,###.##',
-    );
-
-    final money = Money.fromNumWithCurrency(amount, currency);
-    return money;
+  ///   123456 -> 123,456
+  static String formatThousandNumber(double number,
+      {bool keepDecimal = false}) {
+    // Check if the number is an integer
+    if (number == number.toInt() && !keepDecimal) {
+      // Convert to integer string if there's no decimal
+      return NumberFormat('#,###').format(number);
+    } else {
+      // Keep up to two decimal places
+      return NumberFormat('#,###.##').format(number);
+    }
   }
 }

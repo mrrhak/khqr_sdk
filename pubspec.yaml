@@ -1,5 +1,5 @@
 name: khqr_sdk
-description: "Standardization of QR Code (EMV) that will promote wider use of mobile retail payments in Cambodia."
+description: 'Standardization of QR Code (EMV) that will promote wider use of mobile retail payments in Cambodia.'
 maintainer: Mrr Hak
 repository: https://github.com/mrrhak/khqr_sdk
 issue_tracker: https://github.com/mrrhak/khqr_sdk/issues
@@ -8,7 +8,7 @@ version: 1.0.2
 funding:
   - https://ko-fi.com/mrrhak
 screenshots:
-  - description: "Bakong KHQR SDK"
+  - description: 'Bakong KHQR SDK'
     path: assets/khqr_sdk.png
 
 topics:
@@ -29,8 +29,8 @@ dependencies:
   json_annotation: ^4.9.0
   plugin_platform_interface: ^2.1.8
   qr_flutter: ^4.1.0
-  flutter_svg: ^2.0.15
-  money2: ^5.4.0
+  flutter_svg: ^2.0.16
+  intl: ^0.20.1
 
 dev_dependencies:
   flutter_test:
