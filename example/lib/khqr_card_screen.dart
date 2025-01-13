@@ -14,10 +14,11 @@ class KhqrCardScreen extends StatefulWidget {
 class _KhqrCardScreenState extends State<KhqrCardScreen> {
   late KhqrSdk _khqrSdk;
   String? khqrContent;
+  String? errorMessage;
 
   final String _receiverName = 'Kimhak';
   final KhqrCurrency _receiverCurrency = KhqrCurrency.khr;
-  final double _amount = 0;
+  final double _amount = 0.00;
 
   @override
   void initState() {
@@ -42,6 +43,9 @@ class _KhqrCardScreenState extends State<KhqrCardScreen> {
       });
     } on PlatformException catch (e) {
       log('Error: ${e.message}');
+      setState(() {
+        errorMessage = e.message;
+      });
     }
   }
 
@@ -52,26 +56,33 @@ class _KhqrCardScreenState extends State<KhqrCardScreen> {
       appBar: AppBar(
         title: const Text('KHQR Card'),
       ),
-      body: khqrContent == null
-          ? const Center(child: CircularProgressIndicator())
-          : Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                KhqrCardWidget(
-                  width: 300.0,
-                  receiverName: _receiverName,
-                  amount: _amount,
-                  currency: _receiverCurrency,
-                  qr: khqrContent!,
+      body: errorMessage != null
+          ? Center(
+              child: Text(
+              errorMessage!,
+              style: TextStyle(color: Colors.red),
+            ))
+          : khqrContent == null
+              ? const Center(child: CircularProgressIndicator())
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    KhqrCardWidget(
+                      width: 300.0,
+                      receiverName: _receiverName,
+                      amount: _amount,
+                      keepIntegerDecimal: false,
+                      currency: _receiverCurrency,
+                      qr: khqrContent!,
+                    ),
+                    const SizedBox(height: 16.0),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(khqrContent!),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 16.0),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(khqrContent!),
-                ),
-              ],
-            ),
     );
   }
 }

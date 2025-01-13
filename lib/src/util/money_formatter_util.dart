@@ -11,16 +11,14 @@ class MoneyFormatterUtil {
   ///
   ///   123456.78 -> 123,456.78
   ///
-  ///   123456 -> 123,456
+  ///   123456 -> 123,456.00
   static String formatThousandNumber(double number,
       {bool keepDecimal = false}) {
-    // Check if the number is an integer
-    if (number == number.toInt() && !keepDecimal) {
-      // Convert to integer string if there's no decimal
-      return NumberFormat('#,###').format(number);
-    } else {
-      // Keep up to two decimal places
-      return NumberFormat('#,###.##').format(number);
+    String pattern = '#,###.##';
+    if (keepDecimal) {
+      // Enforce exactly two decimal places
+      pattern = '#,##0.00';
     }
+    return NumberFormat(pattern).format(number);
   }
 }

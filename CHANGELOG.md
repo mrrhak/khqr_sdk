@@ -1,8 +1,10 @@
 # Changelog
 
-## Unreleased
+## 1.0.3
 - Updated KHQR Card Widget
-- Added money formatter to format thousand number
+- Added thousand number formatter util
+- Allow to keep decimal places
+- Updated dependencies
 
 ## 1.0.2
 - Updated swift package manager support
