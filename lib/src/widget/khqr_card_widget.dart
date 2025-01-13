@@ -17,6 +17,7 @@ class KhqrCardWidget extends StatefulWidget {
     this.amount = 0.0,
     required this.currency,
     required this.qr,
+    this.keepIntegerDecimal = false,
     this.duration,
     this.showEmptyAmount = true,
     this.isDark,
@@ -38,6 +39,9 @@ class KhqrCardWidget extends StatefulWidget {
 
   /// The currency of the transaction
   final KhqrCurrency currency;
+
+  /// Whether to keep the integer decimal of the amount
+  final bool keepIntegerDecimal;
 
   /// The KHQR code
   final String qr;
@@ -102,7 +106,6 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
   @override
   void initState() {
     super.initState();
-
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _updateDuration();
     });
@@ -176,6 +179,7 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
                   child: SvgPicture.asset(
                     'assets/svg/khqr_logo.svg',
                     package: 'khqr_sdk',
+                    colorFilter: ColorFilter.mode(_pearlWhite, BlendMode.srcIn),
                   ),
                 ),
                 Expanded(
@@ -183,8 +187,9 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
                     width: widget.width,
                     color: _bakongBraveryRed,
                     child: ClipPath(
-                      clipper:
-                          _KhqrCardHeaderClipper(aspectRatio: _aspectRatio),
+                      clipper: _KhqrCardHeaderClipper(
+                        aspectRatio: _aspectRatio,
+                      ),
                       child: Container(
                         color: qrBackgroundColor,
                         child: Column(
@@ -221,17 +226,12 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
                                 children: [
                                   widget.amount > 0 || widget.showEmptyAmount
                                       ? Text(
-                                          widget.currency == KhqrCurrency.khr
-                                              ? MoneyFormatterUtil
-                                                  .rielDisplayFormatter(
-                                                  widget.amount,
-                                                  showSymbol: false,
-                                                ).toString()
-                                              : MoneyFormatterUtil
-                                                  .dollarDisplayFormatter(
-                                                  widget.amount,
-                                                  showSymbol: false,
-                                                ).toString(),
+                                          MoneyFormatterUtil
+                                              .formatThousandNumber(
+                                            widget.amount,
+                                            keepDecimal:
+                                                widget.keepIntegerDecimal,
+                                          ),
                                           style: TextStyle(
                                             fontFamily: _fontFamily,
                                             package: 'khqr_sdk',
@@ -240,10 +240,17 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
                                             color: qrTextColor,
                                           ),
                                         )
-                                      : Text(''),
-                                  if (widget.amount > 0 ||
-                                      widget.showEmptyAmount)
-                                    SizedBox(width: _height * 0.02),
+                                      : Text(
+                                          '',
+                                          style: TextStyle(
+                                            fontSize: _amountFontSize,
+                                          ),
+                                        ),
+                                  Visibility(
+                                    visible: widget.amount > 0 ||
+                                        widget.showEmptyAmount,
+                                    child: SizedBox(width: _height * 0.02),
+                                  ),
                                   Text(
                                     widget.currency.name.toUpperCase(),
                                     style: TextStyle(
