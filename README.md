@@ -41,12 +41,12 @@ The standardization of KHQR code specifications will help promote wider use of m
   <a href="https://pub.dev/packages/khqr_sdk">
     <img src="https://img.shields.io/pub/likes/khqr_sdk?style=flat&logo=dart&label=Likes" alt="Pub Likes"/>
   </a>
-  <a href="https://pub.dev/packages/khqr_sdk">
-    <img alt="Pub Popularity" src="https://img.shields.io/pub/popularity/khqr_sdk?style=flat&logo=dart&label=Popularity&link=https%3A%2F%2Fpub.dev%2Fpackages%2Fkhqr_sdk">
-  </a>
   <a href="https://pub.dartlang.org/packages/khqr_sdk/score">
     <img src="https://img.shields.io/pub/points/khqr_sdk?label=Score&logo=dart"
-      alt="Pub Package" />
+      alt="Pub Score" />
+  </a>
+  <a href="https://pub.dev/packages/khqr_sdk">
+    <img alt="Pub Monthly Downloads" src="https://img.shields.io/pub/dm/khqr_sdk?style=flat&color=blue&logo=dart&label=Downloads&link=https%3A%2F%2Fpub.dev%2Fpackages%2Fkhqr_sdk">
   </a>
   <a href="https://github.com/mrrhak/khqr_sdk"><img src="https://img.shields.io/github/stars/mrrhak/khqr_sdk.svg?style=flat&logo=github&colorB=deeppink&label=Stars" alt="Star on Github"></a>
   <a href="https://github.com/mrrhak/khqr_sdk"><img src="https://img.shields.io/github/forks/mrrhak/khqr_sdk?color=orange&label=Forks&logo=github" alt="Forks on Github"></a>
@@ -102,6 +102,15 @@ See the example app for detailed implementation information.
 ```bash
 source "https://sambo:ycfXmxxRbyzEmozY9z6n@gitlab.nbc.gov.kh/khqr/khqr-ios-pod.git"
 ```
+
+>[!NOTE] 
+>If you don't see `Podfile`, please disable Swift Package Manager in `pubspec.yaml`
+>
+>```yaml
+>flutter:
+>  disable-swift-package-manager: true
+>```
+>After save, `Podfile` will be created automatically.
 
 2. Run pod install (make sure your terminal is in ios folder)
 ```bash
@@ -176,7 +185,8 @@ final deeplinkData = await _khqrSdk.generateDeepLink(deeplinkInfo);
 KhqrCardWidget(
   width: 300.0,
   receiverName: 'Kimhak',
-  amount: 0,
+  amount: 0.00,
+  keepIntegerDecimal: false,
   currency: KhqrCurrency.khr,
   qr: khqrContent,
 ),
