@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.4
+- Migrated Android platform language from Java to Kotlin
+- Added enum value to KhqrCurrency to align with currency code from NBC
+- Updated error message from Native side to Dart side
+- Updated error code to identify error from native side
+- Updated dependencies
+
 ## 1.0.3
 - Updated KHQR Card Widget
 - Added thousand number formatter util

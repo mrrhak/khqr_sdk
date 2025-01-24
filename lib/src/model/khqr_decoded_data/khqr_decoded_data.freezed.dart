@@ -22,13 +22,13 @@ KhqrDecodedData _$KhqrDecodedDataFromJson(Map<String, dynamic> json) {
 mixin _$KhqrDecodedData {
   String? get payloadFormatIndicator => throw _privateConstructorUsedError;
   String? get pointOfInitiationMethod => throw _privateConstructorUsedError;
-  String get bakongAccountId => throw _privateConstructorUsedError;
+  String? get bakongAccountId => throw _privateConstructorUsedError;
   String? get merchantId => throw _privateConstructorUsedError;
   String? get accountInformation => throw _privateConstructorUsedError;
   String? get acquiringBank => throw _privateConstructorUsedError;
   String? get merchantType => throw _privateConstructorUsedError;
   String? get transactionCurrency => throw _privateConstructorUsedError;
-  String get merchantName => throw _privateConstructorUsedError;
+  String? get merchantName => throw _privateConstructorUsedError;
   String? get transactionAmount => throw _privateConstructorUsedError;
   String? get merchantCategoryCode => throw _privateConstructorUsedError;
   String? get countryCode => throw _privateConstructorUsedError;
@@ -67,13 +67,13 @@ abstract class $KhqrDecodedDataCopyWith<$Res> {
   $Res call(
       {String? payloadFormatIndicator,
       String? pointOfInitiationMethod,
-      String bakongAccountId,
+      String? bakongAccountId,
       String? merchantId,
       String? accountInformation,
       String? acquiringBank,
       String? merchantType,
       String? transactionCurrency,
-      String merchantName,
+      String? merchantName,
       String? transactionAmount,
       String? merchantCategoryCode,
       String? countryCode,
@@ -108,13 +108,13 @@ class _$KhqrDecodedDataCopyWithImpl<$Res, $Val extends KhqrDecodedData>
   $Res call({
     Object? payloadFormatIndicator = freezed,
     Object? pointOfInitiationMethod = freezed,
-    Object? bakongAccountId = null,
+    Object? bakongAccountId = freezed,
     Object? merchantId = freezed,
     Object? accountInformation = freezed,
     Object? acquiringBank = freezed,
     Object? merchantType = freezed,
     Object? transactionCurrency = freezed,
-    Object? merchantName = null,
+    Object? merchantName = freezed,
     Object? transactionAmount = freezed,
     Object? merchantCategoryCode = freezed,
     Object? countryCode = freezed,
@@ -140,10 +140,10 @@ class _$KhqrDecodedDataCopyWithImpl<$Res, $Val extends KhqrDecodedData>
           ? _value.pointOfInitiationMethod
           : pointOfInitiationMethod // ignore: cast_nullable_to_non_nullable
               as String?,
-      bakongAccountId: null == bakongAccountId
+      bakongAccountId: freezed == bakongAccountId
           ? _value.bakongAccountId
           : bakongAccountId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       merchantId: freezed == merchantId
           ? _value.merchantId
           : merchantId // ignore: cast_nullable_to_non_nullable
@@ -164,10 +164,10 @@ class _$KhqrDecodedDataCopyWithImpl<$Res, $Val extends KhqrDecodedData>
           ? _value.transactionCurrency
           : transactionCurrency // ignore: cast_nullable_to_non_nullable
               as String?,
-      merchantName: null == merchantName
+      merchantName: freezed == merchantName
           ? _value.merchantName
           : merchantName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       transactionAmount: freezed == transactionAmount
           ? _value.transactionAmount
           : transactionAmount // ignore: cast_nullable_to_non_nullable
@@ -244,13 +244,13 @@ abstract class _$$KhqrDecodedDataImplCopyWith<$Res>
   $Res call(
       {String? payloadFormatIndicator,
       String? pointOfInitiationMethod,
-      String bakongAccountId,
+      String? bakongAccountId,
       String? merchantId,
       String? accountInformation,
       String? acquiringBank,
       String? merchantType,
       String? transactionCurrency,
-      String merchantName,
+      String? merchantName,
       String? transactionAmount,
       String? merchantCategoryCode,
       String? countryCode,
@@ -283,13 +283,13 @@ class __$$KhqrDecodedDataImplCopyWithImpl<$Res>
   $Res call({
     Object? payloadFormatIndicator = freezed,
     Object? pointOfInitiationMethod = freezed,
-    Object? bakongAccountId = null,
+    Object? bakongAccountId = freezed,
     Object? merchantId = freezed,
     Object? accountInformation = freezed,
     Object? acquiringBank = freezed,
     Object? merchantType = freezed,
     Object? transactionCurrency = freezed,
-    Object? merchantName = null,
+    Object? merchantName = freezed,
     Object? transactionAmount = freezed,
     Object? merchantCategoryCode = freezed,
     Object? countryCode = freezed,
@@ -315,10 +315,10 @@ class __$$KhqrDecodedDataImplCopyWithImpl<$Res>
           ? _value.pointOfInitiationMethod
           : pointOfInitiationMethod // ignore: cast_nullable_to_non_nullable
               as String?,
-      bakongAccountId: null == bakongAccountId
+      bakongAccountId: freezed == bakongAccountId
           ? _value.bakongAccountId
           : bakongAccountId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       merchantId: freezed == merchantId
           ? _value.merchantId
           : merchantId // ignore: cast_nullable_to_non_nullable
@@ -339,10 +339,10 @@ class __$$KhqrDecodedDataImplCopyWithImpl<$Res>
           ? _value.transactionCurrency
           : transactionCurrency // ignore: cast_nullable_to_non_nullable
               as String?,
-      merchantName: null == merchantName
+      merchantName: freezed == merchantName
           ? _value.merchantName
           : merchantName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       transactionAmount: freezed == transactionAmount
           ? _value.transactionAmount
           : transactionAmount // ignore: cast_nullable_to_non_nullable
@@ -414,13 +414,13 @@ class _$KhqrDecodedDataImpl implements _KhqrDecodedData {
   _$KhqrDecodedDataImpl(
       {this.payloadFormatIndicator,
       this.pointOfInitiationMethod,
-      required this.bakongAccountId,
+      this.bakongAccountId,
       this.merchantId,
       this.accountInformation,
       this.acquiringBank,
       this.merchantType,
       this.transactionCurrency,
-      required this.merchantName,
+      this.merchantName,
       this.transactionAmount,
       this.merchantCategoryCode,
       this.countryCode,
@@ -445,7 +445,7 @@ class _$KhqrDecodedDataImpl implements _KhqrDecodedData {
   @override
   final String? pointOfInitiationMethod;
   @override
-  final String bakongAccountId;
+  final String? bakongAccountId;
   @override
   final String? merchantId;
   @override
@@ -457,7 +457,7 @@ class _$KhqrDecodedDataImpl implements _KhqrDecodedData {
   @override
   final String? transactionCurrency;
   @override
-  final String merchantName;
+  final String? merchantName;
   @override
   final String? transactionAmount;
   @override
@@ -604,13 +604,13 @@ abstract class _KhqrDecodedData implements KhqrDecodedData {
   factory _KhqrDecodedData(
       {final String? payloadFormatIndicator,
       final String? pointOfInitiationMethod,
-      required final String bakongAccountId,
+      final String? bakongAccountId,
       final String? merchantId,
       final String? accountInformation,
       final String? acquiringBank,
       final String? merchantType,
       final String? transactionCurrency,
-      required final String merchantName,
+      final String? merchantName,
       final String? transactionAmount,
       final String? merchantCategoryCode,
       final String? countryCode,
@@ -635,7 +635,7 @@ abstract class _KhqrDecodedData implements KhqrDecodedData {
   @override
   String? get pointOfInitiationMethod;
   @override
-  String get bakongAccountId;
+  String? get bakongAccountId;
   @override
   String? get merchantId;
   @override
@@ -647,7 +647,7 @@ abstract class _KhqrDecodedData implements KhqrDecodedData {
   @override
   String? get transactionCurrency;
   @override
-  String get merchantName;
+  String? get merchantName;
   @override
   String? get transactionAmount;
   @override
