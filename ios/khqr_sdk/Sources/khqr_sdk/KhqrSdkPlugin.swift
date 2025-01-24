@@ -28,7 +28,8 @@ public class KhqrSdkPlugin: NSObject, FlutterPlugin {
 
   private func generateIndividual(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
     if call.arguments == nil {
-      result(FlutterError(code: "Missing Parameter", message: "Missing Parameter", details: nil))
+      result(
+        FlutterError(code: "GENERATE_INDIVIDUAL_ERROR", message: "Missing Parameter", details: nil))
       return
     }
 
@@ -54,18 +55,21 @@ public class KhqrSdkPlugin: NSObject, FlutterPlugin {
     info?.merchantCity = arguments["merchantCity"] as? String
     info?.merchantCityAlternateLanguage = arguments["merchantCityAlternateLanguage"] as? String
 
-    let khqrResponse = BakongKHQR.generateIndividual(info!)
-    if khqrResponse.status?.code == 0 {
-      let khqrData = khqrResponse.data as? KHQRData
+    let response = BakongKHQR.generateIndividual(info!)
+    if response.status?.code == 0 {
+      let khqrData = response.data as? KHQRData
       result("{\"qr\": \"\(khqrData?.qr ?? "")\", \"md5\": \"\(khqrData?.md5 ?? "")\"}")
     } else {
-      result(FlutterError.init(code: "Error", message: khqrResponse.status?.message, details: nil))
+      result(
+        FlutterError(
+          code: "GENERATE_INDIVIDUAL_ERROR", message: response.status?.message, details: nil))
     }
   }
 
   private func generateMerchant(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
     if call.arguments == nil {
-      result(FlutterError(code: "Missing Parameter", message: "Missing Parameter", details: nil))
+      result(
+        FlutterError(code: "GENERATE_MERCHANT_ERROR", message: "Missing Parameter", details: nil))
       return
     }
 
@@ -91,50 +95,90 @@ public class KhqrSdkPlugin: NSObject, FlutterPlugin {
     info?.merchantCity = arguments["merchantCity"] as? String
     info?.merchantCityAlternateLanguage = arguments["merchantCityAlternateLanguage"] as? String
 
-    let khqrResponse = BakongKHQR.generateMerchant(info!)
-    if khqrResponse.status?.code == 0 {
-      let khqrData = khqrResponse.data as? KHQRData
+    let response = BakongKHQR.generateMerchant(info!)
+    if response.status?.code == 0 {
+      let khqrData = response.data as? KHQRData
       result("{\"qr\": \"\(khqrData?.qr ?? "")\", \"md5\": \"\(khqrData?.md5 ?? "")\"}")
     } else {
-      result(FlutterError.init(code: "Error", message: khqrResponse.status?.message, details: nil))
+      result(
+        FlutterError(
+          code: "GENERATE_MERCHANT_ERROR", message: response.status?.message, details: nil))
     }
   }
 
   private func verify(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
     if call.arguments == nil {
-      result(FlutterError(code: "Missing Parameter", message: "Missing Parameter", details: nil))
+      result(FlutterError(code: "VERIFY_ERROR", message: "Missing Parameter", details: nil))
       return
     }
 
     let arguments = call.arguments as! [String: Any?]
     let qrCode = arguments["qrCode"] as! String
 
-    let khqrResponse = BakongKHQR.verify(qrCode)
-    let crcValidation = khqrResponse?.data as? CRCValidation
-    result(crcValidation?.valid ?? false)
+    let response = BakongKHQR.verify(qrCode)
+    if response?.status?.code == 0 {
+      let crcValidation = response?.data as? CRCValidation
+      result(crcValidation?.valid ?? false)
+    } else {
+      result(FlutterError(code: "VERIFY_ERROR", message: response?.status?.message, details: nil))
+    }
   }
 
   private func decode(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
     if call.arguments == nil {
-      result(FlutterError(code: "Missing Parameter", message: "Missing Parameter", details: nil))
+      result(FlutterError(code: "DECODE_ERROR", message: "Missing Parameter", details: nil))
       return
     }
 
     let arguments = call.arguments as! [String: Any?]
     let qrCode = arguments["qrCode"] as! String
 
-    let khqrResponse = BakongKHQR.decode(qrCode)
+    if qrCode.count < 2 {
+      result(
+        FlutterError(code: "DECODE_ERROR", message: "KHQR provided is invalid", details: nil))
+      return
+    }
 
-    if khqrResponse?.status?.code == 0 {
-      let decodeData = khqrResponse?.data as! KHQRDecodeData
-      if let jsonString = convertObjectToJSONString(object: decodeData) {
-        result(jsonString)
-      } else {
-        result(
-          FlutterError.init(code: "Error", message: khqrResponse?.status?.message, details: nil))
-      }
+    let response = BakongKHQR.decode(qrCode)
+    // If decode on invalid string this KHQRDecodeData will have all fields with null
+    let decodeData = response?.data as! KHQRDecodeData
+    let jsonString = convertObjectToJSONString(object: decodeData)
+    if jsonString != nil {
+      result(jsonString)
     } else {
-      result(FlutterError.init(code: "Error", message: khqrResponse?.status?.message, details: nil))
+      result(
+        FlutterError(code: "DECODE_ERROR", message: "KHQR provided is invalid", details: nil))
+    }
+  }
+
+  private func generateDeepLink(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+    if call.arguments == nil {
+      result(
+        FlutterError(code: "GENERATE_DEEPLINK_ERROR", message: "Missing Parameter", details: nil))
+      return
+    }
+
+    let arguments = call.arguments as! [String: Any?]
+    let qr = arguments["qr"] as! String
+    let url = arguments["url"] as! String
+
+    let sourceInfo = SourceInfo()
+    if arguments["sourceInfo"] != nil {
+      let sourceInfoObj = arguments["sourceInfo"] as! [String: Any?]
+      sourceInfo.appName = sourceInfoObj["appName"] as! String
+      sourceInfo.appIconURL = sourceInfoObj["appIconUrl"] as! String
+      sourceInfo.appDeepLinkCallback = sourceInfoObj["appDeepLinkCallBack"] as! String
+    }
+
+    let response = BakongKHQR.generateDeepLink(url, qr: qr, sourceInfo: sourceInfo)
+
+    if response?.status?.code == 0 {
+      let deeplinkData = response?.data as? KHQRDeepLinkData
+      result("{\"shortLink\": \"\(deeplinkData?.shortLink ?? "")\"}")
+    } else {
+      result(
+        FlutterError(
+          code: "GENERATE_DEEPLINK_ERROR", message: response?.status?.message, details: nil))
     }
   }
 
@@ -178,41 +222,13 @@ public class KhqrSdkPlugin: NSObject, FlutterPlugin {
     // Convert the dictionary to JSON
     do {
       let jsonData = try JSONSerialization.data(withJSONObject: dict, options: [])
-      var jsonString = String(data: jsonData, encoding: .utf8) ?? ""
+      var jsonString = String(data: jsonData, encoding: .utf8) ?? "{}"
       jsonString = jsonString.replacingOccurrences(
         of: "\"bakongAccountID\":", with: "\"bakongAccountId\":")
       return jsonString
     } catch {
       print("Error serializing object to JSON: \(error)")
       return nil
-    }
-  }
-
-  private func generateDeepLink(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
-    if call.arguments == nil {
-      result(FlutterError(code: "Missing Parameter", message: "Missing Parameter", details: nil))
-      return
-    }
-
-    let arguments = call.arguments as! [String: Any?]
-    let qr = arguments["qr"] as! String
-    let url = arguments["url"] as! String
-
-    let sourceInfo = SourceInfo()
-    if arguments["sourceInfo"] != nil {
-      let sourceInfoObj = arguments["sourceInfo"] as! [String: Any?]
-      sourceInfo.appName = sourceInfoObj["appName"] as! String
-      sourceInfo.appIconURL = sourceInfoObj["appIconUrl"] as! String
-      sourceInfo.appDeepLinkCallback = sourceInfoObj["appDeepLinkCallBack"] as! String
-    }
-
-    let response = BakongKHQR.generateDeepLink(url, qr: qr, sourceInfo: sourceInfo)
-
-    if response?.status?.code == 0 {
-      let deeplinkData = response?.data as? KHQRDeepLinkData
-      result("{\"shortLink\": \"\(deeplinkData?.shortLink ?? "")\"}")
-    } else {
-      result(FlutterError.init(code: "Error", message: response?.status?.message, details: nil))
     }
   }
 }

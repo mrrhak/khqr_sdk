@@ -1,18 +1,20 @@
 group = "com.mrrhak.khqr_sdk"
-version = "1.0"
+version = "1.0-SNAPSHOT"
 
 buildscript {
+    ext.kotlin_version = "1.8.22"
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:8.1.0")
+        classpath("com.android.tools.build:gradle:8.1.4")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
     }
 }
 
-rootProject.allprojects {
+allprojects {
     repositories {
         google()
         mavenCentral()
@@ -20,17 +22,25 @@ rootProject.allprojects {
 }
 
 apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
 
 android {
-    if (project.android.hasProperty("namespace")) {
-        namespace = "com.mrrhak.khqr_sdk"
-    }
+    namespace = "com.mrrhak.khqr_sdk"
 
-    compileSdk = 34
+    compileSdk = 35
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11
+    }
+
+    sourceSets {
+        main.java.srcDirs += "src/main/kotlin"
+        test.java.srcDirs += "src/test/kotlin"
     }
 
     defaultConfig {
@@ -38,12 +48,17 @@ android {
     }
 
     dependencies {
-        testImplementation("junit:junit:4.13.2")
+        testImplementation("org.jetbrains.kotlin:kotlin-test")
         testImplementation("org.mockito:mockito-core:5.0.0")
+        // https://central.sonatype.com/artifact/kh.gov.nbc.bakong_khqr/sdk-java
+        implementation("kh.gov.nbc.bakong_khqr:sdk-java:1.0.0.13")
+        implementation("com.google.code.gson:gson:2.11.0")
     }
 
     testOptions {
         unitTests.all {
+            useJUnitPlatform()
+
             testLogging {
                events "passed", "skipped", "failed", "standardOut", "standardError"
                outputs.upToDateWhen {false}
@@ -51,10 +66,4 @@ android {
             }
         }
     }
-}
-
-dependencies {
-    // https://package-search.jetbrains.com/package?id=kh.gov.nbc.bakong_khqr%3Asdk-java
-    implementation 'kh.gov.nbc.bakong_khqr:sdk-java:1.0.0.13'
-    implementation 'com.google.code.gson:gson:2.11.0'
 }

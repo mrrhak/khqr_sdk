@@ -225,7 +225,7 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
           context: context,
           builder: (context) => AlertDialog(
             title: const Text('Success'),
-            content: Text(prettyJson),
+            content: Text(prettyJson, style: TextStyle(fontSize: 12.0)),
             actions: [
               TextButton(
                 child: const Text('OK'),
