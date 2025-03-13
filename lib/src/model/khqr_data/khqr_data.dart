@@ -5,7 +5,7 @@ part 'khqr_data.g.dart';
 
 /// Data class for KhqrData
 @freezed
-class KhqrData with _$KhqrData {
+abstract class KhqrData with _$KhqrData {
   /// Creates a new instance of [KhqrData]
   factory KhqrData({
     required String qr,

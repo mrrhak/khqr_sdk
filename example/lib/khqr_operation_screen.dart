@@ -90,11 +90,17 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
 
   Future<void> generateMerchant() async {
     try {
+      // Dynamic QR with amount required to set expiration
+      // 1 hour from now
+      final expire = DateTime.now().millisecondsSinceEpoch + 3600000;
+
       final info = MerchantInfo(
         bakongAccountId: 'kimhak@dev',
         acquiringBank: 'Dev Bank',
         merchantId: '123456',
         merchantName: 'Kimhak',
+        amount: 1,
+        expirationTimestamp: expire,
       );
       final merchant = await _khqrSdk.generateMerchant(info);
       if (!mounted) return;
@@ -272,6 +278,65 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
     }
   }
 
+  Future<void> decodeNonKhqr(String qrCode) async {
+    try {
+      final nonKhqrDecodeData = await _khqrSdk.decodeNonKhqr(qrCode);
+      if (!mounted) return;
+      if (nonKhqrDecodeData != null) {
+        final prettyJson = const JsonEncoder.withIndent('  ').convert(
+          nonKhqrDecodeData,
+        );
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Success'),
+            content: Text(prettyJson, style: TextStyle(fontSize: 12.0)),
+            actions: [
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        );
+      } else {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Error'),
+            content: const Text('Failed to decode Non KHQR'),
+            actions: [
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        );
+      }
+    } on PlatformException catch (e) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Error'),
+          content: Text(e.message ?? 'Failed to decode Non KHQR'),
+          actions: [
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -373,6 +438,42 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
               ),
               child: const Text(
                 'Decode QR',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    final textController = TextEditingController();
+                    return AlertDialog(
+                      title: const Text('Decode Non KHQR'),
+                      content: TextField(
+                        controller: textController,
+                        decoration: const InputDecoration(
+                          label: Text('Enter Non KHQR code'),
+                        ),
+                      ),
+                      actions: [
+                        TextButton(
+                          child: const Text('Decode'),
+                          onPressed: () async {
+                            decodeNonKhqr(textController.text);
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.all(Colors.pink),
+              ),
+              child: const Text(
+                'Decode Non KHQR',
                 style: TextStyle(color: Colors.white),
               ),
             ),

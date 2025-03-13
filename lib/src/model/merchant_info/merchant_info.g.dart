@@ -6,8 +6,8 @@ part of 'merchant_info.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$MerchantInfoImpl _$$MerchantInfoImplFromJson(Map<String, dynamic> json) =>
-    _$MerchantInfoImpl(
+_MerchantInfo _$MerchantInfoFromJson(Map<String, dynamic> json) =>
+    _MerchantInfo(
       bakongAccountId: json['bakongAccountId'] as String,
       merchantId: json['merchantId'] as String,
       acquiringBank: json['acquiringBank'] as String,
@@ -28,9 +28,10 @@ _$MerchantInfoImpl _$$MerchantInfoImplFromJson(Map<String, dynamic> json) =>
           json['merchantNameAlternateLanguage'] as String?,
       merchantCityAlternateLanguage:
           json['merchantCityAlternateLanguage'] as String?,
+      expirationTimestamp: (json['expirationTimestamp'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$MerchantInfoImplToJson(_$MerchantInfoImpl instance) =>
+Map<String, dynamic> _$MerchantInfoToJson(_MerchantInfo instance) =>
     <String, dynamic>{
       'bakongAccountId': instance.bakongAccountId,
       'merchantId': instance.merchantId,
@@ -49,6 +50,7 @@ Map<String, dynamic> _$$MerchantInfoImplToJson(_$MerchantInfoImpl instance) =>
           instance.merchantAlternateLanguagePreference,
       'merchantNameAlternateLanguage': instance.merchantNameAlternateLanguage,
       'merchantCityAlternateLanguage': instance.merchantCityAlternateLanguage,
+      'expirationTimestamp': instance.expirationTimestamp,
     };
 
 const _$KhqrCurrencyEnumMap = {

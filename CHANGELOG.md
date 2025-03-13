@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.0
+- Added new feature to `Decode Non-KHQR`
+- Added expire timestamp for `Dynamic QR`
+- Upgrade iOS native SDK to `v1.0.0.16`
+- Upgrade Android native SDK to `v1.0.0.14`
+- Updated generated Freezed files
+- Updated dependencies
+
 ## 1.0.4
 - Migrated Android platform language from Java to Kotlin
 - Added enum value to KhqrCurrency to align with currency code from NBC

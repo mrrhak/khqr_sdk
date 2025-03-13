@@ -6,9 +6,8 @@ part of 'khqr_decoded_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$KhqrDecodedDataImpl _$$KhqrDecodedDataImplFromJson(
-        Map<String, dynamic> json) =>
-    _$KhqrDecodedDataImpl(
+_KhqrDecodedData _$KhqrDecodedDataFromJson(Map<String, dynamic> json) =>
+    _KhqrDecodedData(
       payloadFormatIndicator: json['payloadFormatIndicator'] as String?,
       pointOfInitiationMethod: json['pointOfInitiationMethod'] as String?,
       bakongAccountId: json['bakongAccountId'] as String?,
@@ -26,7 +25,6 @@ _$KhqrDecodedDataImpl _$$KhqrDecodedDataImplFromJson(
       storeLabel: json['storeLabel'] as String?,
       terminalLabel: json['terminalLabel'] as String?,
       mobileNumber: json['mobileNumber'] as String?,
-      timestamp: json['timestamp'] as String?,
       crc: json['crc'] as String?,
       upiAccountInformation: json['upiAccountInformation'] as String?,
       purposeOfTransaction: json['purposeOfTransaction'] as String?,
@@ -36,10 +34,11 @@ _$KhqrDecodedDataImpl _$$KhqrDecodedDataImplFromJson(
           json['merchantNameAlternateLanguage'] as String?,
       merchantCityAlternateLanguage:
           json['merchantCityAlternateLanguage'] as String?,
+      creationTimestamp: json['creationTimestamp'] as String?,
+      expirationTimestamp: json['expirationTimestamp'] as String?,
     );
 
-Map<String, dynamic> _$$KhqrDecodedDataImplToJson(
-        _$KhqrDecodedDataImpl instance) =>
+Map<String, dynamic> _$KhqrDecodedDataToJson(_KhqrDecodedData instance) =>
     <String, dynamic>{
       'payloadFormatIndicator': instance.payloadFormatIndicator,
       'pointOfInitiationMethod': instance.pointOfInitiationMethod,
@@ -58,7 +57,6 @@ Map<String, dynamic> _$$KhqrDecodedDataImplToJson(
       'storeLabel': instance.storeLabel,
       'terminalLabel': instance.terminalLabel,
       'mobileNumber': instance.mobileNumber,
-      'timestamp': instance.timestamp,
       'crc': instance.crc,
       'upiAccountInformation': instance.upiAccountInformation,
       'purposeOfTransaction': instance.purposeOfTransaction,
@@ -66,4 +64,6 @@ Map<String, dynamic> _$$KhqrDecodedDataImplToJson(
           instance.merchantAlternateLanguagePreference,
       'merchantNameAlternateLanguage': instance.merchantNameAlternateLanguage,
       'merchantCityAlternateLanguage': instance.merchantCityAlternateLanguage,
+      'creationTimestamp': instance.creationTimestamp,
+      'expirationTimestamp': instance.expirationTimestamp,
     };

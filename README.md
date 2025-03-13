@@ -13,7 +13,7 @@
 
 <div align="center">
 <p align="center">
-The standardization of KHQR code specifications will help promote wider use of mobile retail payments in Cambodia and provide consistent user experience for merchants and consumers. It can enable interoperability in the payment industry. A common QR code would facilitate payments among different schemes, e-wallets and banks and would encourage small merchants to adopt KHQR code as payment method. KHQR is created for retail or remittance in Cambodia and Cross-Border. It only requires a single QR for receiving transactions from any payment provider through Bakong including Bakong App.
+The standardization of KHQR code specifications will help promote wider use of mobile retail payments in Cambodia and provide consistent user experience for merchants and consumers. It can enable interoperability in the payment industry. A common QR code would facilitate payments among different schemes, e-wallets and banks and would encourage small merchants to adopt KHQR code as payment method. KHQR is created for retail payment in Cambodia and Cross-Border payment within asean countries. It only requires a single QR for receiving payment from any mobile apps including Bakong app, making QR payment simple for both customers and merchants in Cambodia.
 </p>
 </div>
 
@@ -79,8 +79,8 @@ The standardization of KHQR code specifications will help promote wider use of m
 - [x] Android
 
 ## Native KHQR SDK Version
-- iOS using **`BakongKHQR`** (v1.0.0.15)
-- Android using **`kh.gov.nbc.bakong_khqr:sdk-java:1.0.0.13`**
+- iOS using **`BakongKHQR`** (v1.0.0.16)
+- Android using **`kh.gov.nbc.bakong_khqr:sdk-java:1.0.0.14`**
 
 ## Features Supported
 
@@ -93,6 +93,7 @@ See the example app for detailed implementation information.
 | Generate Deeplink   |    ✔    |    ✔    |
 | Verify              |    ✔    |    ✔    |
 | Decode              |    ✔    |    ✔    |
+| Decode Non-KHQR     |    ✘    |    ✔    |
 | KHQR Card Widget    |    ✔    |    ✔    |
 
 
@@ -149,6 +150,23 @@ final info = MerchantInfo(
 final khqrData = await _khqrSdk.generateMerchant(info);
 ```
 
+>[!NOTE] 
+>Generate dynamic QR that set amount is required to set expiration
+>
+>```dart
+> // 1 hour from now
+> final expire = DateTime.now().millisecondsSinceEpoch + 3600000;
+> final info = MerchantInfo(
+>    bakongAccountId: 'kimhak@dev',
+>    acquiringBank: 'Dev Bank',
+>    merchantId: '123456',
+>    merchantName: 'Kimhak',
+>    amount: 1,
+>    expirationTimestamp: expire,
+> );
+>```
+
+
 ### Verify KHQR
 ```dart
 const qrCode = '00020101021129270010kimhak@dev01091234567895204599953031165802KH5906Kimhak6010Phnom Penh9917001317324625358296304B59E';
@@ -159,6 +177,12 @@ final isValid = await _khqrSdk.verify(qrCode);
 ```dart
 const qrCode = '00020101021129270010kimhak@dev01091234567895204599953031165802KH5906Kimhak6010Phnom Penh9917001317324625358296304B59E';
 final khqrDecodeData = await _khqrSdk.decode(qrCode);
+```
+
+### Decode Non-KHQR
+```dart
+const qrCode = '00020101021129270010kimhak@dev01091234567895204599953031165802KH5906Kimhak6010Phnom Penh9917001317324625358296304B59E';
+final nonKhqrDecodeData = await _khqrSdk.decodeNonKhqr(qrCode);
 ```
 
 ### Generate KHQR Deeplink

@@ -37,6 +37,7 @@ class KhqrSdk {
   /// - [IndividualInfo.merchantAlternateLanguagePreference] (optional)
   /// - [IndividualInfo.merchantNameAlternateLanguage] (optional)
   /// - [IndividualInfo.merchantCityAlternateLanguage] (optional)
+  /// - [IndividualInfo.expirationTimestamp] (optional)
   ///
   /// Returns a [KhqrData] object containing the generated KHQR code, or null if the operation fails.
   Future<KhqrData?> generateIndividual(IndividualInfo info) async {
@@ -62,6 +63,7 @@ class KhqrSdk {
   /// - [MerchantInfo.merchantAlternateLanguagePreference] (optional)
   /// - [MerchantInfo.merchantNameAlternateLanguage] (optional)
   /// - [MerchantInfo.merchantCityAlternateLanguage] (optional)
+  /// - [MerchantInfo.expirationTimestamp] (optional)
   ///
   /// Returns a [KhqrData] object containing the generated KHQR code, or null if the operation fails.
   Future<KhqrData?> generateMerchant(MerchantInfo info) async {
@@ -84,6 +86,15 @@ class KhqrSdk {
   /// Returns a [KhqrDecodedData] object containing the decoded data, or null if the operation fails.
   Future<KhqrDecodedData?> decode(String qrCode) async {
     return await KhqrSdkPlatform.instance.decode(qrCode);
+  }
+
+  /// Decode a Non KHQR code.
+  ///
+  /// [qrCode] is the Non KHQR code to decode.
+  ///
+  /// Returns a [Map<String, dynamic>] object containing the decoded data, or null if the operation fails.
+  Future<Map<String, dynamic>?> decodeNonKhqr(String qrCode) async {
+    return await KhqrSdkPlatform.instance.decodeNonKhqr(qrCode);
   }
 
   /// Generate a KHQR deeplink.

@@ -56,6 +56,17 @@ class MethodChannelKhqrSdk extends KhqrSdkPlatform {
   }
 
   @override
+  Future<Map<String, dynamic>?> decodeNonKhqr(String qrCode) async {
+    if (qrCode.isEmpty) return null;
+    final jsonData = await methodChannel.invokeMethod(
+      'decodeNonKhqr',
+      {'qrCode': qrCode},
+    );
+    final jsonString = jsonEncode(jsonData);
+    return jsonDecode(jsonString);
+  }
+
+  @override
   Future<DeeplinkData?> generateDeepLink(DeeplinkInfo info) async {
     final jsonData = await methodChannel.invokeMethod(
       'generateDeepLink',

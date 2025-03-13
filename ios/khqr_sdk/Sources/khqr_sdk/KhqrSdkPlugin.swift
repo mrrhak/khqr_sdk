@@ -19,6 +19,8 @@ public class KhqrSdkPlugin: NSObject, FlutterPlugin {
       self.verify(call, result)
     case "decode":
       self.decode(call, result)
+    case "decodeNonKhqr":
+      self.decodeNonKhqr(call, result)
     case "generateDeepLink":
       self.generateDeepLink(call, result)
     default:
@@ -54,6 +56,9 @@ public class KhqrSdkPlugin: NSObject, FlutterPlugin {
     info?.merchantNameAlternateLanguage = arguments["merchantNameAlternateLanguage"] as? String
     info?.merchantCity = arguments["merchantCity"] as? String
     info?.merchantCityAlternateLanguage = arguments["merchantCityAlternateLanguage"] as? String
+    if let expirationTimestamp = arguments["expirationTimestamp"] as? Int {
+      info?.expirationTimestamp = NSNumber(value: expirationTimestamp)
+    }
 
     let response = BakongKHQR.generateIndividual(info!)
     if response.status?.code == 0 {
@@ -94,6 +99,9 @@ public class KhqrSdkPlugin: NSObject, FlutterPlugin {
     info?.merchantNameAlternateLanguage = arguments["merchantNameAlternateLanguage"] as? String
     info?.merchantCity = arguments["merchantCity"] as? String
     info?.merchantCityAlternateLanguage = arguments["merchantCityAlternateLanguage"] as? String
+    if let expirationTimestamp = arguments["expirationTimestamp"] as? Int {
+      info?.expirationTimestamp = NSNumber(value: expirationTimestamp)
+    }
 
     let response = BakongKHQR.generateMerchant(info!)
     if response.status?.code == 0 {
@@ -149,6 +157,26 @@ public class KhqrSdkPlugin: NSObject, FlutterPlugin {
       result(
         FlutterError(code: "DECODE_ERROR", message: "KHQR provided is invalid", details: nil))
     }
+  }
+
+  private func decodeNonKhqr(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+    if call.arguments == nil {
+      result(FlutterError(code: "DECODE_ERROR", message: "Missing Parameter", details: nil))
+      return
+    }
+
+    let arguments = call.arguments as! [String: Any?]
+    let qrCode = arguments["qrCode"] as! String
+
+    if qrCode.count < 2 {
+      result(
+        FlutterError(code: "DECODE_ERROR", message: "Non-KHQR provided is invalid", details: nil))
+      return
+    }
+
+    let response = BakongKHQR.decodeNonKhqr(qrCode)
+    let decodeData = response?.data as? KHQREMVQRData
+    result(decodeData)
   }
 
   private func generateDeepLink(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
@@ -209,22 +237,28 @@ public class KhqrSdkPlugin: NSObject, FlutterPlugin {
       "merchantNameAlternateLanguage",
       "merchantCityAlternateLanguage",
       "timestamp",
+      "expirationTimestamp",
       "crc",
     ]
     var dict: [String: Any] = [:]
 
     for key in keys {
       if let value = object.value(forKey: key) {
-        dict[key] = value
+        var newKey = key
+        if newKey == "bakongAccountID" {
+          newKey = "bakongAccountId"
+        }
+        if newKey == "timestamp" {
+          newKey = "creationTimestamp"
+        }
+        dict[newKey] = value
       }
     }
 
     // Convert the dictionary to JSON
     do {
       let jsonData = try JSONSerialization.data(withJSONObject: dict, options: [])
-      var jsonString = String(data: jsonData, encoding: .utf8) ?? "{}"
-      jsonString = jsonString.replacingOccurrences(
-        of: "\"bakongAccountID\":", with: "\"bakongAccountId\":")
+      let jsonString = String(data: jsonData, encoding: .utf8) ?? "{}"
       return jsonString
     } catch {
       print("Error serializing object to JSON: \(error)")

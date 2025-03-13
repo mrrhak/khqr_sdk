@@ -5,7 +5,7 @@ part 'source_info.g.dart';
 
 /// Data class for SourceInfo
 @freezed
-class SourceInfo with _$SourceInfo {
+abstract class SourceInfo with _$SourceInfo {
   /// Creates a new instance of [SourceInfo]
   factory SourceInfo({
     required String appIconUrl,

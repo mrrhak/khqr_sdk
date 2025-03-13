@@ -6,14 +6,12 @@ part of 'khqr_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$KhqrDataImpl _$$KhqrDataImplFromJson(Map<String, dynamic> json) =>
-    _$KhqrDataImpl(
+_KhqrData _$KhqrDataFromJson(Map<String, dynamic> json) => _KhqrData(
       qr: json['qr'] as String,
       md5: json['md5'] as String,
     );
 
-Map<String, dynamic> _$$KhqrDataImplToJson(_$KhqrDataImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$KhqrDataToJson(_KhqrData instance) => <String, dynamic>{
       'qr': instance.qr,
       'md5': instance.md5,
     };

@@ -6,12 +6,12 @@ part of 'deeplink_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DeeplinkDataImpl _$$DeeplinkDataImplFromJson(Map<String, dynamic> json) =>
-    _$DeeplinkDataImpl(
+_DeeplinkData _$DeeplinkDataFromJson(Map<String, dynamic> json) =>
+    _DeeplinkData(
       shortLink: json['shortLink'] as String,
     );
 
-Map<String, dynamic> _$$DeeplinkDataImplToJson(_$DeeplinkDataImpl instance) =>
+Map<String, dynamic> _$DeeplinkDataToJson(_DeeplinkData instance) =>
     <String, dynamic>{
       'shortLink': instance.shortLink,
     };

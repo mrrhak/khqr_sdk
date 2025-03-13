@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,120 +10,29 @@ part of 'deeplink_data.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-DeeplinkData _$DeeplinkDataFromJson(Map<String, dynamic> json) {
-  return _DeeplinkData.fromJson(json);
-}
 
 /// @nodoc
 mixin _$DeeplinkData {
-  String get shortLink => throw _privateConstructorUsedError;
-
-  /// Serializes this DeeplinkData to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get shortLink;
 
   /// Create a copy of DeeplinkData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $DeeplinkDataCopyWith<DeeplinkData> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$DeeplinkDataCopyWithImpl<DeeplinkData>(
+          this as DeeplinkData, _$identity);
 
-/// @nodoc
-abstract class $DeeplinkDataCopyWith<$Res> {
-  factory $DeeplinkDataCopyWith(
-          DeeplinkData value, $Res Function(DeeplinkData) then) =
-      _$DeeplinkDataCopyWithImpl<$Res, DeeplinkData>;
-  @useResult
-  $Res call({String shortLink});
-}
-
-/// @nodoc
-class _$DeeplinkDataCopyWithImpl<$Res, $Val extends DeeplinkData>
-    implements $DeeplinkDataCopyWith<$Res> {
-  _$DeeplinkDataCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of DeeplinkData
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? shortLink = null,
-  }) {
-    return _then(_value.copyWith(
-      shortLink: null == shortLink
-          ? _value.shortLink
-          : shortLink // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$DeeplinkDataImplCopyWith<$Res>
-    implements $DeeplinkDataCopyWith<$Res> {
-  factory _$$DeeplinkDataImplCopyWith(
-          _$DeeplinkDataImpl value, $Res Function(_$DeeplinkDataImpl) then) =
-      __$$DeeplinkDataImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String shortLink});
-}
-
-/// @nodoc
-class __$$DeeplinkDataImplCopyWithImpl<$Res>
-    extends _$DeeplinkDataCopyWithImpl<$Res, _$DeeplinkDataImpl>
-    implements _$$DeeplinkDataImplCopyWith<$Res> {
-  __$$DeeplinkDataImplCopyWithImpl(
-      _$DeeplinkDataImpl _value, $Res Function(_$DeeplinkDataImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of DeeplinkData
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? shortLink = null,
-  }) {
-    return _then(_$DeeplinkDataImpl(
-      shortLink: null == shortLink
-          ? _value.shortLink
-          : shortLink // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$DeeplinkDataImpl implements _DeeplinkData {
-  _$DeeplinkDataImpl({required this.shortLink});
-
-  factory _$DeeplinkDataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DeeplinkDataImplFromJson(json);
-
-  @override
-  final String shortLink;
-
-  @override
-  String toString() {
-    return 'DeeplinkData(shortLink: $shortLink)';
-  }
+  /// Serializes this DeeplinkData to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DeeplinkDataImpl &&
+            other is DeeplinkData &&
             (identical(other.shortLink, shortLink) ||
                 other.shortLink == shortLink));
   }
@@ -131,35 +41,121 @@ class _$DeeplinkDataImpl implements _DeeplinkData {
   @override
   int get hashCode => Object.hash(runtimeType, shortLink);
 
-  /// Create a copy of DeeplinkData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$DeeplinkDataImplCopyWith<_$DeeplinkDataImpl> get copyWith =>
-      __$$DeeplinkDataImplCopyWithImpl<_$DeeplinkDataImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DeeplinkDataImplToJson(
-      this,
-    );
+  String toString() {
+    return 'DeeplinkData(shortLink: $shortLink)';
   }
 }
 
-abstract class _DeeplinkData implements DeeplinkData {
-  factory _DeeplinkData({required final String shortLink}) = _$DeeplinkDataImpl;
+/// @nodoc
+abstract mixin class $DeeplinkDataCopyWith<$Res> {
+  factory $DeeplinkDataCopyWith(
+          DeeplinkData value, $Res Function(DeeplinkData) _then) =
+      _$DeeplinkDataCopyWithImpl;
+  @useResult
+  $Res call({String shortLink});
+}
 
-  factory _DeeplinkData.fromJson(Map<String, dynamic> json) =
-      _$DeeplinkDataImpl.fromJson;
+/// @nodoc
+class _$DeeplinkDataCopyWithImpl<$Res> implements $DeeplinkDataCopyWith<$Res> {
+  _$DeeplinkDataCopyWithImpl(this._self, this._then);
+
+  final DeeplinkData _self;
+  final $Res Function(DeeplinkData) _then;
+
+  /// Create a copy of DeeplinkData
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? shortLink = null,
+  }) {
+    return _then(_self.copyWith(
+      shortLink: null == shortLink
+          ? _self.shortLink
+          : shortLink // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _DeeplinkData implements DeeplinkData {
+  _DeeplinkData({required this.shortLink});
+  factory _DeeplinkData.fromJson(Map<String, dynamic> json) =>
+      _$DeeplinkDataFromJson(json);
 
   @override
-  String get shortLink;
+  final String shortLink;
 
   /// Create a copy of DeeplinkData
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DeeplinkDataImplCopyWith<_$DeeplinkDataImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$DeeplinkDataCopyWith<_DeeplinkData> get copyWith =>
+      __$DeeplinkDataCopyWithImpl<_DeeplinkData>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$DeeplinkDataToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _DeeplinkData &&
+            (identical(other.shortLink, shortLink) ||
+                other.shortLink == shortLink));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, shortLink);
+
+  @override
+  String toString() {
+    return 'DeeplinkData(shortLink: $shortLink)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$DeeplinkDataCopyWith<$Res>
+    implements $DeeplinkDataCopyWith<$Res> {
+  factory _$DeeplinkDataCopyWith(
+          _DeeplinkData value, $Res Function(_DeeplinkData) _then) =
+      __$DeeplinkDataCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String shortLink});
+}
+
+/// @nodoc
+class __$DeeplinkDataCopyWithImpl<$Res>
+    implements _$DeeplinkDataCopyWith<$Res> {
+  __$DeeplinkDataCopyWithImpl(this._self, this._then);
+
+  final _DeeplinkData _self;
+  final $Res Function(_DeeplinkData) _then;
+
+  /// Create a copy of DeeplinkData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? shortLink = null,
+  }) {
+    return _then(_DeeplinkData(
+      shortLink: null == shortLink
+          ? _self.shortLink
+          : shortLink // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

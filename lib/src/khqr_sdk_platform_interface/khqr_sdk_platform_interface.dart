@@ -52,6 +52,7 @@ abstract class KhqrSdkPlatform extends PlatformInterface {
   /// - [IndividualInfo.merchantAlternateLanguagePreference] (optional)
   /// - [IndividualInfo.merchantNameAlternateLanguage] (optional)
   /// - [IndividualInfo.merchantCityAlternateLanguage] (optional)
+  /// - [IndividualInfo.expirationTimestamp] (optional)
   ///
   /// Returns a [KhqrData] object containing the generated KHQR code, or null if the operation fails.
   Future<KhqrData?> generateIndividual(IndividualInfo info) {
@@ -77,6 +78,7 @@ abstract class KhqrSdkPlatform extends PlatformInterface {
   /// - [MerchantInfo.merchantAlternateLanguagePreference] (optional)
   /// - [MerchantInfo.merchantNameAlternateLanguage] (optional)
   /// - [MerchantInfo.merchantCityAlternateLanguage] (optional)
+  /// - [MerchantInfo.expirationTimestamp] (optional)
   ///
   /// Returns a [KhqrData] object containing the generated KHQR code, or null if the operation fails.
   Future<KhqrData?> generateMerchant(MerchantInfo info) {
@@ -99,6 +101,15 @@ abstract class KhqrSdkPlatform extends PlatformInterface {
   /// Returns a [KhqrDecodedData] object containing the decoded data, or null if the operation fails.
   Future<KhqrDecodedData?> decode(String qrCode) {
     throw UnimplementedError('decode() has not been implemented.');
+  }
+
+  /// Decode a Non KHQR code.
+  ///
+  /// [qrCode] is the Non KHQR code to decode.
+  ///
+  /// Returns a [Map<String, dynamic>] object containing the decoded data, or null if the operation fails.
+  Future<Map<String, dynamic>?> decodeNonKhqr(String qrCode) {
+    throw UnimplementedError('decodeNonKhqr() has not been implemented.');
   }
 
   /// Generate a KHQR deeplink.
