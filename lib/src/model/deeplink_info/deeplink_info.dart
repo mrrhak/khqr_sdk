@@ -6,7 +6,7 @@ part 'deeplink_info.g.dart';
 
 /// Data class for DeeplinkInfo
 @freezed
-class DeeplinkInfo with _$DeeplinkInfo {
+abstract class DeeplinkInfo with _$DeeplinkInfo {
   /// Creates a instance of [DeeplinkInfo]
   factory DeeplinkInfo({
     required String qr,

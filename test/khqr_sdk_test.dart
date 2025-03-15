@@ -11,29 +11,30 @@ void main() {
 
   setUp(() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMethodCallHandler(
-      channel,
-      (MethodCall methodCall) async {
-        if (methodCall.method == 'generateIndividual') {
-          final khqrData = KhqrData(
-              qr: 'This is individual QR', md5: 'This is individual MD5');
-          return jsonEncode(khqrData);
-        } else if (methodCall.method == 'generateMerchant') {
-          final khqrData =
-              KhqrData(qr: 'This is merchant QR', md5: 'This is merchant MD5');
-          return jsonEncode(khqrData);
-        } else if (methodCall.method == 'verify') {
-          return true;
-        } else if (methodCall.method == 'decode') {
-          final decodeData = KhqrDecodedData(
-            bakongAccountId: 'kimhak@dev',
-            merchantName: 'Kimhak',
-          );
-          return jsonEncode(decodeData);
-        }
-        return null;
-      },
-    );
+        .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+          if (methodCall.method == 'generateIndividual') {
+            final khqrData = KhqrData(
+              qr: 'This is individual QR',
+              md5: 'This is individual MD5',
+            );
+            return jsonEncode(khqrData);
+          } else if (methodCall.method == 'generateMerchant') {
+            final khqrData = KhqrData(
+              qr: 'This is merchant QR',
+              md5: 'This is merchant MD5',
+            );
+            return jsonEncode(khqrData);
+          } else if (methodCall.method == 'verify') {
+            return true;
+          } else if (methodCall.method == 'decode') {
+            final decodeData = KhqrDecodedData(
+              bakongAccountId: 'kimhak@dev',
+              merchantName: 'Kimhak',
+            );
+            return jsonEncode(decodeData);
+          }
+          return null;
+        });
   });
 
   tearDown(() {

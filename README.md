@@ -13,7 +13,7 @@
 
 <div align="center">
 <p align="center">
-The standardization of KHQR code specifications will help promote wider use of mobile retail payments in Cambodia and provide consistent user experience for merchants and consumers. It can enable interoperability in the payment industry. A common QR code would facilitate payments among different schemes, e-wallets and banks and would encourage small merchants to adopt KHQR code as payment method. KHQR is created for retail or remittance in Cambodia and Cross-Border. It only requires a single QR for receiving transactions from any payment provider through Bakong including Bakong App.
+The standardization of KHQR code specifications will help promote wider use of mobile retail payments in Cambodia and provide consistent user experience for merchants and consumers. It can enable interoperability in the payment industry. A common QR code would facilitate payments among different schemes, e-wallets and banks and would encourage small merchants to adopt KHQR code as payment method. KHQR is created for retail payment in Cambodia and Cross-Border payment within asean countries. It only requires a single QR for receiving payment from any mobile apps including Bakong app, making QR payment simple for both customers and merchants in Cambodia.
 </p>
 </div>
 
@@ -79,8 +79,8 @@ The standardization of KHQR code specifications will help promote wider use of m
 - [x] Android
 
 ## Native KHQR SDK Version
-- iOS using **`BakongKHQR`** (v1.0.0.15)
-- Android using **`kh.gov.nbc.bakong_khqr:sdk-java:1.0.0.13`**
+- iOS using **`BakongKHQR`** (v1.0.0.16)
+- Android using **`kh.gov.nbc.bakong_khqr:sdk-java:1.0.0.14`**
 
 ## Features Supported
 
@@ -93,12 +93,13 @@ See the example app for detailed implementation information.
 | Generate Deeplink   |    ✔    |    ✔    |
 | Verify              |    ✔    |    ✔    |
 | Decode              |    ✔    |    ✔    |
+| Decode Non-KHQR     |    ✘    |    ✔    |
 | KHQR Card Widget    |    ✔    |    ✔    |
 
 
 ## Platform specific setup
 ### iOS
-1. Add source to Podfile (ios/Podfile)
+#### 1. Add source to Podfile (ios/Podfile)
 ```bash
 source "https://sambo:ycfXmxxRbyzEmozY9z6n@gitlab.nbc.gov.kh/khqr/khqr-ios-pod.git"
 ```
@@ -111,8 +112,63 @@ source "https://sambo:ycfXmxxRbyzEmozY9z6n@gitlab.nbc.gov.kh/khqr/khqr-ios-pod.g
 >  disable-swift-package-manager: true
 >```
 >After save, `Podfile` will be created automatically.
+>
+><details>
+>  <summary>Example Podfile</summary>
+>
+>  ```sh
+>  source "https://sambo:ycfXmxxRbyzEmozY9z6n@gitlab.nbc.gov.kh/khqr/khqr-ios-pod.git"
+>  
+>  # Uncomment this line to define a global platform for your project
+>  # platform :ios, '12.0'
+>
+>  # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
+>  ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+>
+>  project 'Runner', {
+>    'Debug' => :debug,
+>    'Profile' => :release,
+>    'Release' => :release,
+>  }
+>
+>  def flutter_root
+>    generated_xcode_build_settings_path = File.expand_path(File.join('..', 'Flutter', 'Generated.xcconfig'), __FILE__)
+>    unless File.exist?(generated_xcode_build_settings_path)
+>      raise "#{generated_xcode_build_settings_path} must exist. If you're running pod install manually, make sure flutter pub get is executed first"
+>    end
+>
+>    File.foreach(generated_xcode_build_settings_path) do |line|
+>      matches = line.match(/FLUTTER_ROOT\=(.*)/)
+>      return matches[1].strip if matches
+>    end
+>    raise "FLUTTER_ROOT not found in #{generated_xcode_build_settings_path}. Try deleting Generated.xcconfig, then run flutter pub get"
+>  end
+>
+>  require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelper'), flutter_root)
+>
+>  flutter_ios_podfile_setup
+>
+>  target 'Runner' do
+>    use_frameworks!
+>
+>    flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+>    target 'RunnerTests' do
+>      inherit! :search_paths
+>    end
+>  end
+>
+>  post_install do |installer|
+>    installer.pods_project.targets.each do |target|
+>      flutter_additional_ios_build_settings(target)
+>    end
+>  end
+>  ```
+></details>
 
-2. Run pod install (make sure your terminal is in ios folder)
+
+
+
+#### 2. Run pod install (make sure your terminal is in ios folder)
 ```bash
 pod install
 ```
@@ -149,6 +205,23 @@ final info = MerchantInfo(
 final khqrData = await _khqrSdk.generateMerchant(info);
 ```
 
+>[!NOTE] 
+>Generate dynamic QR that set amount is required to set expiration
+>
+>```dart
+> // 1 hour from now
+> final expire = DateTime.now().millisecondsSinceEpoch + 3600000;
+> final info = MerchantInfo(
+>    bakongAccountId: 'kimhak@dev',
+>    acquiringBank: 'Dev Bank',
+>    merchantId: '123456',
+>    merchantName: 'Kimhak',
+>    amount: 1,
+>    expirationTimestamp: expire,
+> );
+>```
+
+
 ### Verify KHQR
 ```dart
 const qrCode = '00020101021129270010kimhak@dev01091234567895204599953031165802KH5906Kimhak6010Phnom Penh9917001317324625358296304B59E';
@@ -159,6 +232,12 @@ final isValid = await _khqrSdk.verify(qrCode);
 ```dart
 const qrCode = '00020101021129270010kimhak@dev01091234567895204599953031165802KH5906Kimhak6010Phnom Penh9917001317324625358296304B59E';
 final khqrDecodeData = await _khqrSdk.decode(qrCode);
+```
+
+### Decode Non-KHQR
+```dart
+const qrCode = '00020101021129270010kimhak@dev01091234567895204599953031165802KH5906Kimhak6010Phnom Penh9917001317324625358296304B59E';
+final nonKhqrDecodeData = await _khqrSdk.decodeNonKhqr(qrCode);
 ```
 
 ### Generate KHQR Deeplink

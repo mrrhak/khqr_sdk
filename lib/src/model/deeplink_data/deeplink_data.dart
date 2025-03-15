@@ -5,7 +5,7 @@ part 'deeplink_data.g.dart';
 
 /// Data class for DeeplinkData
 @freezed
-class DeeplinkData with _$DeeplinkData {
+abstract class DeeplinkData with _$DeeplinkData {
   /// Creates a  new instance of [DeeplinkData]
   factory DeeplinkData({required String shortLink}) = _DeeplinkData;
 

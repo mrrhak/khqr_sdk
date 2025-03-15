@@ -12,8 +12,10 @@ class MoneyFormatterUtil {
   ///   123456.78 -> 123,456.78
   ///
   ///   123456 -> 123,456.00
-  static String formatThousandNumber(double number,
-      {bool keepDecimal = false}) {
+  static String formatThousandNumber(
+    double number, {
+    bool keepDecimal = false,
+  }) {
     String pattern = '#,###.##';
     if (keepDecimal) {
       // Enforce exactly two decimal places
