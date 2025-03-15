@@ -5,7 +5,7 @@ part 'khqr_decoded_data.g.dart';
 
 /// Data class for KhqrDecodedData
 @freezed
-class KhqrDecodedData with _$KhqrDecodedData {
+abstract class KhqrDecodedData with _$KhqrDecodedData {
   /// Creates new instance of [KhqrDecodedData]
   factory KhqrDecodedData({
     String? payloadFormatIndicator,
@@ -25,13 +25,14 @@ class KhqrDecodedData with _$KhqrDecodedData {
     String? storeLabel,
     String? terminalLabel,
     String? mobileNumber,
-    String? timestamp,
     String? crc,
     String? upiAccountInformation,
     String? purposeOfTransaction,
     String? merchantAlternateLanguagePreference,
     String? merchantNameAlternateLanguage,
     String? merchantCityAlternateLanguage,
+    String? creationTimestamp,
+    String? expirationTimestamp,
   }) = _KhqrDecodedData;
 
   /// Creates new instance of [KhqrDecodedData] from JSON map

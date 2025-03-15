@@ -10,5 +10,5 @@ This is a simple interface layer that connects your Dart code directly to the or
 |   ✅    |  ✅  |   -  |   -   |    -   |   -   |
 
 ## Native KHQR SDK Version
-- iOS using **`BakongKHQR`** (v1.0.0.15)
-- Android using **`kh.gov.nbc.bakong_khqr:sdk-java:1.0.0.13`**
+- iOS using **`BakongKHQR`** (v1.0.0.16)
+- Android using **`kh.gov.nbc.bakong_khqr:sdk-java:1.0.0.14`**

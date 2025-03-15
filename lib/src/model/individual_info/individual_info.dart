@@ -6,7 +6,7 @@ part 'individual_info.g.dart';
 
 /// Data class for IndividualInfo
 @freezed
-class IndividualInfo with _$IndividualInfo {
+abstract class IndividualInfo with _$IndividualInfo {
   /// Creates a new instance of [IndividualInfo]
   factory IndividualInfo({
     required String bakongAccountId,
@@ -25,6 +25,7 @@ class IndividualInfo with _$IndividualInfo {
     String? merchantAlternateLanguagePreference,
     String? merchantNameAlternateLanguage,
     String? merchantCityAlternateLanguage,
+    int? expirationTimestamp,
   }) = _IndividualInfo;
 
   /// Creates a new instance of [IndividualInfo] from a JSON map

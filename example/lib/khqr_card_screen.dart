@@ -53,36 +53,33 @@ class _KhqrCardScreenState extends State<KhqrCardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text('KHQR Card'),
-      ),
-      body: errorMessage != null
-          ? Center(
-              child: Text(
-              errorMessage!,
-              style: TextStyle(color: Colors.red),
-            ))
-          : khqrContent == null
+      appBar: AppBar(title: const Text('KHQR Card')),
+      body:
+          errorMessage != null
+              ? Center(
+                child: Text(errorMessage!, style: TextStyle(color: Colors.red)),
+              )
+              : khqrContent == null
               ? const Center(child: CircularProgressIndicator())
               : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    KhqrCardWidget(
-                      width: 300.0,
-                      receiverName: _receiverName,
-                      amount: _amount,
-                      keepIntegerDecimal: false,
-                      currency: _receiverCurrency,
-                      qr: khqrContent!,
-                    ),
-                    const SizedBox(height: 16.0),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(khqrContent!),
-                    ),
-                  ],
-                ),
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  KhqrCardWidget(
+                    width: 300.0,
+                    receiverName: _receiverName,
+                    amount: _amount,
+                    keepIntegerDecimal: false,
+                    currency: _receiverCurrency,
+                    qr: khqrContent!,
+                  ),
+                  const SizedBox(height: 16.0),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(khqrContent!),
+                  ),
+                ],
+              ),
     );
   }
 }
