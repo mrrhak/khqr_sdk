@@ -93,6 +93,8 @@ class KhqrSdk {
   /// [qrCode] is the Non KHQR code to decode.
   ///
   /// Returns a [Map<String, dynamic>] object containing the decoded data, or null if the operation fails.
+  ///
+  /// Note: Currently available on iOS only
   Future<Map<String, dynamic>?> decodeNonKhqr(String qrCode) async {
     return await KhqrSdkPlatform.instance.decodeNonKhqr(qrCode);
   }
