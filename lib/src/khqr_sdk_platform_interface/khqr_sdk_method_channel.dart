@@ -38,30 +38,27 @@ class MethodChannelKhqrSdk extends KhqrSdkPlatform {
   @override
   Future<bool> verify(String qrCode) async {
     if (qrCode.isEmpty) return false;
-    final valid = await methodChannel.invokeMethod<bool>(
-      'verify',
-      {'qrCode': qrCode},
-    );
+    final valid = await methodChannel.invokeMethod<bool>('verify', {
+      'qrCode': qrCode,
+    });
     return valid ?? false;
   }
 
   @override
   Future<KhqrDecodedData?> decode(String qrCode) async {
     if (qrCode.isEmpty) return null;
-    final jsonData = await methodChannel.invokeMethod(
-      'decode',
-      {'qrCode': qrCode},
-    );
+    final jsonData = await methodChannel.invokeMethod('decode', {
+      'qrCode': qrCode,
+    });
     return KhqrDecodedData.fromJson(jsonDecode(jsonData));
   }
 
   @override
   Future<Map<String, dynamic>?> decodeNonKhqr(String qrCode) async {
     if (qrCode.isEmpty) return null;
-    final jsonData = await methodChannel.invokeMethod(
-      'decodeNonKhqr',
-      {'qrCode': qrCode},
-    );
+    final jsonData = await methodChannel.invokeMethod('decodeNonKhqr', {
+      'qrCode': qrCode,
+    });
     final jsonString = jsonEncode(jsonData);
     return jsonDecode(jsonString);
   }

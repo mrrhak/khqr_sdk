@@ -7,10 +7,7 @@ part 'khqr_data.g.dart';
 @freezed
 abstract class KhqrData with _$KhqrData {
   /// Creates a new instance of [KhqrData]
-  factory KhqrData({
-    required String qr,
-    required String md5,
-  }) = _KhqrData;
+  factory KhqrData({required String qr, required String md5}) = _KhqrData;
 
   /// Creates a instance of [KhqrData] from a JSON map
   factory KhqrData.fromJson(Map<String, dynamic> json) =>

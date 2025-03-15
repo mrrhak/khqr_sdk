@@ -7,11 +7,7 @@ part of 'deeplink_data.dart';
 // **************************************************************************
 
 _DeeplinkData _$DeeplinkDataFromJson(Map<String, dynamic> json) =>
-    _DeeplinkData(
-      shortLink: json['shortLink'] as String,
-    );
+    _DeeplinkData(shortLink: json['shortLink'] as String);
 
 Map<String, dynamic> _$DeeplinkDataToJson(_DeeplinkData instance) =>
-    <String, dynamic>{
-      'shortLink': instance.shortLink,
-    };
+    <String, dynamic>{'shortLink': instance.shortLink};

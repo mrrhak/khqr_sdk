@@ -11,7 +11,8 @@ _MerchantInfo _$MerchantInfoFromJson(Map<String, dynamic> json) =>
       bakongAccountId: json['bakongAccountId'] as String,
       merchantId: json['merchantId'] as String,
       acquiringBank: json['acquiringBank'] as String,
-      currency: $enumDecodeNullable(_$KhqrCurrencyEnumMap, json['currency']) ??
+      currency:
+          $enumDecodeNullable(_$KhqrCurrencyEnumMap, json['currency']) ??
           KhqrCurrency.khr,
       amount: (json['amount'] as num?)?.toDouble() ?? 0,
       merchantName: json['merchantName'] as String,
