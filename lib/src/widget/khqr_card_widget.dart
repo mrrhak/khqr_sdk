@@ -1,10 +1,11 @@
 import 'dart:async';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:khqr_sdk/src/common/enum.dart';
-import 'package:khqr_sdk/src/util/money_formatter_util.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+import 'package:khqr_sdk/src/util/number_formatter_util.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
 
 /// KhqrCardWidget is a widget that displays a KHQR card
 class KhqrCardWidget extends StatefulWidget {
@@ -20,8 +21,10 @@ class KhqrCardWidget extends StatefulWidget {
     this.keepIntegerDecimal = false,
     this.duration,
     this.showEmptyAmount = true,
+    this.showCurrencySymbol = true,
     this.isDark,
     this.showShadow = true,
+    this.expiredWidget,
     this.onRetry,
   });
 
@@ -52,11 +55,17 @@ class KhqrCardWidget extends StatefulWidget {
   /// Whether to show the empty amount
   final bool showEmptyAmount;
 
+  /// Whether to show currency symbol
+  final bool showCurrencySymbol;
+
   /// Whether to use dark mode
   final bool? isDark;
 
   /// Whether to show shadow
   final bool showShadow;
+
+  /// The widget to show when qr code is expired
+  final Widget? expiredWidget;
 
   /// The callback when retry
   final Function()? onRetry;
@@ -71,10 +80,9 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
   double get _headerHeight => _height * 0.12;
   double get _receiverNameFontSize => _height * 0.03;
   double get _amountFontSize => _height * 0.065;
-  double get _currencyFontSize => _height * 0.03;
   EdgeInsets get _qrMargin => EdgeInsets.symmetric(
-    horizontal: (_height * 0.1),
-    vertical: (_height * 0.08),
+    horizontal: _height * 0.065,
+    vertical: _height * 0.06,
   );
 
   Duration? _duration;
@@ -82,7 +90,7 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
   final _bakongBraveryRed = const Color.fromRGBO(225, 35, 46, 1);
   final _ravenDarkBlack = const Color.fromRGBO(0, 0, 0, 1);
   final _pearlWhite = const Color.fromRGBO(255, 255, 255, 1);
-  final _backgroundDark = Color(0xff1d1d1d);
+  final _backgroundDark = const Color(0xff1d1d1d);
   final _fontFamily = 'NunitoSans';
   final _durationStream = StreamController<Duration>.broadcast();
 
@@ -93,11 +101,11 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
     offset: const Offset(0, 0),
   );
 
-  Image get _usdSymbol =>
-      Image.asset('assets/images/dollar_symbol.png', package: 'khqr_sdk');
+  AssetImage get _usdIcon =>
+      const AssetImage('assets/images/dollar_symbol.png', package: 'khqr_sdk');
 
-  Image get _khrSymbol =>
-      Image.asset('assets/images/riel_symbol.png', package: 'khqr_sdk');
+  AssetImage get _khrIcon =>
+      const AssetImage('assets/images/riel_symbol.png', package: 'khqr_sdk');
 
   @override
   void initState() {
@@ -111,6 +119,23 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
   void dispose() {
     _durationStream.close();
     super.dispose();
+  }
+
+  Widget _buildQrView() {
+    final qrCode = QrCode(10, QrErrorCorrectLevel.M)..addData(widget.qr);
+
+    final decoration = PrettyQrDecoration(
+      image: PrettyQrDecorationImage(
+        scale: 0.18,
+        position: PrettyQrDecorationImagePosition.foreground,
+        image: widget.currency == KhqrCurrency.khr ? _khrIcon : _usdIcon,
+      ),
+      shape: const PrettyQrSmoothSymbol(roundFactor: 0.1),
+      quietZone: const PrettyQrQuietZone.pixels(4.0),
+      background: Colors.white,
+    );
+
+    return PrettyQrView(qrImage: QrImage(qrCode), decoration: decoration);
   }
 
   @override
@@ -128,26 +153,6 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
         qrTextColor = _ravenDarkBlack;
       }
     }
-
-    final qrImageView = Stack(
-      alignment: Alignment.center,
-      children: [
-        Center(
-          child: QrImageView(
-            padding: widget.padding ?? EdgeInsets.zero,
-            data: widget.qr,
-            version: QrVersions.auto,
-            errorCorrectionLevel: QrErrorCorrectLevel.H,
-            backgroundColor: _pearlWhite,
-          ),
-        ),
-        SizedBox(
-          width: _height * 0.08,
-          height: _height * 0.08,
-          child: widget.currency == KhqrCurrency.khr ? _khrSymbol : _usdSymbol,
-        ),
-      ],
-    );
 
     return Center(
       child: Column(
@@ -195,14 +200,14 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
                             Container(
                               alignment: Alignment.topLeft,
                               padding: EdgeInsets.symmetric(
-                                horizontal: _height * 0.1,
+                                horizontal: _height * 0.08,
                               ),
                               //* Receiver Name
-                              child: Text(
+                              child: AutoSizeText(
                                 widget.receiverName,
                                 textDirection: TextDirection.ltr,
                                 textAlign: TextAlign.left,
-                                maxLines: 1,
+                                maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontFamily: _fontFamily,
@@ -212,48 +217,58 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
                                 ),
                               ),
                             ),
-                            Container(
-                              alignment: Alignment.topLeft,
+                            Padding(
                               padding: EdgeInsets.symmetric(
-                                horizontal: _height * 0.1,
+                                horizontal: _height * 0.08,
                               ),
                               //* Amount
                               child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  widget.amount > 0 || widget.showEmptyAmount
-                                      ? Text(
-                                        MoneyFormatterUtil.formatThousandNumber(
-                                          widget.amount,
-                                          keepDecimal:
-                                              widget.keepIntegerDecimal,
-                                        ),
-                                        style: TextStyle(
-                                          fontFamily: _fontFamily,
-                                          package: 'khqr_sdk',
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: _amountFontSize,
-                                          color: qrTextColor,
-                                        ),
-                                      )
-                                      : Text(
-                                        '',
-                                        style: TextStyle(
-                                          fontSize: _amountFontSize,
-                                        ),
-                                      ),
+                                  //* Currency symbol
+                                  widget.showCurrencySymbol
+                                      ? widget.currency == KhqrCurrency.khr
+                                          ? SvgPicture.asset(
+                                            'assets/svg/riel.svg',
+                                            package: 'khqr_sdk',
+                                            height: _amountFontSize * 0.86,
+                                            colorFilter: ColorFilter.mode(
+                                              qrTextColor,
+                                              BlendMode.srcIn,
+                                            ),
+                                          )
+                                          : SvgPicture.asset(
+                                            'assets/svg/dollar.svg',
+                                            package: 'khqr_sdk',
+                                            height: _amountFontSize * 0.86,
+                                            colorFilter: ColorFilter.mode(
+                                              qrTextColor,
+                                              BlendMode.srcIn,
+                                            ),
+                                          )
+                                      : const SizedBox.shrink(),
                                   Visibility(
-                                    visible:
-                                        widget.amount > 0 ||
-                                        widget.showEmptyAmount,
-                                    child: SizedBox(width: _height * 0.02),
+                                    visible: widget.showCurrencySymbol,
+                                    child: const SizedBox(width: 4.0),
                                   ),
-                                  Text(
-                                    widget.currency.name.toUpperCase(),
-                                    style: TextStyle(
-                                      fontFamily: _fontFamily,
-                                      fontSize: _currencyFontSize,
-                                      color: qrTextColor,
+                                  //* Amount
+                                  Expanded(
+                                    child: AutoSizeText(
+                                      widget.amount > 0 ||
+                                              widget.showEmptyAmount
+                                          ? NumberFormatterUtil.formatThousandNumber(
+                                            widget.amount,
+                                            alwaysShowDecimal:
+                                                widget.keepIntegerDecimal,
+                                          )
+                                          : '',
+                                      maxLines: 1,
+                                      style: TextStyle(
+                                        fontFamily: _fontFamily,
+                                        package: 'khqr_sdk',
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: _amountFontSize,
+                                        color: qrTextColor,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -273,10 +288,10 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
                                 alignment: Alignment.center,
                                 child: StreamBuilder<Duration>(
                                   stream: _durationStream.stream,
-                                  builder: (context, snapshot) {
-                                    final data = snapshot.data;
+                                  builder: (context, duration) {
+                                    final data = duration.data;
                                     return data == null || data.inSeconds > 0
-                                        ? qrImageView
+                                        ? _buildQrView()
                                         : MouseRegion(
                                           cursor: SystemMouseCursors.click,
                                           child: GestureDetector(
@@ -286,7 +301,7 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
                                             },
                                             child: const Icon(
                                               Icons.restart_alt,
-                                              size: 50,
+                                              size: 50.0,
                                             ),
                                           ),
                                         );
@@ -310,10 +325,11 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
               stream: _durationStream.stream,
               builder: (context, snapshot) {
                 if (snapshot.data?.inSeconds == 0) {
-                  return Text(
-                    'QR was expired',
-                    style: TextStyle(color: _bakongBraveryRed),
-                  );
+                  return widget.expiredWidget ??
+                      Text(
+                        "QR will be expired",
+                        style: TextStyle(color: _bakongBraveryRed),
+                      );
                 }
                 return Text(
                   "${_duration?.inMinutes.remainder(60).toString().padLeft(1, '0')}:${_duration?.inSeconds.remainder(60).toString().padLeft(2, '0')} | QR will be expired",
@@ -383,8 +399,8 @@ class _KhqrCardHeaderClipper extends CustomClipper<Path> {
     final width = size.width;
     final height = size.height;
 
-    path.lineTo(width - (width * 0.14 * aspectRatio), 0);
-    path.lineTo(width, height * 0.11 * aspectRatio);
+    path.lineTo(width - (width * 0.12 * aspectRatio), 0);
+    path.lineTo(width, height * 0.08 * aspectRatio);
     path.lineTo(height, 0);
     path.lineTo(width, height);
     path.lineTo(0, height);
@@ -392,5 +408,5 @@ class _KhqrCardHeaderClipper extends CustomClipper<Path> {
   }
 
   @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => true;
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
