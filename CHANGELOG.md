@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.1
+- Added new currency symbols
+- Improvement KHQR Card Widget
+- Updated dependencies
+
 ## 1.1.0
 - Added new feature to `Decode Non-KHQR`
 - Added expire timestamp for `Dynamic QR`

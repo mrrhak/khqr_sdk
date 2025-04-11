@@ -16,7 +16,7 @@ class _KhqrCardScreenState extends State<KhqrCardScreen> {
   String? khqrContent;
   String? errorMessage;
 
-  final String _receiverName = 'Kimhak';
+  final String _receiverName = 'LONG KIMHAK';
   final KhqrCurrency _receiverCurrency = KhqrCurrency.khr;
   final double _amount = 0.00;
 
