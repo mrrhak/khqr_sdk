@@ -4,7 +4,7 @@ maintainer: Mrr Hak
 repository: https://github.com/mrrhak/khqr_sdk
 issue_tracker: https://github.com/mrrhak/khqr_sdk/issues
 homepage: https://mrrhak.com
-version: 1.1.1
+version: 1.1.2
 funding:
   - https://ko-fi.com/mrrhak
 screenshots:
@@ -30,8 +30,7 @@ dependencies:
   json_annotation: ^4.9.0
   plugin_platform_interface: ^2.1.8
   pretty_qr_code: ^3.4.0
-  flutter_svg: ^2.0.17
-  auto_size_text: ^3.0.0
+  flutter_svg: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -39,7 +38,7 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   build_runner: ^2.4.15
   freezed: ^3.0.6
-  json_serializable: ^6.9.4
+  json_serializable: ^6.9.5
 
 flutter:
   plugin:
