@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.2
+- Adjust font size, QR quiet zone, and container decoration in `KhqrCardWidget`
+- Updated dependencies
+
 ## 1.1.1
 - Added new currency symbols
 - Improvement KHQR Card Widget
