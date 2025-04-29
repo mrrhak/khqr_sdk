@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.3
+- Add auto size text for dynamic text resizing in `KhqrCardWidget`
+- Update `KhqrCardWidget` switching theme mode base on app theme mode
+
 ## 1.1.2
 - Adjust font size, QR quiet zone, and container decoration in `KhqrCardWidget`
 - Updated dependencies

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:khqr_sdk/src/common/enum.dart';
@@ -143,19 +144,10 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = MediaQuery.platformBrightnessOf(context) == Brightness.dark;
-    Color qrBackgroundColor = isDark ? _backgroundDark : _pearlWhite;
-    Color qrTextColor = isDark ? _pearlWhite : _ravenDarkBlack;
-
-    if (widget.isDark != null) {
-      if (widget.isDark!) {
-        qrBackgroundColor = _backgroundDark;
-        qrTextColor = _pearlWhite;
-      } else {
-        qrBackgroundColor = _pearlWhite;
-        qrTextColor = _ravenDarkBlack;
-      }
-    }
+    final isDark =
+        widget.isDark ?? Theme.of(context).brightness == Brightness.dark;
+    final qrBackgroundColor = isDark ? _backgroundDark : _pearlWhite;
+    final qrTextColor = isDark ? _pearlWhite : _ravenDarkBlack;
 
     return Center(
       child: Column(
@@ -206,7 +198,7 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
                                 horizontal: _height * 0.08,
                               ),
                               //* Receiver Name
-                              child: Text(
+                              child: AutoSizeText(
                                 widget.receiverName,
                                 textDirection: TextDirection.ltr,
                                 textAlign: TextAlign.left,
@@ -256,7 +248,7 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
                                   ),
                                   //* Amount
                                   Expanded(
-                                    child: Text(
+                                    child: AutoSizeText(
                                       widget.amount > 0 ||
                                               widget.showEmptyAmount
                                           ? NumberFormatterUtil.formatThousandNumber(
