@@ -251,6 +251,9 @@ public class KhqrSdkPlugin: NSObject, FlutterPlugin {
         if newKey == "timestamp" {
           newKey = "creationTimestamp"
         }
+        if newKey == "merchantAccountId" {
+          newKey = "merchantId"
+        }
         dict[newKey] = value
       }
     }
