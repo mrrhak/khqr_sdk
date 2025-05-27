@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -27,6 +26,8 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
         bakongAccountId: 'kimhak@dev',
         merchantName: 'Kimhak',
         accountInformation: '123456789',
+        currency: KhqrCurrency.khr,
+        amount: 0,
       );
       final individual = await _khqrSdk.generateIndividual(info);
       if (!mounted) return;
@@ -103,7 +104,8 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
         acquiringBank: 'Dev Bank',
         merchantId: '123456',
         merchantName: 'Kimhak',
-        amount: 1,
+        currency: KhqrCurrency.usd,
+        amount: 100.0,
         expirationTimestamp: expire,
       );
       final merchant = await _khqrSdk.generateMerchant(info);
@@ -456,42 +458,41 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
               ),
             ),
             const SizedBox(height: 16.0),
-            if (Platform.isIOS)
-              ElevatedButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      final textController = TextEditingController();
-                      return AlertDialog(
-                        title: const Text('Decode Non KHQR'),
-                        content: TextField(
-                          controller: textController,
-                          decoration: const InputDecoration(
-                            label: Text('Enter Non KHQR code'),
-                          ),
+            ElevatedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    final textController = TextEditingController();
+                    return AlertDialog(
+                      title: const Text('Decode Non KHQR'),
+                      content: TextField(
+                        controller: textController,
+                        decoration: const InputDecoration(
+                          label: Text('Enter Non KHQR code'),
                         ),
-                        actions: [
-                          TextButton(
-                            child: const Text('Decode'),
-                            onPressed: () async {
-                              decodeNonKhqr(textController.text);
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
-                style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all(Colors.pink),
-                ),
-                child: const Text(
-                  'Decode Non KHQR',
-                  style: TextStyle(color: Colors.white),
-                ),
+                      ),
+                      actions: [
+                        TextButton(
+                          child: const Text('Decode'),
+                          onPressed: () async {
+                            decodeNonKhqr(textController.text);
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.all(Colors.pink),
               ),
+              child: const Text(
+                'Decode Non KHQR',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
             const SizedBox(height: 100),
           ],
         ),

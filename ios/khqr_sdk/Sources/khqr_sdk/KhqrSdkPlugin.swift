@@ -51,6 +51,7 @@ public class KhqrSdkPlugin: NSObject, FlutterPlugin {
     info?.terminalLabel = arguments["terminalLabel"] as? String
     info?.purposeOfTransaction = arguments["purposeOfTransaction"] as? String
     info?.upiAccountInformation = arguments["upiAccountInformation"] as? String
+    info?.merchantCategoryCode = arguments["merchantCategoryCode"] as? String
     info?.merchantAlternateLanguagePreference =
       arguments["merchantAlternateLanguagePreference"] as? String
     info?.merchantNameAlternateLanguage = arguments["merchantNameAlternateLanguage"] as? String
@@ -94,6 +95,7 @@ public class KhqrSdkPlugin: NSObject, FlutterPlugin {
     info?.terminalLabel = arguments["terminalLabel"] as? String
     info?.purposeOfTransaction = arguments["purposeOfTransaction"] as? String
     info?.upiAccountInformation = arguments["upiAccountInformation"] as? String
+    info?.merchantCategoryCode = arguments["merchantCategoryCode"] as? String
     info?.merchantAlternateLanguagePreference =
       arguments["merchantAlternateLanguagePreference"] as? String
     info?.merchantNameAlternateLanguage = arguments["merchantNameAlternateLanguage"] as? String
@@ -247,6 +249,9 @@ public class KhqrSdkPlugin: NSObject, FlutterPlugin {
         var newKey = key
         if newKey == "bakongAccountID" {
           newKey = "bakongAccountId"
+        }
+        if newKey == "merchantAccountId" {
+          newKey = "merchantId"
         }
         if newKey == "timestamp" {
           newKey = "creationTimestamp"

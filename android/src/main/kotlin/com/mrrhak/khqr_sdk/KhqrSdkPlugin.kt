@@ -18,6 +18,7 @@ import kh.gov.nbc.bakong_khqr.model.KHQRCurrency
 import kh.gov.nbc.bakong_khqr.model.KHQRData
 import kh.gov.nbc.bakong_khqr.model.KHQRDecodeData
 import kh.gov.nbc.bakong_khqr.model.KHQRDeepLinkData
+import kh.gov.nbc.bakong_khqr.model.KHQRHashMap
 import kh.gov.nbc.bakong_khqr.model.KHQRResponse
 import kh.gov.nbc.bakong_khqr.model.MerchantInfo
 import kh.gov.nbc.bakong_khqr.model.SourceInfo
@@ -79,6 +80,7 @@ class KhqrSdkPlugin: FlutterPlugin, MethodCallHandler {
     val merchantAlternateLanguagePreference: String? = call.argument("merchantAlternateLanguagePreference")
     val merchantNameAlternateLanguage: String? = call.argument("merchantNameAlternateLanguage")
     val merchantCityAlternateLanguage: String? = call.argument("merchantCityAlternateLanguage")
+    val merchantCategoryCode: String? = call.argument("merchantCategoryCode")
     val expirationTimestamp: Long? = call.argument("expirationTimestamp")
 
     val individualInfo: IndividualInfo = IndividualInfo().apply {
@@ -98,6 +100,7 @@ class KhqrSdkPlugin: FlutterPlugin, MethodCallHandler {
       this.merchantAlternateLanguagePreference = merchantAlternateLanguagePreference
       this.merchantNameAlternateLanguage = merchantNameAlternateLanguage
       this.merchantCityAlternateLanguage = merchantCityAlternateLanguage
+      this.merchantCategoryCode = merchantCategoryCode
       this.expirationTimestamp = expirationTimestamp
     }
 
@@ -133,6 +136,7 @@ class KhqrSdkPlugin: FlutterPlugin, MethodCallHandler {
     val merchantAlternateLanguagePreference: String? = call.argument("merchantAlternateLanguagePreference")
     val merchantNameAlternateLanguage: String? = call.argument("merchantNameAlternateLanguage")
     val merchantCityAlternateLanguage: String? = call.argument("merchantCityAlternateLanguage")
+    val merchantCategoryCode: String? = call.argument("merchantCategoryCode")
     val expirationTimestamp: Long? = call.argument("expirationTimestamp")
 
     val merchantInfo: MerchantInfo = MerchantInfo().apply {
@@ -152,6 +156,7 @@ class KhqrSdkPlugin: FlutterPlugin, MethodCallHandler {
       this.merchantAlternateLanguagePreference = merchantAlternateLanguagePreference
       this.merchantNameAlternateLanguage = merchantNameAlternateLanguage
       this.merchantCityAlternateLanguage = merchantCityAlternateLanguage
+      this.merchantCategoryCode = merchantCategoryCode
       this.expirationTimestamp = expirationTimestamp
     }
 
@@ -188,7 +193,7 @@ class KhqrSdkPlugin: FlutterPlugin, MethodCallHandler {
     }
 
     val qrCode: String? =  call.argument("qrCode")
-
+    
     val response: KHQRResponse<KHQRDecodeData> = BakongKHQR.decode(qrCode)
     val gson: Gson = Gson()
     var jsonString: String = gson.toJson(response.data)
@@ -203,12 +208,8 @@ class KhqrSdkPlugin: FlutterPlugin, MethodCallHandler {
     }
 
     val qrCode: String? =  call.argument("qrCode")
-    result.error("DECODE_ERROR", "Decode Non-KHQR not yet available in Android platform", null)
-
-//    val response: KHQRResponse<KHQREMVQRData> = BakongKHQR.decodeNonKhqr(qrCode)
-//    val gson: Gson = Gson()
-//    var jsonString: String = gson.toJson(response.data)
-//    result.success(jsonString)
+    val response: KHQRResponse<KHQRHashMap> = BakongKHQR.decodeNonKHQR(qrCode)
+    result.success(response.data)
   }
 
   private fun generateDeepLink(call: MethodCall, result: Result) {
