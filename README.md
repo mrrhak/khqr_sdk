@@ -190,6 +190,8 @@ final info = IndividualInfo(
   bakongAccountId: 'kimhak@dev',
   merchantName: 'Kimhak',
   accountInformation: '123456789',
+  currency: KhqrCurrency.khr,
+  amount: 0,
 );
 final khqrData = await _khqrSdk.generateIndividual(info);
 ```
@@ -201,6 +203,8 @@ final info = MerchantInfo(
   acquiringBank: 'Dev Bank',
   merchantId: '123456',
   merchantName: 'Kimhak',
+  currency: KhqrCurrency.usd,
+  amount: 0,
 );
 final khqrData = await _khqrSdk.generateMerchant(info);
 ```
@@ -216,7 +220,8 @@ final khqrData = await _khqrSdk.generateMerchant(info);
 >    acquiringBank: 'Dev Bank',
 >    merchantId: '123456',
 >    merchantName: 'Kimhak',
->    amount: 1,
+>    currency: KhqrCurrency.usd,
+>    amount: 100,
 >    expirationTimestamp: expire,
 > );
 >```
