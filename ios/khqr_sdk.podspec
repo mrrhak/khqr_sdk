@@ -18,7 +18,7 @@ KHQR is created for retail payment in Cambodia and Cross-Border payment within a
   s.documentation_url = 'https://pub.dev/packages/khqr_sdk'
   s.source_files = 'khqr_sdk/Sources/khqr_sdk/**/*.swift'
   s.dependency 'Flutter'
-  s.dependency 'BakongKHQR', '= 1.0.0.16'
+  s.dependency 'BakongKHQR', '= 1.0.0.17'
   s.platform = :ios, '11.0'
 
   # Flutter.framework does not contain a i386 slice.

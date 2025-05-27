@@ -79,8 +79,8 @@ The standardization of KHQR code specifications will help promote wider use of m
 - [x] Android
 
 ## Native KHQR SDK Version
-- iOS using **`BakongKHQR`** (v1.0.0.16)
-- Android using **`kh.gov.nbc.bakong_khqr:sdk-java:1.0.0.14`**
+- iOS using **`BakongKHQR (1.0.0.17)`**
+- Android using **`kh.gov.nbc.bakong_khqr:sdk-java:1.0.0.15`**
 
 ## Features Supported
 
@@ -93,7 +93,7 @@ See the example app for detailed implementation information.
 | Generate Deeplink   |    ✔    |    ✔    |
 | Verify              |    ✔    |    ✔    |
 | Decode              |    ✔    |    ✔    |
-| Decode Non-KHQR     |    ✘    |    ✔    |
+| Decode Non-KHQR     |    ✔    |    ✔    |
 | KHQR Card Widget    |    ✔    |    ✔    |
 
 

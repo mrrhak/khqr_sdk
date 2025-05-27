@@ -14,7 +14,7 @@ _MerchantInfo _$MerchantInfoFromJson(Map<String, dynamic> json) =>
       currency:
           $enumDecodeNullable(_$KhqrCurrencyEnumMap, json['currency']) ??
           KhqrCurrency.khr,
-      amount: (json['amount'] as num?)?.toDouble() ?? 0,
+      amount: (json['amount'] as num).toDouble(),
       merchantName: json['merchantName'] as String,
       merchantCity: json['merchantCity'] as String? ?? 'Phnom Penh',
       billNumber: json['billNumber'] as String?,
@@ -29,6 +29,7 @@ _MerchantInfo _$MerchantInfoFromJson(Map<String, dynamic> json) =>
           json['merchantNameAlternateLanguage'] as String?,
       merchantCityAlternateLanguage:
           json['merchantCityAlternateLanguage'] as String?,
+      merchantCategoryCode: json['merchantCategoryCode'] as String? ?? '5999',
       expirationTimestamp: (json['expirationTimestamp'] as num?)?.toInt(),
     );
 
@@ -37,7 +38,7 @@ Map<String, dynamic> _$MerchantInfoToJson(_MerchantInfo instance) =>
       'bakongAccountId': instance.bakongAccountId,
       'merchantId': instance.merchantId,
       'acquiringBank': instance.acquiringBank,
-      'currency': _$KhqrCurrencyEnumMap[instance.currency]!,
+      'currency': _$KhqrCurrencyEnumMap[instance.currency],
       'amount': instance.amount,
       'merchantName': instance.merchantName,
       'merchantCity': instance.merchantCity,
@@ -51,6 +52,7 @@ Map<String, dynamic> _$MerchantInfoToJson(_MerchantInfo instance) =>
           instance.merchantAlternateLanguagePreference,
       'merchantNameAlternateLanguage': instance.merchantNameAlternateLanguage,
       'merchantCityAlternateLanguage': instance.merchantCityAlternateLanguage,
+      'merchantCategoryCode': instance.merchantCategoryCode,
       'expirationTimestamp': instance.expirationTimestamp,
     };
 
