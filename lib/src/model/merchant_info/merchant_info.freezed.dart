@@ -71,8 +71,8 @@ class _$MerchantInfoCopyWithImpl<$Res>
 bakongAccountId: null == bakongAccountId ? _self.bakongAccountId : bakongAccountId // ignore: cast_nullable_to_non_nullable
 as String,merchantId: null == merchantId ? _self.merchantId : merchantId // ignore: cast_nullable_to_non_nullable
 as String,acquiringBank: null == acquiringBank ? _self.acquiringBank : acquiringBank // ignore: cast_nullable_to_non_nullable
-as String,currency: null == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
-as KhqrCurrency,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
+as String,currency: freezed == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
+as KhqrCurrency?,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as double,merchantName: null == merchantName ? _self.merchantName : merchantName // ignore: cast_nullable_to_non_nullable
 as String,merchantCity: null == merchantCity ? _self.merchantCity : merchantCity // ignore: cast_nullable_to_non_nullable
 as String,billNumber: freezed == billNumber ? _self.billNumber : billNumber // ignore: cast_nullable_to_non_nullable
@@ -174,8 +174,8 @@ class __$MerchantInfoCopyWithImpl<$Res>
 bakongAccountId: null == bakongAccountId ? _self.bakongAccountId : bakongAccountId // ignore: cast_nullable_to_non_nullable
 as String,merchantId: null == merchantId ? _self.merchantId : merchantId // ignore: cast_nullable_to_non_nullable
 as String,acquiringBank: null == acquiringBank ? _self.acquiringBank : acquiringBank // ignore: cast_nullable_to_non_nullable
-as String,currency: null == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
-as KhqrCurrency,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
+as String,currency: freezed == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
+as KhqrCurrency?,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as double,merchantName: null == merchantName ? _self.merchantName : merchantName // ignore: cast_nullable_to_non_nullable
 as String,merchantCity: null == merchantCity ? _self.merchantCity : merchantCity // ignore: cast_nullable_to_non_nullable
 as String,billNumber: freezed == billNumber ? _self.billNumber : billNumber // ignore: cast_nullable_to_non_nullable
