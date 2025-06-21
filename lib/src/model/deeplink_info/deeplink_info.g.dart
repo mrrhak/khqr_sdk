@@ -10,9 +10,10 @@ _DeeplinkInfo _$DeeplinkInfoFromJson(Map<String, dynamic> json) =>
     _DeeplinkInfo(
       qr: json['qr'] as String,
       url: json['url'] as String,
-      sourceInfo: json['sourceInfo'] == null
-          ? null
-          : SourceInfo.fromJson(json['sourceInfo'] as Map<String, dynamic>),
+      sourceInfo:
+          json['sourceInfo'] == null
+              ? null
+              : SourceInfo.fromJson(json['sourceInfo'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$DeeplinkInfoToJson(_DeeplinkInfo instance) =>
