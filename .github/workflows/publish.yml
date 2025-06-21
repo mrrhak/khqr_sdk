@@ -20,4 +20,4 @@ jobs:
           force: false
           suppressBuildRunner: false
           dryRunOnly: false
-          skipTests: true
+          skipTests: false

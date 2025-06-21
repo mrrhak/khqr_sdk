@@ -38,7 +38,7 @@ Map<String, dynamic> _$MerchantInfoToJson(_MerchantInfo instance) =>
       'bakongAccountId': instance.bakongAccountId,
       'merchantId': instance.merchantId,
       'acquiringBank': instance.acquiringBank,
-      'currency': _$KhqrCurrencyEnumMap[instance.currency]!,
+      'currency': _$KhqrCurrencyEnumMap[instance.currency],
       'amount': instance.amount,
       'merchantName': instance.merchantName,
       'merchantCity': instance.merchantCity,

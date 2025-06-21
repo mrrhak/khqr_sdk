@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.1
+- Fixed(generated_file): fixed `KhqrCurrency` enum value on MerchantInfo class
+
 ## 1.3.0
 - Feat(khqr_card_widget): Add new `isError` and `isLoading` state
 - Feat(khqr_card_widget): Add new `Retry` button display if `isError` true
