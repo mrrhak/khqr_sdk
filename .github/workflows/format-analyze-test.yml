@@ -19,6 +19,12 @@ jobs:
           channel: stable
           flutter-version: 3.32.4
 
+      - name: Clean pubspec.lock and caches
+        run: |
+          rm -f pubspec.lock
+          rm -rf .dart_tool
+          rm -rf ~/.pub-cache
+
       - name: Install Dependencies
         run: flutter pub get
 
