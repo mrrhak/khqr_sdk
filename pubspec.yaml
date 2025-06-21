@@ -19,7 +19,7 @@ topics:
   - bakong
 
 environment:
-  sdk: ">=3.8.0"
+  sdk: ^3.7.2
   flutter: '>=3.3.0'
 
 dependencies:
