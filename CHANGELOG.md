@@ -7,6 +7,7 @@
 - Refactor(khqr_card_widget): refactor time expire display
 - Bumped(flutter_lints): bumped flutter_lints from `v5.0.0` to `v6.0.0`
 - Bumped(flutter_svg): bumped flutter_lints from `v2.1.0` to `v2.2.0`
+- Bumped(build_runner): bumped flutter_lints from `v2.4.15` to `v2.5.3`
 
 ## 1.2.0
 - Added new feature to `Decode Non-KHQR` on Android platform
