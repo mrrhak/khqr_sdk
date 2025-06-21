@@ -12,11 +12,12 @@ include: package:flutter_lints/flutter.yaml
 # formatter:
 #   page_width: 100
 
-exclude:
+analyzer:
+  exclude:
     - 'test'
     - 'example'
-    - '**.g.dart'
-    - '**.freezed.dart'
+    - '**/*.g.dart'
+    - '**/*.freezed.dart'
 
 linter:
   # The lint rules applied to this project can be customized in the
