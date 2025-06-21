@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MerchantInfo {
 
- String get bakongAccountId; String get merchantId; String get acquiringBank; KhqrCurrency? get currency; double get amount; String get merchantName; String get merchantCity; String? get billNumber; String? get mobileNumber; String? get storeLabel; String? get terminalLabel; String? get purposeOfTransaction; String? get upiAccountInformation; String? get merchantAlternateLanguagePreference; String? get merchantNameAlternateLanguage; String? get merchantCityAlternateLanguage; String get merchantCategoryCode; int? get expirationTimestamp;
+ String get bakongAccountId; String get merchantId; String get acquiringBank; KhqrCurrency get currency; double get amount; String get merchantName; String get merchantCity; String? get billNumber; String? get mobileNumber; String? get storeLabel; String? get terminalLabel; String? get purposeOfTransaction; String? get upiAccountInformation; String? get merchantAlternateLanguagePreference; String? get merchantNameAlternateLanguage; String? get merchantCityAlternateLanguage; String get merchantCategoryCode; int? get expirationTimestamp;
 /// Create a copy of MerchantInfo
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $MerchantInfoCopyWith<$Res>  {
   factory $MerchantInfoCopyWith(MerchantInfo value, $Res Function(MerchantInfo) _then) = _$MerchantInfoCopyWithImpl;
 @useResult
 $Res call({
- String bakongAccountId, String merchantId, String acquiringBank, KhqrCurrency? currency, double amount, String merchantName, String merchantCity, String? billNumber, String? mobileNumber, String? storeLabel, String? terminalLabel, String? purposeOfTransaction, String? upiAccountInformation, String? merchantAlternateLanguagePreference, String? merchantNameAlternateLanguage, String? merchantCityAlternateLanguage, String merchantCategoryCode, int? expirationTimestamp
+ String bakongAccountId, String merchantId, String acquiringBank, KhqrCurrency currency, double amount, String merchantName, String merchantCity, String? billNumber, String? mobileNumber, String? storeLabel, String? terminalLabel, String? purposeOfTransaction, String? upiAccountInformation, String? merchantAlternateLanguagePreference, String? merchantNameAlternateLanguage, String? merchantCityAlternateLanguage, String merchantCategoryCode, int? expirationTimestamp
 });
 
 
@@ -66,13 +66,13 @@ class _$MerchantInfoCopyWithImpl<$Res>
 
 /// Create a copy of MerchantInfo
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? bakongAccountId = null,Object? merchantId = null,Object? acquiringBank = null,Object? currency = freezed,Object? amount = null,Object? merchantName = null,Object? merchantCity = null,Object? billNumber = freezed,Object? mobileNumber = freezed,Object? storeLabel = freezed,Object? terminalLabel = freezed,Object? purposeOfTransaction = freezed,Object? upiAccountInformation = freezed,Object? merchantAlternateLanguagePreference = freezed,Object? merchantNameAlternateLanguage = freezed,Object? merchantCityAlternateLanguage = freezed,Object? merchantCategoryCode = null,Object? expirationTimestamp = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? bakongAccountId = null,Object? merchantId = null,Object? acquiringBank = null,Object? currency = null,Object? amount = null,Object? merchantName = null,Object? merchantCity = null,Object? billNumber = freezed,Object? mobileNumber = freezed,Object? storeLabel = freezed,Object? terminalLabel = freezed,Object? purposeOfTransaction = freezed,Object? upiAccountInformation = freezed,Object? merchantAlternateLanguagePreference = freezed,Object? merchantNameAlternateLanguage = freezed,Object? merchantCityAlternateLanguage = freezed,Object? merchantCategoryCode = null,Object? expirationTimestamp = freezed,}) {
   return _then(_self.copyWith(
 bakongAccountId: null == bakongAccountId ? _self.bakongAccountId : bakongAccountId // ignore: cast_nullable_to_non_nullable
 as String,merchantId: null == merchantId ? _self.merchantId : merchantId // ignore: cast_nullable_to_non_nullable
 as String,acquiringBank: null == acquiringBank ? _self.acquiringBank : acquiringBank // ignore: cast_nullable_to_non_nullable
-as String,currency: freezed == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
-as KhqrCurrency?,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
+as String,currency: null == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
+as KhqrCurrency,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as double,merchantName: null == merchantName ? _self.merchantName : merchantName // ignore: cast_nullable_to_non_nullable
 as String,merchantCity: null == merchantCity ? _self.merchantCity : merchantCity // ignore: cast_nullable_to_non_nullable
 as String,billNumber: freezed == billNumber ? _self.billNumber : billNumber // ignore: cast_nullable_to_non_nullable
@@ -103,7 +103,7 @@ class _MerchantInfo implements MerchantInfo {
 @override final  String bakongAccountId;
 @override final  String merchantId;
 @override final  String acquiringBank;
-@override@JsonKey() final  KhqrCurrency? currency;
+@override@JsonKey() final  KhqrCurrency currency;
 @override final  double amount;
 @override final  String merchantName;
 @override@JsonKey() final  String merchantCity;
@@ -152,7 +152,7 @@ abstract mixin class _$MerchantInfoCopyWith<$Res> implements $MerchantInfoCopyWi
   factory _$MerchantInfoCopyWith(_MerchantInfo value, $Res Function(_MerchantInfo) _then) = __$MerchantInfoCopyWithImpl;
 @override @useResult
 $Res call({
- String bakongAccountId, String merchantId, String acquiringBank, KhqrCurrency? currency, double amount, String merchantName, String merchantCity, String? billNumber, String? mobileNumber, String? storeLabel, String? terminalLabel, String? purposeOfTransaction, String? upiAccountInformation, String? merchantAlternateLanguagePreference, String? merchantNameAlternateLanguage, String? merchantCityAlternateLanguage, String merchantCategoryCode, int? expirationTimestamp
+ String bakongAccountId, String merchantId, String acquiringBank, KhqrCurrency currency, double amount, String merchantName, String merchantCity, String? billNumber, String? mobileNumber, String? storeLabel, String? terminalLabel, String? purposeOfTransaction, String? upiAccountInformation, String? merchantAlternateLanguagePreference, String? merchantNameAlternateLanguage, String? merchantCityAlternateLanguage, String merchantCategoryCode, int? expirationTimestamp
 });
 
 
@@ -169,13 +169,13 @@ class __$MerchantInfoCopyWithImpl<$Res>
 
 /// Create a copy of MerchantInfo
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? bakongAccountId = null,Object? merchantId = null,Object? acquiringBank = null,Object? currency = freezed,Object? amount = null,Object? merchantName = null,Object? merchantCity = null,Object? billNumber = freezed,Object? mobileNumber = freezed,Object? storeLabel = freezed,Object? terminalLabel = freezed,Object? purposeOfTransaction = freezed,Object? upiAccountInformation = freezed,Object? merchantAlternateLanguagePreference = freezed,Object? merchantNameAlternateLanguage = freezed,Object? merchantCityAlternateLanguage = freezed,Object? merchantCategoryCode = null,Object? expirationTimestamp = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? bakongAccountId = null,Object? merchantId = null,Object? acquiringBank = null,Object? currency = null,Object? amount = null,Object? merchantName = null,Object? merchantCity = null,Object? billNumber = freezed,Object? mobileNumber = freezed,Object? storeLabel = freezed,Object? terminalLabel = freezed,Object? purposeOfTransaction = freezed,Object? upiAccountInformation = freezed,Object? merchantAlternateLanguagePreference = freezed,Object? merchantNameAlternateLanguage = freezed,Object? merchantCityAlternateLanguage = freezed,Object? merchantCategoryCode = null,Object? expirationTimestamp = freezed,}) {
   return _then(_MerchantInfo(
 bakongAccountId: null == bakongAccountId ? _self.bakongAccountId : bakongAccountId // ignore: cast_nullable_to_non_nullable
 as String,merchantId: null == merchantId ? _self.merchantId : merchantId // ignore: cast_nullable_to_non_nullable
 as String,acquiringBank: null == acquiringBank ? _self.acquiringBank : acquiringBank // ignore: cast_nullable_to_non_nullable
-as String,currency: freezed == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
-as KhqrCurrency?,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
+as String,currency: null == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
+as KhqrCurrency,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as double,merchantName: null == merchantName ? _self.merchantName : merchantName // ignore: cast_nullable_to_non_nullable
 as String,merchantCity: null == merchantCity ? _self.merchantCity : merchantCity // ignore: cast_nullable_to_non_nullable
 as String,billNumber: freezed == billNumber ? _self.billNumber : billNumber // ignore: cast_nullable_to_non_nullable
