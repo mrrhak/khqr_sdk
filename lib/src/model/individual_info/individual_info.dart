@@ -13,7 +13,7 @@ abstract class IndividualInfo with _$IndividualInfo {
     String? accountInformation,
     String? acquiringBank,
     @Default(KhqrCurrency.khr) KhqrCurrency currency,
-    @Default(0) double amount,
+    required double amount,
     required String merchantName,
     @Default('Phnom Penh') String merchantCity,
     String? billNumber,
@@ -25,6 +25,7 @@ abstract class IndividualInfo with _$IndividualInfo {
     String? merchantAlternateLanguagePreference,
     String? merchantNameAlternateLanguage,
     String? merchantCityAlternateLanguage,
+    @Default('5999') String merchantCategoryCode,
     int? expirationTimestamp,
   }) = _IndividualInfo;
 

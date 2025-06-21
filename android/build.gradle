@@ -51,8 +51,8 @@ android {
         testImplementation("org.jetbrains.kotlin:kotlin-test")
         testImplementation("org.mockito:mockito-core:5.0.0")
         // https://central.sonatype.com/artifact/kh.gov.nbc.bakong_khqr/sdk-java
-        implementation("kh.gov.nbc.bakong_khqr:sdk-java:1.0.0.14")
-        implementation("com.google.code.gson:gson:2.12.1")
+        implementation("kh.gov.nbc.bakong_khqr:sdk-java:1.0.0.15")
+        implementation("com.google.code.gson:gson:2.13.1")
     }
 
     testOptions {

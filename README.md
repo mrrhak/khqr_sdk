@@ -79,8 +79,8 @@ The standardization of KHQR code specifications will help promote wider use of m
 - [x] Android
 
 ## Native KHQR SDK Version
-- iOS using **`BakongKHQR`** (v1.0.0.16)
-- Android using **`kh.gov.nbc.bakong_khqr:sdk-java:1.0.0.14`**
+- iOS using **`BakongKHQR (1.0.0.17)`**
+- Android using **`kh.gov.nbc.bakong_khqr:sdk-java:1.0.0.15`**
 
 ## Features Supported
 
@@ -93,7 +93,7 @@ See the example app for detailed implementation information.
 | Generate Deeplink   |    ✔    |    ✔    |
 | Verify              |    ✔    |    ✔    |
 | Decode              |    ✔    |    ✔    |
-| Decode Non-KHQR     |    ✘    |    ✔    |
+| Decode Non-KHQR     |    ✔    |    ✔    |
 | KHQR Card Widget    |    ✔    |    ✔    |
 
 
@@ -190,6 +190,8 @@ final info = IndividualInfo(
   bakongAccountId: 'kimhak@dev',
   merchantName: 'Kimhak',
   accountInformation: '123456789',
+  currency: KhqrCurrency.khr,
+  amount: 0,
 );
 final khqrData = await _khqrSdk.generateIndividual(info);
 ```
@@ -201,6 +203,8 @@ final info = MerchantInfo(
   acquiringBank: 'Dev Bank',
   merchantId: '123456',
   merchantName: 'Kimhak',
+  currency: KhqrCurrency.usd,
+  amount: 0,
 );
 final khqrData = await _khqrSdk.generateMerchant(info);
 ```
@@ -216,7 +220,8 @@ final khqrData = await _khqrSdk.generateMerchant(info);
 >    acquiringBank: 'Dev Bank',
 >    merchantId: '123456',
 >    merchantName: 'Kimhak',
->    amount: 1,
+>    currency: KhqrCurrency.usd,
+>    amount: 100,
 >    expirationTimestamp: expire,
 > );
 >```

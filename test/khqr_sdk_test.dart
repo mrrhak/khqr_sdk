@@ -47,6 +47,8 @@ void main() {
       bakongAccountId: 'kimhak@dev',
       merchantName: 'Kimhak',
       accountInformation: '123456789',
+      currency: KhqrCurrency.khr,
+      amount: 0,
     );
     final khqrData = await khqrSdk.generateIndividual(info);
     expect(khqrData, isNotNull);
@@ -59,6 +61,8 @@ void main() {
       merchantName: 'Kimhak',
       acquiringBank: 'Dev Bank',
       merchantId: '123456',
+      currency: KhqrCurrency.khr,
+      amount: 0,
     );
     final khqrData = await khqrSdk.generateMerchant(info);
     expect(khqrData, isNotNull);
