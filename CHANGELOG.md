@@ -6,6 +6,7 @@
 - Chore(Android): Upgrade Kotlin from `v1.8.22` to `v2.1.0`
 - Chore(Android): Upgrade Gradle Tool from `v8.1.4` to `v8.7.3`
 - Chore(Docs): Updated README file
+- Chore(Deps) Updated dependencies
 
 ## 1.3.1
 - Fixed(generated_file): fixed `KhqrCurrency` enum value on MerchantInfo class
