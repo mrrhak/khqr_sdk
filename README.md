@@ -78,10 +78,6 @@ The standardization of KHQR code specifications will help promote wider use of m
 - [x] iOS
 - [x] Android
 
-## Native KHQR SDK Version
-- iOS using **`BakongKHQR (1.0.0.17)`**
-- Android using **`kh.gov.nbc.bakong_khqr:sdk-java:1.0.0.15`**
-
 ## Features Supported
 
 See the example app for detailed implementation information.
@@ -96,85 +92,9 @@ See the example app for detailed implementation information.
 | Decode Non-KHQR     |    ✔    |    ✔    |
 | KHQR Card Widget    |    ✔    |    ✔    |
 
-
-## Platform specific setup
-### iOS
-#### 1. Add source to Podfile (ios/Podfile)
-```bash
-source "https://sambo:ycfXmxxRbyzEmozY9z6n@gitlab.nbc.gov.kh/khqr/khqr-ios-pod.git"
-```
-
->[!NOTE] 
->If you don't see `Podfile`, please disable Swift Package Manager in `pubspec.yaml`
->
->```yaml
->flutter:
->  disable-swift-package-manager: true
->```
->After save, `Podfile` will be created automatically.
->
-><details>
->  <summary>Example Podfile</summary>
->
->  ```sh
->  source "https://sambo:ycfXmxxRbyzEmozY9z6n@gitlab.nbc.gov.kh/khqr/khqr-ios-pod.git"
->  
->  # Uncomment this line to define a global platform for your project
->  # platform :ios, '12.0'
->
->  # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
->  ENV['COCOAPODS_DISABLE_STATS'] = 'true'
->
->  project 'Runner', {
->    'Debug' => :debug,
->    'Profile' => :release,
->    'Release' => :release,
->  }
->
->  def flutter_root
->    generated_xcode_build_settings_path = File.expand_path(File.join('..', 'Flutter', 'Generated.xcconfig'), __FILE__)
->    unless File.exist?(generated_xcode_build_settings_path)
->      raise "#{generated_xcode_build_settings_path} must exist. If you're running pod install manually, make sure flutter pub get is executed first"
->    end
->
->    File.foreach(generated_xcode_build_settings_path) do |line|
->      matches = line.match(/FLUTTER_ROOT\=(.*)/)
->      return matches[1].strip if matches
->    end
->    raise "FLUTTER_ROOT not found in #{generated_xcode_build_settings_path}. Try deleting Generated.xcconfig, then run flutter pub get"
->  end
->
->  require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelper'), flutter_root)
->
->  flutter_ios_podfile_setup
->
->  target 'Runner' do
->    use_frameworks!
->
->    flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
->    target 'RunnerTests' do
->      inherit! :search_paths
->    end
->  end
->
->  post_install do |installer|
->    installer.pods_project.targets.each do |target|
->      flutter_additional_ios_build_settings(target)
->    end
->  end
->  ```
-></details>
-
-
-
-
-#### 2. Run pod install (make sure your terminal is in ios folder)
-```bash
-pod install
-```
-
-### Android
-- No need to do anything it's working out of the box.
+#### This Plugin Using Native KHQR SDK
+- iOS using **`BakongKHQR (1.0.0.17)`**
+- Android using **`kh.gov.nbc.bakong_khqr:sdk-java:1.0.0.15`**
 
 ## Usage
 ### Create instance of KHQR SDK

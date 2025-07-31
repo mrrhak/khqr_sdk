@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -16,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MerchantInfo {
 
- String get bakongAccountId; String get merchantId; String get acquiringBank; KhqrCurrency? get currency; double get amount; String get merchantName; String get merchantCity; String? get billNumber; String? get mobileNumber; String? get storeLabel; String? get terminalLabel; String? get purposeOfTransaction; String? get upiAccountInformation; String? get merchantAlternateLanguagePreference; String? get merchantNameAlternateLanguage; String? get merchantCityAlternateLanguage; String get merchantCategoryCode; int? get expirationTimestamp;
+ String get bakongAccountId; String get merchantId; String get acquiringBank; KhqrCurrency get currency; double get amount; String get merchantName; String get merchantCity; String? get billNumber; String? get mobileNumber; String? get storeLabel; String? get terminalLabel; String? get purposeOfTransaction; String? get upiAccountInformation; String? get merchantAlternateLanguagePreference; String? get merchantNameAlternateLanguage; String? get merchantCityAlternateLanguage; String get merchantCategoryCode; int? get expirationTimestamp;
 /// Create a copy of MerchantInfo
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +48,7 @@ abstract mixin class $MerchantInfoCopyWith<$Res>  {
   factory $MerchantInfoCopyWith(MerchantInfo value, $Res Function(MerchantInfo) _then) = _$MerchantInfoCopyWithImpl;
 @useResult
 $Res call({
- String bakongAccountId, String merchantId, String acquiringBank, KhqrCurrency? currency, double amount, String merchantName, String merchantCity, String? billNumber, String? mobileNumber, String? storeLabel, String? terminalLabel, String? purposeOfTransaction, String? upiAccountInformation, String? merchantAlternateLanguagePreference, String? merchantNameAlternateLanguage, String? merchantCityAlternateLanguage, String merchantCategoryCode, int? expirationTimestamp
+ String bakongAccountId, String merchantId, String acquiringBank, KhqrCurrency currency, double amount, String merchantName, String merchantCity, String? billNumber, String? mobileNumber, String? storeLabel, String? terminalLabel, String? purposeOfTransaction, String? upiAccountInformation, String? merchantAlternateLanguagePreference, String? merchantNameAlternateLanguage, String? merchantCityAlternateLanguage, String merchantCategoryCode, int? expirationTimestamp
 });
 
 
@@ -66,13 +65,13 @@ class _$MerchantInfoCopyWithImpl<$Res>
 
 /// Create a copy of MerchantInfo
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? bakongAccountId = null,Object? merchantId = null,Object? acquiringBank = null,Object? currency = freezed,Object? amount = null,Object? merchantName = null,Object? merchantCity = null,Object? billNumber = freezed,Object? mobileNumber = freezed,Object? storeLabel = freezed,Object? terminalLabel = freezed,Object? purposeOfTransaction = freezed,Object? upiAccountInformation = freezed,Object? merchantAlternateLanguagePreference = freezed,Object? merchantNameAlternateLanguage = freezed,Object? merchantCityAlternateLanguage = freezed,Object? merchantCategoryCode = null,Object? expirationTimestamp = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? bakongAccountId = null,Object? merchantId = null,Object? acquiringBank = null,Object? currency = null,Object? amount = null,Object? merchantName = null,Object? merchantCity = null,Object? billNumber = freezed,Object? mobileNumber = freezed,Object? storeLabel = freezed,Object? terminalLabel = freezed,Object? purposeOfTransaction = freezed,Object? upiAccountInformation = freezed,Object? merchantAlternateLanguagePreference = freezed,Object? merchantNameAlternateLanguage = freezed,Object? merchantCityAlternateLanguage = freezed,Object? merchantCategoryCode = null,Object? expirationTimestamp = freezed,}) {
   return _then(_self.copyWith(
 bakongAccountId: null == bakongAccountId ? _self.bakongAccountId : bakongAccountId // ignore: cast_nullable_to_non_nullable
 as String,merchantId: null == merchantId ? _self.merchantId : merchantId // ignore: cast_nullable_to_non_nullable
 as String,acquiringBank: null == acquiringBank ? _self.acquiringBank : acquiringBank // ignore: cast_nullable_to_non_nullable
-as String,currency: freezed == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
-as KhqrCurrency?,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
+as String,currency: null == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
+as KhqrCurrency,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as double,merchantName: null == merchantName ? _self.merchantName : merchantName // ignore: cast_nullable_to_non_nullable
 as String,merchantCity: null == merchantCity ? _self.merchantCity : merchantCity // ignore: cast_nullable_to_non_nullable
 as String,billNumber: freezed == billNumber ? _self.billNumber : billNumber // ignore: cast_nullable_to_non_nullable
@@ -93,6 +92,136 @@ as int?,
 }
 
 
+/// Adds pattern-matching-related methods to [MerchantInfo].
+extension MerchantInfoPatterns on MerchantInfo {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _MerchantInfo value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _MerchantInfo() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _MerchantInfo value)  $default,){
+final _that = this;
+switch (_that) {
+case _MerchantInfo():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _MerchantInfo value)?  $default,){
+final _that = this;
+switch (_that) {
+case _MerchantInfo() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String bakongAccountId,  String merchantId,  String acquiringBank,  KhqrCurrency currency,  double amount,  String merchantName,  String merchantCity,  String? billNumber,  String? mobileNumber,  String? storeLabel,  String? terminalLabel,  String? purposeOfTransaction,  String? upiAccountInformation,  String? merchantAlternateLanguagePreference,  String? merchantNameAlternateLanguage,  String? merchantCityAlternateLanguage,  String merchantCategoryCode,  int? expirationTimestamp)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _MerchantInfo() when $default != null:
+return $default(_that.bakongAccountId,_that.merchantId,_that.acquiringBank,_that.currency,_that.amount,_that.merchantName,_that.merchantCity,_that.billNumber,_that.mobileNumber,_that.storeLabel,_that.terminalLabel,_that.purposeOfTransaction,_that.upiAccountInformation,_that.merchantAlternateLanguagePreference,_that.merchantNameAlternateLanguage,_that.merchantCityAlternateLanguage,_that.merchantCategoryCode,_that.expirationTimestamp);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String bakongAccountId,  String merchantId,  String acquiringBank,  KhqrCurrency currency,  double amount,  String merchantName,  String merchantCity,  String? billNumber,  String? mobileNumber,  String? storeLabel,  String? terminalLabel,  String? purposeOfTransaction,  String? upiAccountInformation,  String? merchantAlternateLanguagePreference,  String? merchantNameAlternateLanguage,  String? merchantCityAlternateLanguage,  String merchantCategoryCode,  int? expirationTimestamp)  $default,) {final _that = this;
+switch (_that) {
+case _MerchantInfo():
+return $default(_that.bakongAccountId,_that.merchantId,_that.acquiringBank,_that.currency,_that.amount,_that.merchantName,_that.merchantCity,_that.billNumber,_that.mobileNumber,_that.storeLabel,_that.terminalLabel,_that.purposeOfTransaction,_that.upiAccountInformation,_that.merchantAlternateLanguagePreference,_that.merchantNameAlternateLanguage,_that.merchantCityAlternateLanguage,_that.merchantCategoryCode,_that.expirationTimestamp);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String bakongAccountId,  String merchantId,  String acquiringBank,  KhqrCurrency currency,  double amount,  String merchantName,  String merchantCity,  String? billNumber,  String? mobileNumber,  String? storeLabel,  String? terminalLabel,  String? purposeOfTransaction,  String? upiAccountInformation,  String? merchantAlternateLanguagePreference,  String? merchantNameAlternateLanguage,  String? merchantCityAlternateLanguage,  String merchantCategoryCode,  int? expirationTimestamp)?  $default,) {final _that = this;
+switch (_that) {
+case _MerchantInfo() when $default != null:
+return $default(_that.bakongAccountId,_that.merchantId,_that.acquiringBank,_that.currency,_that.amount,_that.merchantName,_that.merchantCity,_that.billNumber,_that.mobileNumber,_that.storeLabel,_that.terminalLabel,_that.purposeOfTransaction,_that.upiAccountInformation,_that.merchantAlternateLanguagePreference,_that.merchantNameAlternateLanguage,_that.merchantCityAlternateLanguage,_that.merchantCategoryCode,_that.expirationTimestamp);case _:
+  return null;
+
+}
+}
+
+}
+
 /// @nodoc
 @JsonSerializable()
 
@@ -103,7 +232,7 @@ class _MerchantInfo implements MerchantInfo {
 @override final  String bakongAccountId;
 @override final  String merchantId;
 @override final  String acquiringBank;
-@override@JsonKey() final  KhqrCurrency? currency;
+@override@JsonKey() final  KhqrCurrency currency;
 @override final  double amount;
 @override final  String merchantName;
 @override@JsonKey() final  String merchantCity;
@@ -152,7 +281,7 @@ abstract mixin class _$MerchantInfoCopyWith<$Res> implements $MerchantInfoCopyWi
   factory _$MerchantInfoCopyWith(_MerchantInfo value, $Res Function(_MerchantInfo) _then) = __$MerchantInfoCopyWithImpl;
 @override @useResult
 $Res call({
- String bakongAccountId, String merchantId, String acquiringBank, KhqrCurrency? currency, double amount, String merchantName, String merchantCity, String? billNumber, String? mobileNumber, String? storeLabel, String? terminalLabel, String? purposeOfTransaction, String? upiAccountInformation, String? merchantAlternateLanguagePreference, String? merchantNameAlternateLanguage, String? merchantCityAlternateLanguage, String merchantCategoryCode, int? expirationTimestamp
+ String bakongAccountId, String merchantId, String acquiringBank, KhqrCurrency currency, double amount, String merchantName, String merchantCity, String? billNumber, String? mobileNumber, String? storeLabel, String? terminalLabel, String? purposeOfTransaction, String? upiAccountInformation, String? merchantAlternateLanguagePreference, String? merchantNameAlternateLanguage, String? merchantCityAlternateLanguage, String merchantCategoryCode, int? expirationTimestamp
 });
 
 
@@ -169,13 +298,13 @@ class __$MerchantInfoCopyWithImpl<$Res>
 
 /// Create a copy of MerchantInfo
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? bakongAccountId = null,Object? merchantId = null,Object? acquiringBank = null,Object? currency = freezed,Object? amount = null,Object? merchantName = null,Object? merchantCity = null,Object? billNumber = freezed,Object? mobileNumber = freezed,Object? storeLabel = freezed,Object? terminalLabel = freezed,Object? purposeOfTransaction = freezed,Object? upiAccountInformation = freezed,Object? merchantAlternateLanguagePreference = freezed,Object? merchantNameAlternateLanguage = freezed,Object? merchantCityAlternateLanguage = freezed,Object? merchantCategoryCode = null,Object? expirationTimestamp = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? bakongAccountId = null,Object? merchantId = null,Object? acquiringBank = null,Object? currency = null,Object? amount = null,Object? merchantName = null,Object? merchantCity = null,Object? billNumber = freezed,Object? mobileNumber = freezed,Object? storeLabel = freezed,Object? terminalLabel = freezed,Object? purposeOfTransaction = freezed,Object? upiAccountInformation = freezed,Object? merchantAlternateLanguagePreference = freezed,Object? merchantNameAlternateLanguage = freezed,Object? merchantCityAlternateLanguage = freezed,Object? merchantCategoryCode = null,Object? expirationTimestamp = freezed,}) {
   return _then(_MerchantInfo(
 bakongAccountId: null == bakongAccountId ? _self.bakongAccountId : bakongAccountId // ignore: cast_nullable_to_non_nullable
 as String,merchantId: null == merchantId ? _self.merchantId : merchantId // ignore: cast_nullable_to_non_nullable
 as String,acquiringBank: null == acquiringBank ? _self.acquiringBank : acquiringBank // ignore: cast_nullable_to_non_nullable
-as String,currency: freezed == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
-as KhqrCurrency?,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
+as String,currency: null == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
+as KhqrCurrency,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as double,merchantName: null == merchantName ? _self.merchantName : merchantName // ignore: cast_nullable_to_non_nullable
 as String,merchantCity: null == merchantCity ? _self.merchantCity : merchantCity // ignore: cast_nullable_to_non_nullable
 as String,billNumber: freezed == billNumber ? _self.billNumber : billNumber // ignore: cast_nullable_to_non_nullable
