@@ -34,61 +34,58 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
       if (individual != null) {
         showDialog(
           context: context,
-          builder:
-              (context) => AlertDialog(
-                title: const Text('Success'),
-                content: Text(individual.qr),
-                actions: [
-                  TextButton(
-                    child: const Text('Copy'),
-                    onPressed: () {
-                      Clipboard.setData(ClipboardData(text: individual.qr));
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  TextButton(
-                    child: const Text('OK'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
+          builder: (context) => AlertDialog(
+            title: const Text('Success'),
+            content: Text(individual.qr),
+            actions: [
+              TextButton(
+                child: const Text('Copy'),
+                onPressed: () {
+                  Clipboard.setData(ClipboardData(text: individual.qr));
+                  Navigator.of(context).pop();
+                },
               ),
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
         );
       } else {
         showDialog(
           context: context,
-          builder:
-              (context) => AlertDialog(
-                title: const Text('Error'),
-                content: const Text('Failed to generate individual QR'),
-                actions: [
-                  TextButton(
-                    child: const Text('OK'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
+          builder: (context) => AlertDialog(
+            title: const Text('Error'),
+            content: const Text('Failed to generate individual QR'),
+            actions: [
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
+            ],
+          ),
         );
       }
     } on PlatformException catch (e) {
       showDialog(
         context: context,
-        builder:
-            (context) => AlertDialog(
-              title: const Text('Error'),
-              content: Text(e.message ?? 'Failed to generate individual QR'),
-              actions: [
-                TextButton(
-                  child: const Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
+        builder: (context) => AlertDialog(
+          title: const Text('Error'),
+          content: Text(e.message ?? 'Failed to generate individual QR'),
+          actions: [
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             ),
+          ],
+        ),
       );
     }
   }
@@ -113,61 +110,58 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
       if (merchant != null) {
         showDialog(
           context: context,
-          builder:
-              (context) => AlertDialog(
-                title: const Text('Success'),
-                content: Text(merchant.qr),
-                actions: [
-                  TextButton(
-                    child: const Text('Copy'),
-                    onPressed: () {
-                      Clipboard.setData(ClipboardData(text: merchant.qr));
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  TextButton(
-                    child: const Text('OK'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
+          builder: (context) => AlertDialog(
+            title: const Text('Success'),
+            content: Text(merchant.qr),
+            actions: [
+              TextButton(
+                child: const Text('Copy'),
+                onPressed: () {
+                  Clipboard.setData(ClipboardData(text: merchant.qr));
+                  Navigator.of(context).pop();
+                },
               ),
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
         );
       } else {
         showDialog(
           context: context,
-          builder:
-              (context) => AlertDialog(
-                title: const Text('Error'),
-                content: const Text('Failed to generate merchant QR'),
-                actions: [
-                  TextButton(
-                    child: const Text('OK'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
+          builder: (context) => AlertDialog(
+            title: const Text('Error'),
+            content: const Text('Failed to generate merchant QR'),
+            actions: [
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
+            ],
+          ),
         );
       }
     } on PlatformException catch (e) {
       showDialog(
         context: context,
-        builder:
-            (context) => AlertDialog(
-              title: const Text('Error'),
-              content: Text(e.message ?? 'Failed to generate merchant QR'),
-              actions: [
-                TextButton(
-                  child: const Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
+        builder: (context) => AlertDialog(
+          title: const Text('Error'),
+          content: Text(e.message ?? 'Failed to generate merchant QR'),
+          actions: [
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             ),
+          ],
+        ),
       );
     }
   }
@@ -179,54 +173,51 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
       if (isValid) {
         showDialog(
           context: context,
-          builder:
-              (context) => AlertDialog(
-                title: const Text('Success'),
-                content: const Text('QR code is valid.'),
-                actions: [
-                  TextButton(
-                    child: const Text('OK'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
+          builder: (context) => AlertDialog(
+            title: const Text('Success'),
+            content: const Text('QR code is valid.'),
+            actions: [
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
+            ],
+          ),
         );
       } else {
         showDialog(
           context: context,
-          builder:
-              (context) => AlertDialog(
-                title: const Text('Error'),
-                content: const Text('QR code is invalid.'),
-                actions: [
-                  TextButton(
-                    child: const Text('OK'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
+          builder: (context) => AlertDialog(
+            title: const Text('Error'),
+            content: const Text('QR code is invalid.'),
+            actions: [
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
+            ],
+          ),
         );
       }
     } on PlatformException catch (e) {
       showDialog(
         context: context,
-        builder:
-            (context) => AlertDialog(
-              title: const Text('Error'),
-              content: Text(e.message ?? 'Verify failed'),
-              actions: [
-                TextButton(
-                  child: const Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
+        builder: (context) => AlertDialog(
+          title: const Text('Error'),
+          content: Text(e.message ?? 'Verify failed'),
+          actions: [
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             ),
+          ],
+        ),
       );
     }
   }
@@ -241,54 +232,51 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
         ).convert(khqrDecodeData.toJson());
         showDialog(
           context: context,
-          builder:
-              (context) => AlertDialog(
-                title: const Text('Success'),
-                content: Text(prettyJson, style: TextStyle(fontSize: 12.0)),
-                actions: [
-                  TextButton(
-                    child: const Text('OK'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
+          builder: (context) => AlertDialog(
+            title: const Text('Success'),
+            content: Text(prettyJson, style: TextStyle(fontSize: 12.0)),
+            actions: [
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
+            ],
+          ),
         );
       } else {
         showDialog(
           context: context,
-          builder:
-              (context) => AlertDialog(
-                title: const Text('Error'),
-                content: const Text('Failed to decode QR'),
-                actions: [
-                  TextButton(
-                    child: const Text('OK'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
+          builder: (context) => AlertDialog(
+            title: const Text('Error'),
+            content: const Text('Failed to decode QR'),
+            actions: [
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
+            ],
+          ),
         );
       }
     } on PlatformException catch (e) {
       showDialog(
         context: context,
-        builder:
-            (context) => AlertDialog(
-              title: const Text('Error'),
-              content: Text(e.message ?? 'Failed to decode QR'),
-              actions: [
-                TextButton(
-                  child: const Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
+        builder: (context) => AlertDialog(
+          title: const Text('Error'),
+          content: Text(e.message ?? 'Failed to decode QR'),
+          actions: [
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             ),
+          ],
+        ),
       );
     }
   }
@@ -303,54 +291,51 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
         ).convert(nonKhqrDecodeData);
         showDialog(
           context: context,
-          builder:
-              (context) => AlertDialog(
-                title: const Text('Success'),
-                content: Text(prettyJson, style: TextStyle(fontSize: 12.0)),
-                actions: [
-                  TextButton(
-                    child: const Text('OK'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
+          builder: (context) => AlertDialog(
+            title: const Text('Success'),
+            content: Text(prettyJson, style: TextStyle(fontSize: 12.0)),
+            actions: [
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
+            ],
+          ),
         );
       } else {
         showDialog(
           context: context,
-          builder:
-              (context) => AlertDialog(
-                title: const Text('Error'),
-                content: const Text('Failed to decode Non KHQR'),
-                actions: [
-                  TextButton(
-                    child: const Text('OK'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
+          builder: (context) => AlertDialog(
+            title: const Text('Error'),
+            content: const Text('Failed to decode Non KHQR'),
+            actions: [
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
+            ],
+          ),
         );
       }
     } on PlatformException catch (e) {
       showDialog(
         context: context,
-        builder:
-            (context) => AlertDialog(
-              title: const Text('Error'),
-              content: Text(e.message ?? 'Failed to decode Non KHQR'),
-              actions: [
-                TextButton(
-                  child: const Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
+        builder: (context) => AlertDialog(
+          title: const Text('Error'),
+          content: Text(e.message ?? 'Failed to decode Non KHQR'),
+          actions: [
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             ),
+          ],
+        ),
       );
     }
   }

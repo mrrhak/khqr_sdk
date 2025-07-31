@@ -14,11 +14,17 @@ let package = Package(
     dependencies: [],
     targets: [
         .target(
+            name: "BakongKHQR",
+            path: "Sources/BakongKHQR",
+            publicHeadersPath: "Classes"
+        ),
+        .target(
             name: "khqr_sdk",
-            dependencies: [],
+            dependencies: ["BakongKHQR"],
+            path: "Sources/khqr_sdk",
             resources: [
                 .process("PrivacyInfo.xcprivacy")
             ]
-        )
+        ),
     ]
 )
