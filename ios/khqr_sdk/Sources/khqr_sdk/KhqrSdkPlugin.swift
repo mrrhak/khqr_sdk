@@ -1,6 +1,9 @@
-import BakongKHQR
 import Flutter
 import UIKit
+
+#if canImport(BakongKHQR)
+  import BakongKHQR
+#endif
 
 public class KhqrSdkPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
