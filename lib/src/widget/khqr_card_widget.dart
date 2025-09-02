@@ -160,7 +160,7 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
             ? _usdIcon
             : _bakongIcon,
       ),
-      shape: const PrettyQrSmoothSymbol(roundFactor: 0.1),
+      shape: const PrettyQrSquaresSymbol(),
       quietZone: const PrettyQrQuietZone.pixels(6.0),
       background: _pearlWhite,
     );
