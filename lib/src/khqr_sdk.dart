@@ -29,7 +29,6 @@ class KhqrSdk {
   /// final info = IndividualInfo(
   ///   bakongAccountId: 'kimhak@dev',
   ///   merchantName: 'Kimhak',
-  ///   merchantCity: 'Phnom Penh',
   ///   currency: KhqrCurrency.khr,
   /// );
   ///
@@ -72,7 +71,6 @@ class KhqrSdk {
   /// final info = MerchantInfo(
   ///   bakongAccountId: 'kimhak@dev',
   ///   merchantName: 'Kimhak',
-  ///   merchantCity: 'Phnom Penh',
   ///   acquiringBank: 'Dev Bank',
   ///   merchantId: '123456',
   ///   currency: KhqrCurrency.khr,
