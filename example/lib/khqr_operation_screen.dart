@@ -4,23 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:khqr_sdk/khqr_sdk.dart';
 
-class KhqrOperationScreen extends StatefulWidget {
+class KhqrOperationScreen extends StatelessWidget {
   const KhqrOperationScreen({super.key});
 
-  @override
-  State<KhqrOperationScreen> createState() => _KhqrOperationScreenState();
-}
-
-class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
-  late KhqrSdk _khqrSdk;
-
-  @override
-  void initState() {
-    _khqrSdk = KhqrSdk();
-    super.initState();
-  }
-
-  Future<void> generateIndividual() async {
+  void _generateIndividual(BuildContext context) {
     try {
       final info = IndividualInfo(
         bakongAccountId: 'kimhak@dev',
@@ -29,19 +16,18 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
         currency: KhqrCurrency.khr,
         amount: 0,
       );
-      final individual = await _khqrSdk.generateIndividual(info);
-      if (!mounted) return;
-      if (individual != null) {
+      final res = KhqrSdk.generateIndividual(info);
+      if (res.data != null) {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
             title: const Text('Success'),
-            content: Text(individual.qr),
+            content: Text(res.data!.qr),
             actions: [
               TextButton(
                 child: const Text('Copy'),
                 onPressed: () {
-                  Clipboard.setData(ClipboardData(text: individual.qr));
+                  Clipboard.setData(ClipboardData(text: res.data!.qr));
                   Navigator.of(context).pop();
                 },
               ),
@@ -90,7 +76,7 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
     }
   }
 
-  Future<void> generateMerchant() async {
+  void _generateMerchant(BuildContext context) {
     try {
       // Dynamic QR with amount required to set expiration
       // 1 hour from now
@@ -105,19 +91,18 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
         amount: 100.0,
         expirationTimestamp: expire,
       );
-      final merchant = await _khqrSdk.generateMerchant(info);
-      if (!mounted) return;
-      if (merchant != null) {
+      final res = KhqrSdk.generateMerchant(info);
+      if (res.data != null) {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
             title: const Text('Success'),
-            content: Text(merchant.qr),
+            content: Text(res.data!.qr),
             actions: [
               TextButton(
                 child: const Text('Copy'),
                 onPressed: () {
-                  Clipboard.setData(ClipboardData(text: merchant.qr));
+                  Clipboard.setData(ClipboardData(text: res.data!.qr));
                   Navigator.of(context).pop();
                 },
               ),
@@ -166,11 +151,10 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
     }
   }
 
-  Future<void> verify(String qrCode) async {
+  void _verify(BuildContext context, String qrCode) {
     try {
-      final isValid = await _khqrSdk.verify(qrCode);
-      if (!mounted) return;
-      if (isValid) {
+      final res = KhqrSdk.verify(qrCode);
+      if (res.isValid) {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -222,14 +206,13 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
     }
   }
 
-  Future<void> decode(String qrCode) async {
+  void _decode(BuildContext context, String qrCode) {
     try {
-      final khqrDecodeData = await _khqrSdk.decode(qrCode);
-      if (!mounted) return;
-      if (khqrDecodeData != null) {
+      final res = KhqrSdk.decode(qrCode);
+      if (res.data != null) {
         final prettyJson = const JsonEncoder.withIndent(
           '  ',
-        ).convert(khqrDecodeData.toJson());
+        ).convert(res.data!.toMap());
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -281,14 +264,11 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
     }
   }
 
-  Future<void> decodeNonKhqr(String qrCode) async {
+  void _decodeNonKhqr(BuildContext context, String qrCode) {
     try {
-      final nonKhqrDecodeData = await _khqrSdk.decodeNonKhqr(qrCode);
-      if (!mounted) return;
-      if (nonKhqrDecodeData != null) {
-        final prettyJson = const JsonEncoder.withIndent(
-          '  ',
-        ).convert(nonKhqrDecodeData);
+      final res = KhqrSdk.decodeNonKhqr(qrCode);
+      if (res.data != null) {
+        final prettyJson = const JsonEncoder.withIndent('  ').convert(res.data);
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -350,7 +330,7 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: generateIndividual,
+              onPressed: () => _generateIndividual(context),
               style: ButtonStyle(
                 backgroundColor: WidgetStateProperty.all(Colors.green),
               ),
@@ -361,7 +341,7 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: generateMerchant,
+              onPressed: () => _generateMerchant(context),
               style: ButtonStyle(
                 backgroundColor: WidgetStateProperty.all(Colors.blue),
               ),
@@ -389,8 +369,8 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
                         TextButton(
                           child: const Text('Verify'),
                           onPressed: () async {
-                            verify(textController.text);
                             Navigator.of(context).pop();
+                            _verify(context, textController.text);
                           },
                         ),
                       ],
@@ -425,8 +405,8 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
                         TextButton(
                           child: const Text('Decode'),
                           onPressed: () async {
-                            decode(textController.text);
                             Navigator.of(context).pop();
+                            _decode(context, textController.text);
                           },
                         ),
                       ],
@@ -461,8 +441,8 @@ class _KhqrOperationScreenState extends State<KhqrOperationScreen> {
                         TextButton(
                           child: const Text('Decode'),
                           onPressed: () async {
-                            decodeNonKhqr(textController.text);
                             Navigator.of(context).pop();
+                            _decodeNonKhqr(context, textController.text);
                           },
                         ),
                       ],

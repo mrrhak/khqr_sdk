@@ -4,7 +4,7 @@ maintainer: Mrr Hak
 repository: https://github.com/mrrhak/khqr_sdk
 issue_tracker: https://github.com/mrrhak/khqr_sdk/issues
 homepage: https://mrrhak.com
-version: 1.4.0
+version: 2.0.0
 funding:
   - https://ko-fi.com/mrrhak
 screenshots:
@@ -19,37 +19,25 @@ topics:
   - bakong
 
 environment:
-  sdk: ^3.8.1
+  sdk: ^3.9.0
   flutter: '>=3.3.0'
 
 dependencies:
   flutter:
     sdk: flutter
   intl: ">=0.18.1 <=0.20.2"
-  freezed_annotation: ^3.1.0
-  json_annotation: ^4.9.0
-  plugin_platform_interface: ^2.1.8
+  crypto: ^3.0.6
+  http: ^1.5.0
   pretty_qr_code: ^3.5.0
-  flutter_svg: ^2.2.0
+  flutter_svg: ^2.2.1
   auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-  build_runner: ^2.7.1
-  freezed: ^3.2.0
-  json_serializable: ^6.10.0
 
 flutter:
-  plugin:
-    platforms:
-      android:
-        package: com.mrrhak.khqr_sdk
-        pluginClass: KhqrSdkPlugin
-      ios:
-        pluginClass: KhqrSdkPlugin
-
   assets:
     - assets/fonts/nunito_sans/
     - assets/images/

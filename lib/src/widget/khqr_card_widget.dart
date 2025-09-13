@@ -3,9 +3,10 @@ import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:khqr_sdk/src/common/enum.dart';
-import 'package:khqr_sdk/src/util/number_formatter_util.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
+
+import '../enum/khqr_currency.dart';
+import '../util/number_formatter_util.dart';
 
 /// KhqrCardWidget is a widget that displays a KHQR card
 class KhqrCardWidget extends StatefulWidget {
