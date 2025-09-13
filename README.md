@@ -3,9 +3,7 @@
 </div>
 
 > [!NOTE]
-> This **KHQR SDK** plugin is not officially release from [**NBC**](https://bakong.nbc.gov.kh/).
-> 
-> This is a simple interface layer that connects your Dart code directly to the original native platform-specific SDK, bridging Flutter and native functionality seamlessly.
+> This **KHQR SDK** package is not officially release from [**NBC**](https://bakong.nbc.gov.kh/).
 > 
 > <small>[KHQR SDK Document Reference](https://bakong.nbc.gov.kh/en/download/KHQR/integration/KHQR%20SDK%20Document.pdf)
 > </small>
@@ -24,7 +22,7 @@ The standardization of KHQR code specifications will help promote wider use of m
   </a>
   <div align="center">
     <a href="https://www.buymeacoffee.com/mrrhak">
-      <img width="150" alt="buymeacoffee" src="https://user-images.githubusercontent.com/26390946/161375563-69c634fd-89d2-45ac-addd-931b03996b34.png">
+      <img width="150" alt="buy me a coffee" src="https://user-images.githubusercontent.com/26390946/161375563-69c634fd-89d2-45ac-addd-931b03996b34.png">
     </a>
     <a href="https://ko-fi.com/mrrhak">
       <img width="150" alt="Ko-fi" src="https://user-images.githubusercontent.com/26390946/161375565-e7d64410-bbcf-4a28-896b-7514e106478e.png">
@@ -74,37 +72,26 @@ The standardization of KHQR code specifications will help promote wider use of m
   <img src="https://raw.githubusercontent.com/mrrhak/khqr_sdk/refs/heads/master/assets/khqr_sdk_preview.png" width="640" alt="khqr sdk preview"/>
 </p>
 
-## Supported Platforms
-- [x] iOS
-- [x] Android
-
 ## Features Supported
 
-See the example app for detailed implementation information.
-
-| Features            | Android | iOS     |
-|---------------------|---------|---------|
-| Generate Individual |    ✔    |    ✔    |
-| Generate Merchant   |    ✔    |    ✔    |
-| Generate Deeplink   |    ✔    |    ✔    |
-| Verify              |    ✔    |    ✔    |
-| Decode              |    ✔    |    ✔    |
-| Decode Non-KHQR     |    ✔    |    ✔    |
-| KHQR Card Widget    |    ✔    |    ✔    |
-
-#### This Plugin Using Native KHQR SDK
-- iOS using **`BakongKHQR (1.0.0.17)`**
-- Android using **`kh.gov.nbc.bakong_khqr:sdk-java:1.0.0.15`**
+| Features             | Android | iOS     | Web     | Windows | macOS   | Linux   |
+|----------------------|---------|---------|---------|---------|---------| ------- |
+| Generate Individual  |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| Generate Merchant    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| Generate Deeplink    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| Verify               |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| Decode               |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| Decode Non-KHQR      |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| Check Bakong Account |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| KHQR Card Widget     |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
 
 ## Usage
-### Create instance of KHQR SDK
+### Import KHQR SDK Package
 ```dart
 import 'package:khqr_sdk/khqr_sdk.dart';
-
-final _khqrSdk = KhqrSdk();
 ```
 
-### Generate KHQR (Individual)
+### Generate Individual KHQR
 ```dart
 final info = IndividualInfo(
   bakongAccountId: 'kimhak@dev',
@@ -113,10 +100,10 @@ final info = IndividualInfo(
   currency: KhqrCurrency.khr,
   amount: 0,
 );
-final khqrData = await _khqrSdk.generateIndividual(info);
+final res = KhqrSdk.generateIndividual(info);
 ```
 
-### Generate KHQR (Merchant)
+### Generate Merchant KHQR
 ```dart
 final info = MerchantInfo(
   bakongAccountId: 'kimhak@dev',
@@ -126,11 +113,11 @@ final info = MerchantInfo(
   currency: KhqrCurrency.usd,
   amount: 0,
 );
-final khqrData = await _khqrSdk.generateMerchant(info);
+final res = KhqrSdk.generateMerchant(info);
 ```
 
 >[!NOTE] 
->Generate dynamic QR that set amount is required to set expiration
+>To generate `Dynamic QR` required to set amount more than zero with expiration
 >
 >```dart
 > // 1 hour from now
@@ -144,25 +131,26 @@ final khqrData = await _khqrSdk.generateMerchant(info);
 >    amount: 100,
 >    expirationTimestamp: expire,
 > );
+> final res = KhqrSdk.generateMerchant(info);
 >```
 
 
 ### Verify KHQR
 ```dart
 const qrCode = '00020101021129270010kimhak@dev01091234567895204599953031165802KH5906Kimhak6010Phnom Penh9917001317324625358296304B59E';
-final isValid = await _khqrSdk.verify(qrCode);
+final res = KhqrSdk.verify(qrCode);
 ```
 
 ### Decode KHQR
 ```dart
 const qrCode = '00020101021129270010kimhak@dev01091234567895204599953031165802KH5906Kimhak6010Phnom Penh9917001317324625358296304B59E';
-final khqrDecodeData = await _khqrSdk.decode(qrCode);
+final res = KhqrSdk.decode(qrCode);
 ```
 
 ### Decode Non-KHQR
 ```dart
 const qrCode = '00020101021129270010kimhak@dev01091234567895204599953031165802KH5906Kimhak6010Phnom Penh9917001317324625358296304B59E';
-final nonKhqrDecodeData = await _khqrSdk.decodeNonKhqr(qrCode);
+final res = KhqrSdk.decodeNonKhqr(qrCode);
 ```
 
 ### Generate KHQR Deeplink
@@ -181,7 +169,14 @@ final deeplinkInfo = DeeplinkInfo(
   sourceInfo: sourceInfo,
 );
 
-final deeplinkData = await _khqrSdk.generateDeepLink(deeplinkInfo);
+final res = await KhqrSdk.generateDeepLink(deeplinkInfo);
+```
+
+### Check Bakong Account
+```dart
+  final url = 'https://api-bakong.nbc.gov.kh/v1/check_account_by_id';
+  final bakongAccount = 'kimhak@dev';
+  final res = await KhqrSdk.checkBakongAccount(url, bakongAccount);
 ```
 
 ### KHQR Card Widget

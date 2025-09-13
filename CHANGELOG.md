@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.0.0
+- Feat(SDK): Re-implement all functions in Dart
+- Feat(SDK): Add new function `checkBakongAccount`
+- Refactor(SDK): Change structure from Flutter Plugin to Flutter Package
+- Chore(Docs): Updated README file
+- Chore(Deps) Updated dependencies
+- #### BREAKING CHANGE:
+  - All SDK functions are now static in `KhqrSdk` class
+
 ## 1.4.0
 - Feat(iOS): Add Swift Package Manager support
 - Refactor(iOS): Moved private Pods source from NBC to directly embedded `Objective-C`

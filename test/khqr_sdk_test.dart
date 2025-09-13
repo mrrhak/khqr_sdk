@@ -1,82 +1,118 @@
-import 'dart:convert';
-
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:khqr_sdk/khqr_sdk.dart';
+import 'package:khqr_sdk/src/enum/merchant_type.dart';
 
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
-  KhqrSdk khqrSdk = KhqrSdk();
-  const MethodChannel channel = MethodChannel('khqr_sdk');
+  final bakongAccountId = 'test@dev';
+  final merchantName = 'Test Merchant';
+  final acquiringBank = 'Dev Bank';
+  final merchantId = '123456';
 
-  setUp(() {
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
-          if (methodCall.method == 'generateIndividual') {
-            final khqrData = KhqrData(
-              qr: 'This is individual QR',
-              md5: 'This is individual MD5',
-            );
-            return jsonEncode(khqrData);
-          } else if (methodCall.method == 'generateMerchant') {
-            final khqrData = KhqrData(
-              qr: 'This is merchant QR',
-              md5: 'This is merchant MD5',
-            );
-            return jsonEncode(khqrData);
-          } else if (methodCall.method == 'verify') {
-            return true;
-          } else if (methodCall.method == 'decode') {
-            final decodeData = KhqrDecodedData(
-              bakongAccountId: 'kimhak@dev',
-              merchantName: 'Kimhak',
-            );
-            return jsonEncode(decodeData);
-          }
-          return null;
-        });
-  });
-
-  tearDown(() {
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMethodCallHandler(channel, null);
-  });
-
-  test('generateIndividual', () async {
+  test('generate individual qr code', () {
     final info = IndividualInfo(
-      bakongAccountId: 'kimhak@dev',
-      merchantName: 'Kimhak',
-      accountInformation: '123456789',
-      currency: KhqrCurrency.khr,
-      amount: 0,
+      bakongAccountId: bakongAccountId,
+      merchantName: merchantName,
     );
-    final khqrData = await khqrSdk.generateIndividual(info);
-    expect(khqrData, isNotNull);
-    expect(khqrData?.qr, 'This is individual QR');
+    final res = KhqrSdk.generateIndividual(info);
+    expect(res.data, isNotNull);
+    expect(res.data!.qr, isA<String>());
+    expect(res.data!.md5Hash, isA<String>());
   });
 
-  test('generateMerchant', () async {
+  test('generate merchant qr code', () {
     final info = MerchantInfo(
-      bakongAccountId: 'kimhak@dev',
-      merchantName: 'Kimhak',
-      acquiringBank: 'Dev Bank',
-      merchantId: '123456',
-      currency: KhqrCurrency.khr,
-      amount: 0,
+      bakongAccountId: bakongAccountId,
+      acquiringBank: acquiringBank,
+      merchantId: merchantId,
+      merchantName: merchantName,
     );
-    final khqrData = await khqrSdk.generateMerchant(info);
-    expect(khqrData, isNotNull);
-    expect(khqrData?.qr, 'This is merchant QR');
+    final res = KhqrSdk.generateMerchant(info);
+    expect(res.data, isNotNull);
+    expect(res.data!.qr, isA<String>());
+    expect(res.data!.md5Hash, isA<String>());
   });
 
-  test('verify', () async {
-    final isVerify = await khqrSdk.verify('Test');
-    expect(isVerify, true);
+  test('verify individual qr code', () {
+    final qrString =
+        '00020101021129120008test@dev5204599953031165802KH5913Test Merchant6010Phnom Penh63048C7E';
+    final validation = KhqrSdk.verify(qrString);
+    expect(validation.isValid, isTrue);
   });
 
-  test('decode', () async {
-    final decoded = await khqrSdk.decode('Test');
-    expect(decoded, isNotNull);
-    expect(decoded?.bakongAccountId, 'kimhak@dev');
+  test('verify merchant qr code', () {
+    final qrString =
+        '00020101021130340008test@dev01061234560208Dev Bank5204599953031165802KH5913Test Merchant6010Phnom Penh6304BCB9';
+    final validation = KhqrSdk.verify(qrString);
+    expect(validation.isValid, isTrue);
+  });
+
+  test('decode individual qr code', () {
+    final qrString =
+        '00020101021129120008test@dev5204599953031165802KH5913Test Merchant6010Phnom Penh63048C7E';
+    final res = KhqrSdk.decode(qrString);
+    expect(res.data, isNotNull);
+    expect(res.data!.merchantType, MerchantType.individual.tag);
+    expect(res.data!.bakongAccountID, bakongAccountId);
+    expect(res.data!.merchantName, merchantName);
+    expect(res.data!.accountInformation, isNull);
+    expect(res.data!.merchantID, isNull);
+    expect(res.data!.acquiringBank, isNull);
+    expect(res.data!.billNumber, isNull);
+    expect(res.data!.mobileNumber, isNull);
+    expect(res.data!.storeLabel, isNull);
+    expect(res.data!.terminalLabel, isNull);
+    expect(res.data!.purposeOfTransaction, isNull);
+    expect(res.data!.languagePreference, isNull);
+    expect(res.data!.merchantNameAlternateLanguage, isNull);
+    expect(res.data!.merchantCityAlternateLanguage, isNull);
+    expect(res.data!.creationTimestamp, isNull);
+    expect(res.data!.expirationTimestamp, isNull);
+    expect(res.data!.payloadFormatIndicator, isNotNull);
+    expect(res.data!.pointOfInitiationMethod, isNotNull);
+    expect(res.data!.unionPayMerchant, isNull);
+    expect(res.data!.merchantCategoryCode, isNotNull);
+    expect(res.data!.transactionCurrency, isNotNull);
+    expect(res.data!.transactionAmount, isNull);
+    expect(res.data!.countryCode, isNotNull);
+    expect(res.data!.crc, isNotNull);
+  });
+
+  test('decode merchant qr code', () {
+    final qrString =
+        '00020101021130340008test@dev01061234560208Dev Bank5204599953031165802KH5913Test Merchant6010Phnom Penh6304BCB9';
+    final res = KhqrSdk.decode(qrString);
+    expect(res.data, isNotNull);
+    expect(res.data!.merchantType, MerchantType.merchant.tag);
+    expect(res.data!.bakongAccountID, bakongAccountId);
+    expect(res.data!.merchantName, merchantName);
+    expect(res.data!.accountInformation, isNull);
+    expect(res.data!.merchantID, merchantId);
+    expect(res.data!.acquiringBank, acquiringBank);
+    expect(res.data!.billNumber, isNull);
+    expect(res.data!.mobileNumber, isNull);
+    expect(res.data!.storeLabel, isNull);
+    expect(res.data!.terminalLabel, isNull);
+    expect(res.data!.purposeOfTransaction, isNull);
+    expect(res.data!.languagePreference, isNull);
+    expect(res.data!.merchantNameAlternateLanguage, isNull);
+    expect(res.data!.merchantCityAlternateLanguage, isNull);
+    expect(res.data!.creationTimestamp, isNull);
+    expect(res.data!.expirationTimestamp, isNull);
+    expect(res.data!.payloadFormatIndicator, isNotNull);
+    expect(res.data!.pointOfInitiationMethod, isNotNull);
+    expect(res.data!.unionPayMerchant, isNull);
+    expect(res.data!.merchantCategoryCode, isNotNull);
+    expect(res.data!.transactionCurrency, isNotNull);
+    expect(res.data!.transactionAmount, isNull);
+    expect(res.data!.countryCode, isNotNull);
+    expect(res.data!.crc, isNotNull);
+  });
+
+  test('decode non khqr code', () {
+    final qrString =
+        '00020101021129120008test@dev5204599953031165802KH5913Test Merchant6010Phnom Penh63048C7E';
+    final res = KhqrSdk.decodeNonKhqr(qrString);
+    expect(res.data, isNotNull);
+    expect(res.data, isMap);
   });
 }
