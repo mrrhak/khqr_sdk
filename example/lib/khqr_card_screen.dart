@@ -12,7 +12,6 @@ class KhqrCardScreen extends StatefulWidget {
 }
 
 class _KhqrCardScreenState extends State<KhqrCardScreen> {
-  late KhqrSdk _khqrSdk;
   String? khqrContent;
   String? errorMessage;
 
@@ -22,7 +21,6 @@ class _KhqrCardScreenState extends State<KhqrCardScreen> {
 
   @override
   void initState() {
-    _khqrSdk = KhqrSdk();
     super.initState();
 
     generateIndividual();
@@ -37,9 +35,9 @@ class _KhqrCardScreenState extends State<KhqrCardScreen> {
         currency: _receiverCurrency,
         amount: _amount,
       );
-      final individual = await _khqrSdk.generateIndividual(info);
+      final res = KhqrSdk.generateIndividual(info);
       setState(() {
-        khqrContent = individual?.qr;
+        khqrContent = res.data?.qr;
       });
     } on PlatformException catch (e) {
       log('Error: ${e.message}');

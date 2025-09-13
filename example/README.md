@@ -4,44 +4,71 @@ flutter pub add khqr_sdk
 ```
 
 ## Usage
-### Create instance of KHQR SDK
+### Import KHQR SDK Package
 ```dart
 import 'package:khqr_sdk/khqr_sdk.dart';
-
-final _khqrSdk = KhqrSdk();
 ```
 
-### Generate KHQR (Individual)
+### Generate Individual KHQR
 ```dart
 final info = IndividualInfo(
   bakongAccountId: 'kimhak@dev',
   merchantName: 'Kimhak',
   accountInformation: '123456789',
+  currency: KhqrCurrency.khr,
+  amount: 0,
 );
-final khqrData = await _khqrSdk.generateIndividual(info);
+final res = KhqrSdk.generateIndividual(info);
 ```
 
-### Generate KHQR (Merchant)
+### Generate Merchant KHQR
 ```dart
 final info = MerchantInfo(
   bakongAccountId: 'kimhak@dev',
   acquiringBank: 'Dev Bank',
   merchantId: '123456',
   merchantName: 'Kimhak',
+  currency: KhqrCurrency.usd,
+  amount: 0,
 );
-final khqrData = await _khqrSdk.generateMerchant(info);
+final res = KhqrSdk.generateMerchant(info);
 ```
+
+>[!NOTE] 
+>To generate `Dynamic QR` required to set amount more than zero with expiration
+>
+>```dart
+> // 1 hour from now
+> final expire = DateTime.now().millisecondsSinceEpoch + 3600000;
+> final info = MerchantInfo(
+>    bakongAccountId: 'kimhak@dev',
+>    acquiringBank: 'Dev Bank',
+>    merchantId: '123456',
+>    merchantName: 'Kimhak',
+>    currency: KhqrCurrency.usd,
+>    amount: 100,
+>    expirationTimestamp: expire,
+> );
+> final res = KhqrSdk.generateMerchant(info);
+>```
+
 
 ### Verify KHQR
 ```dart
 const qrCode = '00020101021129270010kimhak@dev01091234567895204599953031165802KH5906Kimhak6010Phnom Penh9917001317324625358296304B59E';
-final isValid = await _khqrSdk.verify(qrCode);
+final res = KhqrSdk.verify(qrCode);
 ```
 
 ### Decode KHQR
 ```dart
 const qrCode = '00020101021129270010kimhak@dev01091234567895204599953031165802KH5906Kimhak6010Phnom Penh9917001317324625358296304B59E';
-final khqrDecodeData = await _khqrSdk.decode(qrCode);
+final res = KhqrSdk.decode(qrCode);
+```
+
+### Decode Non-KHQR
+```dart
+const qrCode = '00020101021129270010kimhak@dev01091234567895204599953031165802KH5906Kimhak6010Phnom Penh9917001317324625358296304B59E';
+final res = KhqrSdk.decodeNonKhqr(qrCode);
 ```
 
 ### Generate KHQR Deeplink
@@ -60,7 +87,14 @@ final deeplinkInfo = DeeplinkInfo(
   sourceInfo: sourceInfo,
 );
 
-final deeplinkData = await _khqrSdk.generateDeepLink(deeplinkInfo);
+final res = await KhqrSdk.generateDeepLink(deeplinkInfo);
+```
+
+### Check Bakong Account
+```dart
+  final url = 'https://api-bakong.nbc.gov.kh/v1/check_account_by_id';
+  final bakongAccount = 'kimhak@dev';
+  final res = await KhqrSdk.checkBakongAccount(url, bakongAccount);
 ```
 
 ### KHQR Card Widget
@@ -68,8 +102,11 @@ final deeplinkData = await _khqrSdk.generateDeepLink(deeplinkInfo);
 KhqrCardWidget(
   width: 300.0,
   receiverName: 'Kimhak',
-  amount: 0,
+  amount: 0.00,
+  keepIntegerDecimal: false,
   currency: KhqrCurrency.khr,
   qr: khqrContent,
 ),
 ```
+
+See the [example](https://github.com/mrrhak/khqr_sdk/tree/master/example) for runnable examples of various usages.

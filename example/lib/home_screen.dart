@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:khqr_sdk_example/khqr_card_screen.dart';
-import 'package:khqr_sdk_example/khqr_operation_screen.dart';
+
+import 'khqr_card_screen.dart';
+import 'khqr_operation_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
