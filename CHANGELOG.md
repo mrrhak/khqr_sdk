@@ -9,6 +9,7 @@
 - Refactor(KhqrCardWidget): Replace `retryButtonText`/`onRetry` with a customizable `errorOverlay` widget
 - Fixed(KhqrCardWidget): Fixed dashed divider color not adapting to dark mode
 - Fixed(KhqrCardWidget): Fixed potential error when widget is disposed while countdown timer is running
+- Chore(Deps): Raised minimum Flutter version to `>=3.35.0`
 - Chore(Deps) Updated dependencies
 - Chore(Example): Updated example project
 - #### BREAKING CHANGE:

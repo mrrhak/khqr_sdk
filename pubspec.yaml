@@ -20,7 +20,7 @@ topics:
 
 environment:
   sdk: ^3.9.0
-  flutter: ">=3.3.0"
+  flutter: ">=3.35.0"
 
 dependencies:
   flutter:

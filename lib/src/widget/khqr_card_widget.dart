@@ -155,6 +155,7 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
   void initState() {
     super.initState();
     _qrImage = _buildQrImage();
+    _duration = widget.duration;
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _updateDuration();
     });
