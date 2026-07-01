@@ -14,14 +14,16 @@ class KhqrCardWidget extends StatefulWidget {
   const KhqrCardWidget({
     super.key,
     this.qr = 'No Content',
-    this.width = 300,
+    this.width,
     this.padding,
     required this.receiverName,
     this.amount = 0.0,
     this.currency,
     this.keepIntegerDecimal = false,
-    this.showEmptyAmount = true,
-    this.showCurrencySymbol = true,
+    this.showEmptyAmount = false,
+    this.showCurrencySymbol = false,
+    this.showCurrencyLabel = true,
+    this.alwaysShowBakongIcon = true,
     this.isDark,
     this.showShadow = true,
     this.duration,
@@ -30,15 +32,17 @@ class KhqrCardWidget extends StatefulWidget {
     this.isLoading = false,
     this.loadingWidget,
     this.isError = false,
-    this.retryButtonText,
-    this.onRetry,
+    this.errorOverlay,
+    this.onAmountTap,
   });
 
   /// The KHQR code default value is [No Content]
   final String qr;
 
-  /// The width of the card
-  final double width;
+  /// The width of the card.
+  /// If null, defaults to 80% of the screen width via [MediaQuery] and
+  /// updates automatically when the screen is resized.
+  final double? width;
 
   /// The padding of the QR code
   final EdgeInsets? padding;
@@ -60,6 +64,12 @@ class KhqrCardWidget extends StatefulWidget {
 
   /// Whether to show currency symbol
   final bool showCurrencySymbol;
+
+  /// Whether to show currency label
+  final bool showCurrencyLabel;
+
+  /// Whether to always show Bakong icon or dynamic change base on currency
+  final bool alwaysShowBakongIcon;
 
   /// Whether to use dark mode
   final bool? isDark;
@@ -87,11 +97,11 @@ class KhqrCardWidget extends StatefulWidget {
   /// If true, the retry button will be shown
   final bool isError;
 
-  /// The text of retry button
-  final String? retryButtonText;
+  /// The widget to show when isError true
+  final Widget? errorOverlay;
 
-  /// The callback when retry
-  final Function()? onRetry;
+  /// The callback when tap on amount
+  final Function()? onAmountTap;
 
   @override
   State<KhqrCardWidget> createState() => _KhqrCardWidgetState();
@@ -99,47 +109,68 @@ class KhqrCardWidget extends StatefulWidget {
 
 class _KhqrCardWidgetState extends State<KhqrCardWidget> {
   double get _aspectRatio => 20 / 29;
-  double get _height => widget.width / _aspectRatio;
-  double get _headerHeight => _height * 0.12;
+  double get _effectiveWidth =>
+      widget.width ?? MediaQuery.sizeOf(context).width * 0.8;
+  double get _height => _effectiveWidth / _aspectRatio;
   double get _receiverNameFontSize => _height * 0.03;
-  double get _amountFontSize => _height * 0.056;
+  double get _amountFontSize => _height * 0.065;
+  double get _currencyFontSize => _height * 0.03;
+  double get _headerHeight => _height * 0.12;
   EdgeInsets get _qrMargin => EdgeInsets.symmetric(
-    horizontal: _height * 0.065,
-    vertical: _height * 0.06,
+    horizontal: _height * 0.01,
+    vertical: _height * 0.08,
   );
 
-  Duration? _duration;
-  int _durationCount = 0;
-  final _bakongBraveryRed = const Color.fromRGBO(225, 35, 46, 1);
-  final _ravenDarkBlack = const Color.fromRGBO(0, 0, 0, 1);
-  final _pearlWhite = const Color.fromRGBO(255, 255, 255, 1);
-  final _backgroundDark = const Color(0XFF1D1D1D);
-  final _buttonColor = const Color(0xFF717171);
-  final _fontFamily = 'NunitoSans';
-  final _durationStream = StreamController<Duration>.broadcast();
-
-  final BoxShadow _boxShadow = BoxShadow(
-    color: const Color(0xFF000000).withAlpha(10),
+  late QrImage _qrImage;
+  static const _bakongBraveryRed = Color(0xFFE1232E);
+  static const _ravenDarkBlack = Color(0xFF000000);
+  static const _pearlWhite = Color(0xFFFFFFFF);
+  static const _backgroundDark = Color(0XFF1D1D1D);
+  static const _buttonColor = Color(0xFF717171);
+  static const _fontFamily = 'NunitoSans';
+  static const _usdIcon = AssetImage(
+    'assets/images/dollar_symbol.png',
+    package: 'khqr_sdk',
+  );
+  static const _khrIcon = AssetImage(
+    'assets/images/riel_symbol.png',
+    package: 'khqr_sdk',
+  );
+  static const _bakongIcon = AssetImage(
+    'assets/images/bakong_symbol.png',
+    package: 'khqr_sdk',
+  );
+  static final _boxShadow = BoxShadow(
+    color: const Color(0xFF000000).withValues(alpha: 0.1),
     blurRadius: 16,
     spreadRadius: 4,
     offset: const Offset(0, 0),
   );
 
-  AssetImage get _usdIcon =>
-      const AssetImage('assets/images/dollar_symbol.png', package: 'khqr_sdk');
-
-  AssetImage get _khrIcon =>
-      const AssetImage('assets/images/riel_symbol.png', package: 'khqr_sdk');
-
-  AssetImage get _bakongIcon =>
-      const AssetImage('assets/images/bakong_symbol.png', package: 'khqr_sdk');
+  Duration? _duration;
+  int _durationCount = 0;
+  final _durationStream = StreamController<Duration>.broadcast();
 
   @override
   void initState() {
     super.initState();
+    _qrImage = _buildQrImage();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _updateDuration();
     });
+  }
+
+  @override
+  void didUpdateWidget(KhqrCardWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.qr != widget.qr) {
+      _qrImage = _buildQrImage();
+    }
+  }
+
+  QrImage _buildQrImage() {
+    final qrCode = QrCode(10, QrErrorCorrectLevel.M)..addData(widget.qr);
+    return QrImage(qrCode);
   }
 
   @override
@@ -149,12 +180,13 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
   }
 
   Widget _buildQrView() {
-    final qrCode = QrCode(10, QrErrorCorrectLevel.M)..addData(widget.qr);
     final decoration = PrettyQrDecoration(
       image: PrettyQrDecorationImage(
         scale: 0.18,
         position: PrettyQrDecorationImagePosition.foreground,
-        image: widget.currency == KhqrCurrency.khr
+        image: widget.alwaysShowBakongIcon
+            ? _bakongIcon
+            : widget.currency == KhqrCurrency.khr
             ? _khrIcon
             : widget.currency == KhqrCurrency.usd
             ? _usdIcon
@@ -168,7 +200,7 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
     return Container(
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(4.0)),
-      child: PrettyQrView(qrImage: QrImage(qrCode), decoration: decoration),
+      child: PrettyQrView(qrImage: _qrImage, decoration: decoration),
     );
   }
 
@@ -180,51 +212,7 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
         child: CircularProgressIndicator(
           strokeWidth: 3.0,
           backgroundColor: Theme.of(context).primaryColor,
-          valueColor: AlwaysStoppedAnimation<Color>(_pearlWhite),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildErrorOverly() {
-    return Center(
-      child: IntrinsicWidth(
-        child: Material(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.circular(40.0),
-          clipBehavior: Clip.antiAlias,
-          child: Ink(
-            color: _buttonColor,
-            child: InkWell(
-              onTap: widget.onRetry?.call,
-              child: Container(
-                padding: const EdgeInsets.only(
-                  left: 8.0,
-                  right: 12.0,
-                  top: 8.0,
-                  bottom: 8.0,
-                ),
-                decoration: ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(90),
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    Icon(Icons.refresh_outlined, color: _pearlWhite),
-                    SizedBox(width: 4.0),
-                    Text(
-                      widget.retryButtonText ?? 'Retry',
-                      style: TextStyle(
-                        color: _pearlWhite,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          valueColor: const AlwaysStoppedAnimation<Color>(_pearlWhite),
         ),
       ),
     );
@@ -258,11 +246,11 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.refresh_outlined, color: _pearlWhite),
-                    SizedBox(width: 4.0),
+                    const Icon(Icons.refresh_outlined, color: _pearlWhite),
+                    const SizedBox(width: 4.0),
                     Text(
                       widget.regenerateButtonText ?? 'Regenerate',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: _pearlWhite,
                         fontWeight: FontWeight.w600,
                       ),
@@ -286,24 +274,12 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
 
     final qrViewWidget = _buildQrView();
 
-    Widget? symbol;
-    if (widget.showCurrencySymbol) {
-      if (widget.currency == KhqrCurrency.khr) {
-        symbol = SvgPicture.asset(
-          'assets/svg/riel.svg',
-          package: 'khqr_sdk',
-          height: _amountFontSize * 0.75,
-          colorFilter: ColorFilter.mode(qrTextColor, BlendMode.srcIn),
-        );
-      } else if (widget.currency == KhqrCurrency.usd) {
-        symbol = SvgPicture.asset(
-          'assets/svg/dollar.svg',
-          package: 'khqr_sdk',
-          height: _amountFontSize * 0.86,
-          colorFilter: ColorFilter.mode(qrTextColor, BlendMode.srcIn),
-        );
-      }
-    }
+    final amount = widget.amount > 0 || widget.showEmptyAmount
+        ? NumberFormatterUtil.formatThousandNumber(
+            widget.amount,
+            alwaysShowDecimal: widget.keepIntegerDecimal,
+          )
+        : '';
 
     return Center(
       child: Column(
@@ -312,7 +288,7 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: widget.width,
+            width: _effectiveWidth,
             height: _height,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(_height * 0.045),
@@ -332,12 +308,15 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
                   child: SvgPicture.asset(
                     'assets/svg/khqr_logo.svg',
                     package: 'khqr_sdk',
-                    colorFilter: ColorFilter.mode(_pearlWhite, BlendMode.srcIn),
+                    colorFilter: const ColorFilter.mode(
+                      _pearlWhite,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
                 Expanded(
                   child: Container(
-                    width: widget.width,
+                    width: _effectiveWidth,
                     color: _bakongBraveryRed,
                     child: ClipPath(
                       clipper: _KhqrCardHeaderClipper(
@@ -369,53 +348,78 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
                               ),
                             ),
                             const SizedBox(height: 4.0),
-                            //* Symbol with Amount
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: _height * 0.08,
-                              ),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  //* Symbol
-                                  if (symbol != null)
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                        right: 4.0,
-                                      ),
-                                      child: symbol,
-                                    ),
-                                  //* Amount
-                                  Expanded(
-                                    child: AutoSizeText(
-                                      widget.amount > 0 ||
-                                              widget.showEmptyAmount
-                                          ? NumberFormatterUtil.formatThousandNumber(
-                                              widget.amount,
-                                              alwaysShowDecimal:
-                                                  widget.keepIntegerDecimal,
-                                            )
-                                          : '',
-                                      maxLines: 1,
-                                      style: TextStyle(
-                                        fontFamily: _fontFamily,
+                            //* Amount Row
+                            InkWell(
+                              onTap: widget.onAmountTap,
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: _height * 0.08,
+                                ),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  spacing: 4.0,
+                                  children: [
+                                    //* Currency symbol
+                                    if (widget.showCurrencySymbol &&
+                                        widget.currency == KhqrCurrency.khr)
+                                      SvgPicture.asset(
+                                        'assets/svg/riel.svg',
                                         package: 'khqr_sdk',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: _amountFontSize,
-                                        height: 1.2,
-                                        color: qrTextColor,
+                                        height: _amountFontSize * 0.75,
+                                        colorFilter: ColorFilter.mode(
+                                          qrTextColor,
+                                          BlendMode.srcIn,
+                                        ),
+                                      ),
+                                    if (widget.showCurrencySymbol &&
+                                        widget.currency == KhqrCurrency.usd)
+                                      SvgPicture.asset(
+                                        'assets/svg/dollar.svg',
+                                        package: 'khqr_sdk',
+                                        height: _amountFontSize * 0.86,
+                                        colorFilter: ColorFilter.mode(
+                                          qrTextColor,
+                                          BlendMode.srcIn,
+                                        ),
+                                      ),
+                                    //* Amount
+                                    Flexible(
+                                      child: AutoSizeText(
+                                        amount,
+                                        maxLines: 1,
+                                        style: TextStyle(
+                                          fontFamily: _fontFamily,
+                                          package: 'khqr_sdk',
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: _amountFontSize,
+                                          color: qrTextColor,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                    //* Currency label
+                                    if (widget.showCurrencyLabel &&
+                                        widget.currency != null &&
+                                        amount.isNotEmpty)
+                                      Text(
+                                        widget.currency!.name.toUpperCase(),
+                                        style: TextStyle(
+                                          fontFamily: _fontFamily,
+                                          package: 'khqr_sdk',
+                                          fontSize: _currencyFontSize,
+                                          color: qrTextColor,
+                                        ),
+                                      ),
+                                  ],
+                                ),
                               ),
                             ),
                             SizedBox(height: _height * 0.04),
                             CustomPaint(
                               painter: _DashedLineHorizontalPainter(
                                 aspectRatio: _aspectRatio,
+                                color: isDark ? Colors.white : Colors.black,
                               ),
-                              size: Size(widget.width, 1),
+                              size: Size(_effectiveWidth, 1),
                             ),
                             //* QR Image
                             Expanded(
@@ -447,7 +451,9 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
                                     widget.loadingWidget ??
                                         _buildLoadingOverly(),
                                   //* Error Widget
-                                  if (widget.isError) _buildErrorOverly(),
+                                  if (widget.isError &&
+                                      widget.errorOverlay != null)
+                                    widget.errorOverlay!,
                                   //* Expired Widget
                                   if (widget.duration != null)
                                     StreamBuilder<Duration>(
@@ -465,7 +471,7 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
                                             ),
                                             alignment: Alignment.center,
                                             decoration: ShapeDecoration(
-                                              shape: CircleBorder(
+                                              shape: const CircleBorder(
                                                 side: BorderSide(
                                                   width: 4.0,
                                                   color: _pearlWhite,
@@ -485,7 +491,7 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
                                                 fontWeight: FontWeight.bold,
                                                 fontSize:
                                                     0.07 *
-                                                    widget.width *
+                                                    _effectiveWidth *
                                                     _aspectRatio,
                                               ),
                                             ),
@@ -516,30 +522,34 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
     _durationCount = 0;
     Future.microtask(() async {
       while (_duration!.inSeconds > 0) {
+        if (!mounted || _durationStream.isClosed) break;
         _duration = Duration(
           seconds: widget.duration!.inSeconds - _durationCount,
         );
         _durationStream.sink.add(_duration!);
         await Future.delayed(const Duration(seconds: 1));
         _durationCount += 1;
-        if (!mounted) break;
       }
     });
   }
 }
 
 class _DashedLineHorizontalPainter extends CustomPainter {
-  _DashedLineHorizontalPainter({required this.aspectRatio});
+  _DashedLineHorizontalPainter({
+    required this.aspectRatio,
+    this.color = Colors.grey,
+  });
 
   final double aspectRatio;
+  final Color color;
 
   @override
   void paint(Canvas canvas, Size size) {
     final double dashWidth = size.width * 0.03 * aspectRatio;
     final double dashSpace = size.width * 0.02 * aspectRatio;
     final paint = Paint();
-    paint.color = Colors.grey;
-    paint.strokeWidth = 0.5;
+    paint.color = color;
+    paint.strokeWidth = 0.2;
     double startX = 0;
 
     while (startX < size.width) {
@@ -565,7 +575,6 @@ class _KhqrCardHeaderClipper extends CustomClipper<Path> {
 
     path.lineTo(width - (width * 0.12 * aspectRatio), 0);
     path.lineTo(width, height * 0.08 * aspectRatio);
-    path.lineTo(height, 0);
     path.lineTo(width, height);
     path.lineTo(0, height);
     return path;

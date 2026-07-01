@@ -1,0 +1,21 @@
+version: 2
+
+enable-beta-ecosystems: false
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+      time: "08:00"
+      timezone: "Asia/Phnom_Penh"
+    labels:
+      - "dependencies"
+
+  - package-ecosystem: "pub"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+      time: "08:00"
+      timezone: "Asia/Phnom_Penh"
+    labels:
+      - "dependencies"

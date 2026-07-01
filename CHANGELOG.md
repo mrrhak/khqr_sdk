@@ -1,5 +1,20 @@
 # Changelog
 
+## 3.0.0
+- Feat(KhqrCardWidget): Apply new Dual Currency design guideline following NBC's new KHQR standard
+- Feat(KhqrCardWidget): Make `width` optional, defaults to 80% of screen width and updates automatically on resize
+- Feat(KhqrCardWidget): Add new `showCurrencyLabel` to show/hide currency code label
+- Feat(KhqrCardWidget): Add new `alwaysShowBakongIcon` to always show Bakong icon in QR regardless of currency
+- Feat(KhqrCardWidget): Add new `onAmountTap` callback
+- Refactor(KhqrCardWidget): Replace `retryButtonText`/`onRetry` with a customizable `errorOverlay` widget
+- Fixed(KhqrCardWidget): Fixed dashed divider color not adapting to dark mode
+- Fixed(KhqrCardWidget): Fixed potential error when widget is disposed while countdown timer is running
+- Chore(Deps) Updated dependencies
+- Chore(Example): Updated example project
+- #### BREAKING CHANGE:
+  - `KhqrCardWidget.showEmptyAmount` and `showCurrencySymbol` now default to `false`
+  - `KhqrCardWidget.retryButtonText` and `onRetry` removed, use `errorOverlay` instead
+
 ## 2.0.1
 - Refactor(Widget): Removed dual currency label in `KhqrCardWidget` and export separately from SDK
 - Chore(Example): Updated example project

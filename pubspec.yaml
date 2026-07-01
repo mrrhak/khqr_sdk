@@ -4,7 +4,7 @@ maintainer: Mrr Hak
 repository: https://github.com/mrrhak/khqr_sdk
 issue_tracker: https://github.com/mrrhak/khqr_sdk/issues
 homepage: https://mrrhak.com
-version: 2.0.1
+version: 3.0.0
 funding:
   - https://ko-fi.com/mrrhak
 screenshots:
@@ -25,11 +25,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  intl: ">=0.18.1 <=0.20.2"
-  crypto: ^3.0.6
-  http: ^1.5.0
-  pretty_qr_code: ^3.5.0
-  flutter_svg: ^2.2.1
+  intl: ">=0.18.1 <=0.20.3"
+  crypto: ^3.0.7
+  http: ^1.6.0
+  pretty_qr_code: ^3.6.0
+  flutter_svg: ^2.3.0
   auto_size_text: ^3.0.0
 
 dev_dependencies:
