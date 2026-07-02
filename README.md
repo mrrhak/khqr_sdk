@@ -155,6 +155,7 @@ final decodeNonKhqrRes = KhqrSdk.decodeNonKhqr(qrCode);
 ### Generate KHQR Deeplink
 ```dart
 const qrCode = '00020101021129270010kimhak@dev01091234567895204599953031165802KH5906Kimhak6010Phnom Penh9917001317324625358296304B59E';
+final url = 'http://api.example.com/v1/generate_deeplink_by_qr';
 
 final sourceInfo = SourceInfo(
   appName: 'Example App',
@@ -162,14 +163,8 @@ final sourceInfo = SourceInfo(
   appDeepLinkCallBack: 'http://app.example.com/callback',
 );
 
-final deeplinkInfo = DeeplinkInfo(
-  qr: qrCode,
-  url: 'http://api.example.com/v1/generate_deeplink_by_qr',
-  sourceInfo: sourceInfo,
-);
-
 // generateDeepLink and checkBakongAccount are async, call them from an async context
-final res = await KhqrSdk.generateDeepLink(deeplinkInfo);
+final res = await KhqrSdk.generateDeepLink(url, qrCode, sourceInfo);
 ```
 
 ### Check Bakong Account
