@@ -1,12 +1,28 @@
 # Changelog
 
-## 2.0.1
+## 3.0.0
+
+- Feat(KhqrCardWidget): Apply new Dual Currency design guideline following NBC's new KHQR standard
+- Feat(KhqrCardWidget): Make `width` optional, defaults to 80% of screen width and updates automatically on resize
+- Feat(KhqrCardWidget): Add new `showCurrencyLabel` to show/hide currency code label
+- Feat(KhqrCardWidget): Add new `alwaysShowBakongIcon` to always show Bakong icon in QR regardless of currency
+- Feat(KhqrCardWidget): Add new `onAmountTap` callback
+- Feat(KhqrCardWidget): Add new `qrTypeNumber` and `qrErrorCorrectLevel` to customize the generated QR code
+- Feat(KhqrCardWidget): Add new `qrMarginHorizontalRatio` and `qrMarginVerticalRatio` to customize the QR code margin
+- Fixed(KhqrCardWidget): Fixed dashed divider color not adapting to dark mode
+- Fixed(KhqrCardWidget): Fixed potential error when widget is disposed while countdown timer is running
+- Refactor(KhqrCardWidget): Replace `retryButtonText`/`onRetry` with a customizable `errorOverlay` widget
 - Refactor(Widget): Removed dual currency label in `KhqrCardWidget` and export separately from SDK
-- Chore(Example): Updated example project
-- Chore(Docs): Updated README file
+- Chore(Deps): Raised minimum Flutter version to `>=3.35.0`
 - Chore(Deps) Updated dependencies
+- Chore(Docs): Updated README file
+- Chore(Example): Updated example project
+- #### BREAKING CHANGE:
+  - `KhqrCardWidget.showEmptyAmount` and `showCurrencySymbol` now default to `false`
+  - `KhqrCardWidget.retryButtonText` and `onRetry` removed, use `errorOverlay` instead
 
 ## 2.0.0
+
 - Feat(SDK): Re-implement all functions in Dart
 - Feat(SDK): Add new function `checkBakongAccount`
 - Refactor(SDK): Change structure from Flutter Plugin to Flutter Package
@@ -16,6 +32,7 @@
   - All SDK functions are now static in `KhqrSdk` class
 
 ## 1.4.0
+
 - Feat(iOS): Add Swift Package Manager support
 - Refactor(iOS): Moved private Pods source from NBC to directly embedded `Objective-C`
 - Chore(Android): Upgrade Kotlin from `v1.8.22` to `v2.1.0`
@@ -24,9 +41,11 @@
 - Chore(Deps) Updated dependencies
 
 ## 1.3.1
+
 - Fixed(generated_file): fixed `KhqrCurrency` enum value on MerchantInfo class
 
 ## 1.3.0
+
 - Feat(khqr_card_widget): Add new `isError` and `isLoading` state
 - Feat(khqr_card_widget): Add new `Retry` button display if `isError` true
 - Feat(khqr_card_widget): Add new `Regenerate` button when QR was expired
@@ -36,6 +55,7 @@
 - Bumped(build_runner): bumped flutter_lints from `v2.4.15` to `v2.5.3`
 
 ## 1.2.0
+
 - Added new feature to `Decode Non-KHQR` on Android platform
 - Added new Bakong logo in `KhqrCardWidget`
 - Added new field `merchantCategoryCode` with default value `5999`
@@ -44,19 +64,23 @@
 - Upgrade Android native SDK to `v1.0.0.15`
 
 ## 1.1.3
+
 - Add auto size text for dynamic text resizing in `KhqrCardWidget`
 - Update `KhqrCardWidget` switching theme mode base on app theme mode
 
 ## 1.1.2
+
 - Adjust font size, QR quiet zone, and container decoration in `KhqrCardWidget`
 - Updated dependencies
 
 ## 1.1.1
+
 - Added new currency symbols
 - Improvement KHQR Card Widget
 - Updated dependencies
 
 ## 1.1.0
+
 - Added new feature to `Decode Non-KHQR`
 - Added expire timestamp for `Dynamic QR`
 - Upgrade iOS native SDK to `v1.0.0.16`
@@ -65,6 +89,7 @@
 - Updated dependencies
 
 ## 1.0.4
+
 - Migrated Android platform language from Java to Kotlin
 - Added enum value to KhqrCurrency to align with currency code from NBC
 - Updated error message from Native side to Dart side
@@ -72,18 +97,21 @@
 - Updated dependencies
 
 ## 1.0.3
+
 - Updated KHQR Card Widget
 - Added thousand number formatter util
 - Allow to keep decimal places
 - Updated dependencies
 
 ## 1.0.2
+
 - Updated swift package manager support
 - Updated KHQR Card Widget
 - Updated README
 - Updated dependencies
 
 ## 1.0.1
+
 - Added public API documentation
 - Added swift package manager
 - Improved json serialization
@@ -93,6 +121,7 @@
 - Updated README
 
 ## 1.0.0
+
 - Initial release (iOS, Android)
 - Added feature Generate KHQR (individual/merchant)
 - Added feature Verification (Valid/Invalid)

@@ -18,7 +18,7 @@ class _KhqrCardScreenState extends State<KhqrCardScreen> {
 
   final String _receiverName = 'LONG KIMHAK';
   final KhqrCurrency _receiverCurrency = KhqrCurrency.khr;
-  final double _amount = 0.00;
+  final double _amount = 0;
 
   @override
   void initState() {
@@ -64,7 +64,6 @@ class _KhqrCardScreenState extends State<KhqrCardScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 KhqrCardWidget(
-                  width: 300.0,
                   receiverName: _receiverName,
                   amount: _amount,
                   keepIntegerDecimal: false,

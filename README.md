@@ -85,6 +85,14 @@ The standardization of KHQR code specifications will help promote wider use of m
 | Check Bakong Account |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
 | KHQR Card Widget     |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
 
+## Installation
+Run the following command in your Flutter project:
+```bash
+flutter pub add khqr_sdk
+```
+> [!TIP]
+> Check the [pub.dev page](https://pub.dev/packages/khqr_sdk) for the minimum required Dart/Flutter SDK version.
+
 ## Usage
 ### Import KHQR SDK Package
 ```dart
@@ -135,27 +143,19 @@ final res = KhqrSdk.generateMerchant(info);
 >```
 
 
-### Verify KHQR
+### Verify / Decode / Decode Non-KHQR
 ```dart
 const qrCode = '00020101021129270010kimhak@dev01091234567895204599953031165802KH5906Kimhak6010Phnom Penh9917001317324625358296304B59E';
-final res = KhqrSdk.verify(qrCode);
-```
 
-### Decode KHQR
-```dart
-const qrCode = '00020101021129270010kimhak@dev01091234567895204599953031165802KH5906Kimhak6010Phnom Penh9917001317324625358296304B59E';
-final res = KhqrSdk.decode(qrCode);
-```
-
-### Decode Non-KHQR
-```dart
-const qrCode = '00020101021129270010kimhak@dev01091234567895204599953031165802KH5906Kimhak6010Phnom Penh9917001317324625358296304B59E';
-final res = KhqrSdk.decodeNonKhqr(qrCode);
+final verifyRes = KhqrSdk.verify(qrCode);
+final decodeRes = KhqrSdk.decode(qrCode);
+final decodeNonKhqrRes = KhqrSdk.decodeNonKhqr(qrCode);
 ```
 
 ### Generate KHQR Deeplink
 ```dart
 const qrCode = '00020101021129270010kimhak@dev01091234567895204599953031165802KH5906Kimhak6010Phnom Penh9917001317324625358296304B59E';
+final url = 'http://api.example.com/v1/generate_deeplink_by_qr';
 
 final sourceInfo = SourceInfo(
   appName: 'Example App',
@@ -163,20 +163,15 @@ final sourceInfo = SourceInfo(
   appDeepLinkCallBack: 'http://app.example.com/callback',
 );
 
-final deeplinkInfo = DeeplinkInfo(
-  qr: qrCode,
-  url: 'http://api.example.com/v1/generate_deeplink_by_qr',
-  sourceInfo: sourceInfo,
-);
-
-final res = await KhqrSdk.generateDeepLink(deeplinkInfo);
+// generateDeepLink and checkBakongAccount are async, call them from an async context
+final res = await KhqrSdk.generateDeepLink(url, qrCode, sourceInfo);
 ```
 
 ### Check Bakong Account
 ```dart
-  final url = 'https://api-bakong.nbc.gov.kh/v1/check_account_by_id';
-  final bakongAccount = 'kimhak@dev';
-  final res = await KhqrSdk.checkBakongAccount(url, bakongAccount);
+final url = 'https://api-bakong.nbc.gov.kh/v1/check_account_by_id';
+final bakongAccount = 'kimhak@dev';
+final res = await KhqrSdk.checkBakongAccount(url, bakongAccount);
 ```
 
 ### KHQR Card Widget
@@ -190,14 +185,17 @@ KhqrCardWidget(
   qr: khqrContent,
 ),
 ```
-
-See the [example](https://github.com/mrrhak/khqr_sdk/tree/master/example) for runnable examples of various usages.
+> [!TIP]
+> `KhqrCardWidget` also supports dynamic QR countdown (`duration`, `onRegenerate`), loading/error overlays (`isLoading`, `loadingWidget`, `isError`, `errorOverlay`), QR customization (`qrTypeNumber`, `qrErrorCorrectLevel`, `qrMarginHorizontalRatio`, `qrMarginVerticalRatio`), and display toggles (`showEmptyAmount`, `showCurrencySymbol`, `showCurrencyLabel`, `alwaysShowBakongIcon`, `isDark`, `showShadow`, `onAmountTap`). See the [example](https://github.com/mrrhak/khqr_sdk/tree/master/example) for runnable examples of various usages.
 
 ## Bugs or Requests
 
 If you encounter any problems feel free to open an [issue](https://github.com/mrrhak/khqr_sdk/issues/new?template=bug_report.md). If you feel the library is missing a feature, please raise a [ticket](https://github.com/mrrhak/khqr_sdk/issues/new?template=feature_request.md) on GitHub and I'll look into it. Pull request are also welcome.
 
 See [Contributing.md](https://github.com/mrrhak/khqr_sdk/blob/master/CONTRIBUTING.md).
+
+## License
+This project is licensed under the [MIT License](https://github.com/mrrhak/khqr_sdk/blob/master/LICENSE).
 
 ## Support
 Don't forget to give it a like 👍 or a star ⭐
