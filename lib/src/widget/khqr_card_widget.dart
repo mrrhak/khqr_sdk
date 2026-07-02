@@ -14,8 +14,11 @@ class KhqrCardWidget extends StatefulWidget {
   const KhqrCardWidget({
     super.key,
     this.qr = 'No Content',
+    this.qrTypeNumber = 10,
+    this.qrErrorCorrectLevel = QrErrorCorrectLevel.M,
+    this.qrMarginHorizontalRatio = 0.1,
+    this.qrMarginVerticalRatio = 0.08,
     this.width,
-    this.padding,
     required this.receiverName,
     this.amount = 0.0,
     this.currency,
@@ -39,13 +42,24 @@ class KhqrCardWidget extends StatefulWidget {
   /// The KHQR code default value is [No Content]
   final String qr;
 
+  /// The QR code type number (version), controlling its size/capacity.
+  final int qrTypeNumber;
+
+  /// The QR code error correction level, see [QrErrorCorrectLevel].
+  final int qrErrorCorrectLevel;
+
   /// The width of the card.
   /// If null, defaults to 80% of the screen width via [MediaQuery] and
   /// updates automatically when the screen is resized.
   final double? width;
 
-  /// The padding of the QR code
-  final EdgeInsets? padding;
+  /// The horizontal margin ratio of the QR code, relative to the card
+  /// height. Defaults to 0.1. (10% of the card height)
+  final double qrMarginHorizontalRatio;
+
+  /// The vertical margin ratio of the QR code, relative to the card
+  /// height. Defaults to 0.08. (8% of the card height)
+  final double qrMarginVerticalRatio;
 
   /// The name of the receiver
   final String receiverName;
@@ -117,8 +131,8 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
   double get _currencyFontSize => _height * 0.03;
   double get _headerHeight => _height * 0.12;
   EdgeInsets get _qrMargin => EdgeInsets.symmetric(
-    horizontal: _height * 0.01,
-    vertical: _height * 0.08,
+    horizontal: _height * widget.qrMarginHorizontalRatio,
+    vertical: _height * widget.qrMarginVerticalRatio,
   );
 
   late QrImage _qrImage;
@@ -170,7 +184,8 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
   }
 
   QrImage _buildQrImage() {
-    final qrCode = QrCode(10, QrErrorCorrectLevel.M)..addData(widget.qr);
+    final qrCode = QrCode(widget.qrTypeNumber, widget.qrErrorCorrectLevel)
+      ..addData(widget.qr);
     return QrImage(qrCode);
   }
 
