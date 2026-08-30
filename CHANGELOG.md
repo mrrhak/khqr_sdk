@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.1
+
+- Refactor(Deps): Replaces `flutter/material.dart` with `material_ui`
+- Chore(Deps): Raised minimum Flutter version to `>=3.44.0` and Dart `>=3.12.0`
+
 ## 3.0.0
 
 - Feat(KhqrCardWidget): Apply new Dual Currency design guideline following NBC's new KHQR standard
