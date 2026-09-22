@@ -137,9 +137,8 @@ class GenerateKHQR {
           }
 
           if (precision != null) {
-            amountInput = double.parse(
-              amountInput.toString(),
-            ).toStringAsFixed(2);
+            amountInput = double.parse(amountInput.toString())
+                .toStringAsFixed(2);
           }
         }
 

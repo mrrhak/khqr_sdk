@@ -210,9 +210,8 @@ class KhqrOperationScreen extends StatelessWidget {
     try {
       final res = KhqrSdk.decode(qrCode);
       if (res.data != null) {
-        final prettyJson = const JsonEncoder.withIndent(
-          '  ',
-        ).convert(res.data!.toMap());
+        final prettyJson = const JsonEncoder.withIndent('  ')
+            .convert(res.data!.toMap());
         showDialog(
           context: context,
           builder: (context) => AlertDialog(

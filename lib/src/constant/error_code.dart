@@ -109,8 +109,7 @@ class ErrorCode {
   /// Error Code 13
   static const connectionTimeout = ErrorCode(
     code: 13,
-    message:
-        "Cannot reach Bakong Open API service. Please check internet connection",
+    message: "Cannot reach Bakong Open API service. Please check internet connection",
   );
 
   /// Error Code 14

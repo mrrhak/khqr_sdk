@@ -494,9 +494,8 @@ class _KhqrCardWidgetState extends State<KhqrCardWidget> {
                                                   strokeAlign: 1.0,
                                                 ),
                                               ),
-                                              color: Theme.of(
-                                                context,
-                                              ).primaryColor,
+                                              color: Theme.of(context)
+                                                  .primaryColor,
                                             ),
                                             child: AutoSizeText(
                                               "${_duration?.inSeconds.toString().padLeft(2, '0')}",
