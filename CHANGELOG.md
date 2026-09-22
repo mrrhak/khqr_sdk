@@ -1,9 +1,9 @@
 # Changelog
 
-## 3.0.1
+## 3.1.0
 
-- Refactor(Deps): Replaces `flutter/material.dart` with `material_ui`
-- Chore(Deps): Raised minimum Flutter version to `>=3.44.0` and Dart `>=3.12.0`
+- Feat(Widget): Add support for the standalone `material_ui` package
+- Chore(Deps): Raised minimum Flutter version to `>=3.47.0` and Dart `>=3.13.0`
 
 ## 3.0.0
 

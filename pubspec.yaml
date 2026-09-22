@@ -4,7 +4,7 @@ maintainer: Mrr Hak
 repository: https://github.com/mrrhak/khqr_sdk
 issue_tracker: https://github.com/mrrhak/khqr_sdk/issues
 homepage: https://mrrhak.com
-version: 3.0.1
+version: 3.1.0
 funding:
   - https://ko-fi.com/mrrhak
 screenshots:
@@ -19,8 +19,8 @@ topics:
   - bakong
 
 environment:
-  sdk: ^3.12.0
-  flutter: ">=3.44.0"
+  sdk: ^3.13.0
+  flutter: ">=3.47.0"
 
 dependencies:
   flutter:
@@ -31,8 +31,7 @@ dependencies:
   pretty_qr_code: ^3.6.0
   flutter_svg: ^2.3.0
   auto_size_text: ^3.0.0
-
-  material_ui: ^1.1.0
+  material_ui: ^1.4.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
